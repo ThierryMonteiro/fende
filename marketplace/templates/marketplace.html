@@ -1,0 +1,305 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block top_catalog %}active{% endblock %}
+{% block page_content %}
+<div class="col-sm-2">
+	<div class="row">
+		<div class="col-xs-6 col-sm-12">
+			<fieldset>
+				<label class="mb-2"><i class="fal fa-fw fa-sitemap" aria-hidden="true"></i> {% trans "Categories" %}</label>
+				<ul class="p-0 no-list">
+					<li><a class="badge badge-fende w-100 my-1 opacity-7" href="{% url 'Marketplace:index' %}">{% trans "All" %}</a></li>
+					{% for category in categories %}
+					<li><a class="badge badge-fende w-100 my-1 opacity-7 category-{{ category.name }}" href="{% url 'Marketplace:index' category.name %}">{{ category.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</fieldset>
+		</div>
+		<div class="col-xs-6 col-sm-12">
+			<form id="tagform" action="" method="post">{% csrf_token %}
+				<fieldset>
+					<label class="mb-2"><i class="fal fa-fw fa-tags" aria-hidden="true"></i> Tags</label>
+					<div class="form-group">
+						<div class="col-md-10">
+							{% for tag in tags %}
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="checkboxtag{{ tag.id }}" name="{{ tag }}" {% if tag in listtags %} checked {% endif %} onclick="tagformsubmmit()">
+								<label class="custom-control-label" for="checkboxtag{{ tag.id }}">{{ tag }}</label>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="col-sm-10 col-md-10 col-lg-10">
+	<div class="row">
+		<!-- col -->
+		<div class="col-12">
+			<!-- sparks -->
+			<ul class="w-100 pb-4" id="sparks">
+				{% for tag in listtags %}
+				<li class="sparks-info">
+					<div class="btn-group">
+						<a class="btn btn-default btn-xs">{{ tag }}</a><button class="btn btn-default btn-xs" onclick="taguncheck({{ tag.id }})">X</button>
+					</div>
+				</li>
+				{% endfor %}
+				{% if category %}
+				<li class="sparks-info my-auto">
+					<h5> {% trans 'Category' %}
+						<span class="txt-color-purple"><i class="fal fa-crop " data-rel="bootstrap-tooltip" title="{{ category }}"></i>{{ category }}</span>
+					</h5>
+				</li>
+				{% endif %}
+				
+				<li class="sparks-info">
+					<h5> {% trans "Results" %} <span class="txt-color-blue">{{ service_list.count }}</span></h5>
+				</li>
+			</ul>
+			<!-- end sparks -->
+		</div>
+		<!-- end col -->
+	</div>
+	<form class="mb-4" role="search" {% if category %}action="{% url 'Marketplace:index' category %}{% endif %}">
+		<div class="input-group input-group-sm bg-white shadow-inset-2">
+			<div class="input-group-prepend">
+				<span class="input-group-text bg-transparent border-right-0 py-1 px-3">
+					<i class="fal fa-search"></i>
+				</span>
+			</div>
+			<input type="text" class="form-control border-left-0 bg-transparent pl-0" name="q" placeholder="{% trans 'Search...' %}" id="search-project">
+			<div class="input-group-append">
+				<button class="btn btn-default waves-effect waves-themed input-border" type="submit">{% trans 'Search...' %}</button>
+			</div>
+		</div>
+	</form>
+	{% if service_list %}
+	{% for service in service_list %}
+	<div class="marketplace-service">
+		<div>
+			<!-- TODO STYLE -->
+			<ul class="nav nav-pills nav-stacked text-center h-100 d-flex flex-column nav-marketplace">
+				<li  class="d-flex flex-fill m-0 " role="presentation" >
+					<a class="align-items-stretch w-100 d-flex active"style="border-radius:0;" href="#more-information{{ forloop.counter }}" aria-controls="more-information" role="tab" data-toggle="tab">
+						<div class="m-auto p-1">
+							<i class="fal fa-2x mb-2 fa-file-alt"></i><br/>
+							{% trans "Description" %}
+						</div>
+					</a>
+				</li>
+				<li  class="d-flex flex-fill m-0" role="presentation">
+					<a class="align-items-stretch w-100 d-flex"style="border-radius:0;" href="#specifications{{ forloop.counter }}" aria-controls="specifications" role="tab" data-toggle="tab">
+						<div class="m-auto p-1">
+							<i class="fal fa-2x mb-2 fa-asterisk" aria-hidden="true"></i><br/>
+							{% trans "Specifications" %}
+						</div>
+					</a>
+				</li>
+				<li  class="d-flex flex-fill m-0" role="presentation">
+					<a class="align-items-stretch w-100 d-flex"style="border-radius:0;" href="#services{{ forloop.counter }}" aria-controls="services" role="tab" data-toggle="tab">
+						<div class="m-auto p-1">
+							<i class="fal fa-2x mb-2 fa-tasks" aria-hidden="true"></i><br/>
+							{% trans "Composite" %}
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="w-100 d-flex">
+			<div class="col-md-{% if service.print_set.all %}8{%else%}12{%endif%} my-4 px-5">
+				<div class="row d-flex mb-2">
+					<div class="col-md-8">
+						<h2 class="name mt-0"><a href="{% url 'Marketplace:service' service.id %}">{{ service.sfc_name }}</a></h2>
+						<p class="d-flex justify-content-between">
+							<span class="badge badge-fende px-2 py-1 category-{{ service.category.name }}">{{ service.category.name }}</span>
+							<span><i class="fal fa-fw fa-tags"></i>{% trans "Tags" %}: {% for tag in service.tag.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+						</p>
+					</div>
+					<div class="col-md-4 text-right font-weight-bold text-fende-dark-marine">
+						<h1 class="m-0 font-weight-bold" >${{ service.price }}/mo</h1><small>* {% trans "includes tax" %}</small>
+						{% if service.id in repositories_ids %}
+						<button type="button" class="btn w-100 btn-success mt-2" disabled><i class="fal fa-fw fa-check" aria-hidden="true"></i>{% trans "Acquired" %}</button>
+						{% else %}
+						<a class="btn btn-fende w-100 confirm-modal mt-2" data-service="{{ service.id }}"><i class="fal fa-fw fa-shopping-cart" aria-hidden="true"></i>{% trans "Acquire" %} </a>
+						{% endif %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 tab-content">
+						<div role="tabpanel" class="tab-pane active" id="more-information{{ forloop.counter }}">
+							<h6>{% trans "Product Description" %}</h6>
+							<p class="indent">{{ service.full_description }}</p>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="specifications{{ forloop.counter }}">
+							<h6>{% trans "Specifications" %}</h6>
+							<ul class="m-0">
+								<li>
+									<strong>{% trans "Consultant:" %}</strong> {{ service.consultant }}
+								</li>
+								<li>
+									<strong>{% trans "Institution:" %}</strong> {{ service.institution }}
+								</li>
+								<li>
+									<strong>{% trans "Version:" %}</strong> {{ service.version }}
+								</li>
+								<li>
+									<strong>{% trans "Category:" %}</strong> {{ service.category }}
+								</li>
+								<li>
+									<strong>{% trans "Create:" %}</strong> {{ service.create_date }}
+								</li>
+							</ul>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="services{{ forloop.counter }}">
+							<div class="accordion accordion-outline" id="js_demo_accordion-{{ forloop.counter }}">
+								{% for item in service.vnfs.all %}
+								<div class="card">
+									<div class="card-header">
+										<a href="javascript:void(0);" class="card-title collapsed" data-toggle="collapse" data-target="#accordion{{ service.id }}{{ item.catalog.id }}{{ forloop.counter }}" aria-expanded="false">
+											{{ item.catalog }}
+											<span class="ml-auto">
+												<span class="collapsed-reveal">
+													<i class="fal fa-minus fs-xl"></i>
+												</span>
+												<span class="collapsed-hidden">
+													<i class="fal fa-plus fs-xl"></i>
+												</span>
+											</span>
+										</a>
+									</div>
+									<div id="accordion{{ service.id }}{{ item.catalog.id }}{{ forloop.counter }}" class="collapse" data-parent="#js_demo_accordion-{{ forloop.parentloop.counter }}" style="">
+										<div class="card-body">
+											<ul class="m-0">
+												<li><strong>{% trans "Developer" %}: </strong>{{ item.catalog.developer }}</li>
+												<li><strong>{% trans "Institution" %} </strong>{{ item.catalog.institution }}</li>
+												<li><strong>{% trans "Version" %}: </strong>{{ item.catalog.version }}</li>
+												<li><strong>{% trans "Category" %}: </strong>{{ item.catalog.category }}</li>
+												<li><strong>{% trans "Abstract" %}: </strong>{{ item.catalog.abstract }}</li>
+												<li><strong>{% trans "Create:" %} </strong>{{ item.catalog.create_date }}</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								{% endfor %}
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			{% if service.print_set.all %}
+			<div class="col-md-4 my-auto py-3 px-5">
+				<!-- Image -->
+				{% if service.print_set.all|length == 1 %}
+				{% for print in service.print_set.all %}
+				<img class="w-100 h-auto"src="{{ print.image.url }}">
+				{% endfor %}
+				{% else %}
+				<div class="carousel slide" data-ride="carousel">
+					<div id="mkplc-{{ forloop.counter }}" class="carousel slide w-100">
+						<ol class="carousel-indicators mb-0">
+							{% for print in service.print_set.all %}
+							<li data-target="#mkplc-{{ forloop.parentloop.counter }}" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+							{% endfor %}
+						</ol>
+						<div class="carousel-inner">
+							{% for print in service.print_set.all %}
+							<div class="carousel-item {% if forloop.first %}active{% endif %}">
+								<img class="d-block w-100" src="{{ print.image.url }}"  data-holder-rendered="true">
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#mkplc-{{ forloop.counter }}" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#mkplc-{{ forloop.counter }}" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				
+				
+				{% endif %}
+			</div>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+	{% else %}
+	<h1>
+		<center>{% trans "No Products available." %}</center>
+	</h1>
+	{% endif %}
+</div>
+<!--================ MODAL CONFIRMAR COMPRA ================== -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="confirm-modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content pt-5 px-5">
+			<div class="wait-text text-center mb-5">
+				<h1>{% trans 'Are you sure that you want to acquire this VNF?' %}</h1>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary px-5"
+				data-dismiss="modal">{% trans 'Cancel' %}</button>
+				<button type="button" class="btn btn-success wait-clock px-5">{% trans 'Confirm' %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================ MODAL CONFIRMAR COMPRA ================== -->
+{% endblock page_content %}
+{% block extra_footer %}
+<script>
+	$('.confirm-modal').click(function () {
+		var id = $(this).data('service');
+		$('#confirm-modal .wait-clock').attr("onclick", "buy(" + id + ")")
+		$('#confirm-modal').modal('show');
+	});
+	
+	function tagformsubmmit() {
+		$('#tagform').submit();
+	}
+	
+	function taguncheck(id) {
+		document.getElementById("checkboxtag" + id).checked = false;
+		$('#tagform').submit();
+	}
+	
+	var id = null
+	
+	function buy(id) {
+		$.post("/pt-br/marketplace/buy/", {
+			'repository': id,
+			'csrfmiddlewaretoken': '{{ csrf_token }}'
+		},
+		function (data, status) {
+			sleep(1000);
+			location.reload();
+		}
+		);
+	}
+	
+	function sleep(milliseconds) {
+		var start = new Date().getTime();
+		for (var i = 0; i < 1e7; i++) {
+			if ((new Date().getTime() - start) > milliseconds) {
+				break;
+			}
+		}
+	}
+</script>
+<style>
+	.carousel-inner{
+		max-height: 200px;
+		overflow: hidden;
+	}
+</style>
+{% endblock %}

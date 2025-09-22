@@ -1,0 +1,42 @@
+{% load advanced_inputs %}
+{% load static %}
+{% block page_content %}
+{% load i18n %}
+
+{% csrf_token %}
+
+<style type="text/css">
+     body {
+	background-color: #EEEEEF;
+     }
+     .title {
+	color: #212229;
+     }
+</style>
+
+
+
+<div id="info"></div>
+
+
+<p class="title">VNF information</p>
+<ul>
+{% for obj in catalog %}
+<li><b>{% trans "VNF Name:" %}</b> {{ obj.VNF_name }}</li>
+<li><b>{% trans "Version:" %}</b> {{ obj.version }}</li>
+<li><b>{% trans "Category:" %} </b>{{ obj.category }}</li>
+<li><b>{% trans "Abstract:" %}</b> {{ obj.abstract }}</li>
+<li><b>{% trans "Developer:" %}</b> {{ obj.developer }}</li>
+{% endfor %}
+</ul>
+<p class="title">{% trans "Instance information" %}</p>
+<ul>
+{% for obj in instance %}
+<li><b>VNF ID: </b>{{ obj.vnf_id }}</li>
+<li><b>IP:</b> {{ obj.vnf_ip }}</li>
+<li><b>VNFD ID:</b> {{ obj.vnfd_id }}</li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock page_content %}

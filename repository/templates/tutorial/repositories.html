@@ -1,0 +1,41 @@
+
+<div class="p-3">
+    <div class="row">
+        <div class="col-md-12">
+            <p> In the My Repositories page, developers can access information and manage/update his/jer accepted repositories. All repositories listed are available for customers to be acquired in the FENDE catalog.</p>
+            <p>Navigate through the items below to obtain more information about each manage/update action.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link bg-fusion-100 mb-2 active" data-toggle="pill" href="#tab-repositories-r1" role="tab" aria-controls="tab-repositories-r1"><span class="badge bg-fusion-900 mr-3">1</span>Change Policy</a>
+                <a class="nav-link bg-fusion-100 mb-2" data-toggle="pill" href="#tab-repositories-r2" role="tab" aria-controls="tab-repositories-r2"><span class="badge bg-fusion-900 mr-3">2</span>Update VNFD</a>
+                <a class="nav-link bg-fusion-100 mb-2" data-toggle="pill" href="#tab-repositories-r3" role="tab" aria-controls="tab-repositories-r3"><span class="badge bg-fusion-900 mr-3">3</span>New Version</a>
+            </div>
+        </div>
+        <div class="col-10 border">
+            <div class="tab-content p-2" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="tab-repositories-r1" role="tabpanel" aria-labelledby="tab-repositories-r1-tab">
+                    <p>
+                        Updates the policies related to the privacy of selected repository. The policies available includes:
+                        <ul>
+                            <li>Contract VNF: Defines who (specific customer or institution) can use the VNF offered in the catalog. The values for this input are None, All or Specific.</li>
+                            <li>See code source: Sets who (specific customer or institutio) can have access to the link for the VNF source code, in order to have development access to the VNF. The values for this input are the same of the policy above.</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="tab-repositories-r2" role="tabpanel" aria-labelledby="tab-repositories-r2-tab">
+                    <p>
+                        Updates the VNF Descriptor (VNFD) related to the selected repository. The developer must fill the form with comments about the modifications performed to motivate the VNFD update request. A file with the new descriptor must be sent as well.
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="tab-repositories-r3" role="tabpanel" aria-labelledby="tab-repositories-r3-tab">
+                    <p>
+                        Sends a new version of a existing repository. This option is useful to manage distinct versions of VNFs and allows developers to offer new repository (i.e., VNFs) versions to fix bugs or improve functionalities of an specific VNF, for example. The version history will be available for a customer whose want to contract the VNF.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

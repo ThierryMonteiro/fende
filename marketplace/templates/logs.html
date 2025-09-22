@@ -1,0 +1,21 @@
+{% extends "instances.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Marketplace:logs' vnf_id %}">{% trans "Instance Logs" %}</a></li>
+{% endblock %}
+
+{% block page_content %}
+    {% fende_widget location='start' widget_type='default' id='teste' title=_("Logs") size='long' %}
+    <div class="row">
+        <article class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <pre>{{ response|safe }}</pre>
+        </article>
+    </div>
+    {% fende_widget location='end' widget_type='default' %}
+
+{% endblock page_content %}
+

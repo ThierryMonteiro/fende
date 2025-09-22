@@ -1,0 +1,269 @@
+ {
+    "eth_type": {
+        "type": "string",
+        "description": "Specifies Ethernet frame type (See IEEE 802.3)",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "eth_src": {
+        "type": "string",
+        "description": "Ethernet source address",
+        "criterion": "",
+        "value": "endereço MAC\nregex: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$\nexemplo: 3D:F2:C9:A6:B3:4F",
+        "placeholder": "3D:F2:C9:A6:B3:4F"
+    },
+
+    "eth_dst": {
+        "type": "string",
+        "description": "Ethernet destination address",
+        "criterion": "",
+        "value": "endereço MAC\nregex: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$\nexemplo: 3D:F2:C9:A6:B3:4F",
+        "placeholder": "3D:F2:C9:A6:B3:4F"
+    },
+
+    "vlan_id": {
+        "type": "integer",
+        "in_range": [1, 4094],
+        "description": "VLAN ID",
+        "criterion": "https://www.juniper.net/documentation/en_US/junos/topics/reference/general/ethernet-802-1q-vlan-id-by-interface-type.html",
+        "value": "\n0 reserved for tagging the priority of frames\n1 ~ 511 reserved for normal VLANs\n512 ~ 4094 reserved for VLAN circuit cross-connect (CCCs)",
+        "placeholder": ""
+    },
+
+    "vlan_pcp": {
+        "type": "integer",
+        "in_range": [0, 7],
+        "description": "VLAN Priority Code Point",
+        "criterion": "",
+        "value": "https://en.wikipedia.org/wiki/IEEE_P802.1p",
+        "placeholder": ""
+    },
+
+    "mpls_label": {
+        "type": "integer",
+        "in_range": [16, 1048575],
+        "description": "MPLS Label",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "mpls_tc": {
+        "type": "integer",
+        "in_range": [0, 7],
+        "description": "MPLS Traffic Class",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "ip_dscp": {
+        "type": "integer",
+        "in_range": [0, 63],
+        "description": "IP DSCP (6 bits in ToS field)",
+        "criterion": "",
+        "value": "https://en.wikipedia.org/wiki/Differentiated_services#Commonly_used_DSCP_values",
+        "placeholder": ""
+    },
+
+    "ip_ecn": {
+        "type": "integer",
+        "in_range": [0, 3],
+        "description": "IP ECN (2 bits in ToS field)",
+        "criterion": "https://en.wikipedia.org/wiki/Explicit_Congestion_Notification",
+        "value": "0 – disable ECN and neither initiate nor accept it\n1 – enable ECN when requested by incoming connections, and also request ECN on outgoing connection attempts\n2 – (default) enable ECN when requested by incoming connections, but do not request ECN on outgoing connections",
+        "placeholder": ""
+    },
+
+    "ip_src_prefix": {
+        "type": "string",
+        "description": "IP source address prefix",
+        "criterion": "IP address (pode conter CIDR)",
+        "value": "exemplos: 200.17.202.200\n200.132.35.235\n172.24.4.4\n200.17.202.0/32\n10.10.0.0/24"
+    },
+
+    "ip_dst_prefix": {
+        "type": "string",
+        "description": "IP destination address prefix",
+        "criterion": "IP address (pode conter CIDR)",
+        "value": "exemplos:\n200.17.202.200\n200.132.35.235\n172.24.4.4\n200.17.202.0/32\n10.10.0.0/24",
+        "placeholder": ""
+    },
+
+    "ip_proto": {
+        "type": "integer",
+        "in_range": [1, 254],
+        "description": "IP protocol number",
+        "criterion": "",
+        "value": "https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers\n",
+        "placeholder": ""
+    },
+
+    "destination_port_range": {
+        "type": "string",
+        "description": "Destination port range",
+        "criterion": "",
+        "value": "1 até 65535 exemplos:\n80-80\n22-80\n1-65535\n80-8000",
+        "placeholder": "1-65535"
+    },
+
+    "source_port_range": {
+        "type": "string",
+        "description": "Source port range",
+        "criterion": "",
+        "value": "1 até 65535\n\nexemplos:\n80-80\n22-80\n1-65535\n80-8000",
+        "placeholder": "1-65535"
+    },
+
+    "network_id": {
+        "type": "string",
+        "description": "Network ID",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "network_name": {
+        "type": "string",
+        "description": "Network name",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "tenant_id": {
+        "type": "string",
+        "description": "OpenStack Tenant ID",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "icmpv4_type": {
+        "type": "integer",
+        "in_range": [0, 254],
+        "description": "ICMP type",
+        "criterion": "",
+        "value": "https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml\n",
+        "placeholder": ""
+    },
+
+    "icmpv4_code": {
+        "type": "integer",
+        "in_range": [0, 15],
+        "description": "ICMP code",
+        "criterion": "",
+        "value": "0\tNet is unreachable\n1\tHost is unreachable\n2\tProtocol is unreachable\n3\tPort is unreachable\n4\tFragmentation is needed and Don't Fragment was set\n5\tSource route failed\n6\tDestination network is unknown\n7\tDestination host is unknown\n8\tSource host is isolated\n9\tCommunication with destination network is administratively prohibited\n10\tCommunication with destination host is administratively prohibited\n11\tDestination network is unreachable for type of service\n12\tDestination host is unreachable for type of service\n13\tCommunication is administratively prohibited\n14\tHost precedence violation\n15\tPrecedence cutoff is in effect",
+        "placeholder": ""
+    },
+
+    "arp_op": {
+        "type": "integer",
+        "in_range": [1, 25],
+        "description": "ARP opcode",
+        "criterion": "",
+        "value": "1\tRequest\n2\tReply\n3\tRequest Reverse\n4\tReply Reverse\n5\tDRARP Request\n6\tDRARP Reply\n7\tDRARP Error\n8\tInARP Request\n9\tInARP Reply\n10\tARP NAK\n11\tMARS Request\n12\tMARS Multi\n13\tMARS MServ\n14\tMARS Join\n15\tMARS Leave\n16\tMARS NAK\n17\tMARS Unserv\n18\tMARS SJoin\n19\tMARS SLeave\n20\tMARS Grouplist Request\n21\tMARS Grouplist Reply\n22\tMARS Redirect Map\n23\tMAPOS UNARP\n24\tOP_EXP1\n25\tOP_EXP2",
+        "placeholder": ""
+    },
+
+    "arp_spa": {
+        "type": "string",
+        "description": "ARP source ipv4 address",
+        "criterion": "",
+        "value": "regex: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+        "placeholder": ""
+    },
+
+    "arp_tpa": {
+        "type": "string",
+        "description": "ARP target ipv4 address",
+        "criterion": "",
+        "value": "regex: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+        "placeholder": ""
+    },
+
+    "arp_sha": {
+        "type": "string",
+        "description": "ARP source hardware address",
+        "criterion": "",
+        "value": "regex: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$\nexemplo: 3D:F2:C9:A6:B3:4F",
+        "placeholder": ""
+    },
+
+    "arp_tha": {
+        "type": "string",
+        "description": "ARP target hardware address",
+        "criterion": "",
+        "value": "regex: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$\nexemplo: 3D:F2:C9:A6:B3:4F",
+        "placeholder": ""
+    },
+
+    "ipv6_src": {
+        "type": "string",
+        "description": "IPv6 source address",
+        "criterion": "",
+        "value": "endereço MAC IPV6",
+        "placeholder": ""
+    },
+
+    "ipv6_dst": {
+        "type": "string",
+        "description": "IPv6 destination address",
+        "criterion": "",
+        "value": "endereço MAC IPV6",
+        "placeholder": ""
+    },
+
+    "ipv6_flabel": {
+        "type": "integer",
+        "in_range": [0, 1048575],
+        "description": "IPv6 Flow Label",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "icmpv6_type": {
+        "type": "integer",
+        "in_range": [0, 255],
+        "description": "ICMPv6 type",
+        "criterion": "",
+        "value": "\n1\tDestination Unreachable\n2\tPacket Too Big\n3\tTime Exceeded\n4\tParameter Problem\n5-99\tUnassigned\n100\tPrivate experimentation\n101\tPrivate experimentation\n102-126\tUnassigned\n127\tReserved for expansion of ICMPv6 error messages\n128\tEcho Request\n129\tEcho Reply\n130\tMulticast Listener Query\n131\tMulticast Listener Report\n132\tMulticast Listener Done\n133\tRouter Solicitation\n134\tRouter Advertisement\n135\tNeighbor Solicitation\n136\tNeighbor Advertisement\n137\tRedirect Message\n138\tRouter Renumbering\n139\tICMP Node Information Query\n140\tICMP Node Information Response\n141\tInverse Neighbor Discovery Solicitation Message\n142\tInverse Neighbor Discovery Advertisement Message\n143\tVersion 2 Multicast Listener Report\n144\tHome Agent Address Discovery Request Message\n145\tHome Agent Address Discovery Reply Message\n146\tMobile Prefix Solicitation\n147\tMobile Prefix Advertisement\n148\tCertification Path Solicitation Message\n149\tCertification Path Advertisement Message\n150\tICMP messages utilized by experimental mobility protocols such as Seamoby\n151\tMulticast Router Advertisement\n152\tMulticast Router Solicitation\n153\tMulticast Router Termination\n154\tFMIPv6 Messages\n155\tRPL Control Message\n156\tILNPv6 Locator Update Message\n157\tDuplicate Address Request\n158\tDuplicate Address Confirmation\n159\tMPL Control Message\n160\tExtended Echo Request\n161\tExtended Echo Reply\n162-199\tUnassigned\n200\tPrivate experimentation\n201\tPrivate experimentation\n255\tReserved for expansion of ICMPv6 informational messages",
+        "placeholder": ""
+    },
+
+    "icmpv6_code": {
+        "type": "integer",
+        "in_range": [0, 7],
+        "description": "ICMPv6 code",
+        "criterion": "",
+        "value": "https://www.iana.org/assignments/icmpv6-parameters/icmpv6-parameters.xhtml#icmpv6-parameters-",
+        "placeholder": ""
+    },
+
+    "ipv6_nd_target": {
+        "type": "string",
+        "description": "Target address for ND",
+        "criterion": "",
+        "value": "https://en.wikipedia.org/wiki/Neighbor_Discovery_Protocol\n",
+        "placeholder": ""
+    },
+
+    "ipv6_nd_sll": {
+        "type": "string",
+        "description": "Source link-layer for ND",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    },
+
+    "ipv6_nd_tll": {
+        "type": "string",
+        "description": "Target link-layer for ND",
+        "criterion": "",
+        "value": "",
+        "placeholder": ""
+    }
+}

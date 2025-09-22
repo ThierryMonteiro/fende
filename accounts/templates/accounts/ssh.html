@@ -1,0 +1,80 @@
+{% extends "accounts/index.html" %}
+{% load i18n %}
+
+{% load widget_tweaks %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'accounts:ssh_key' %}">{% trans "SSH Keys" %}</a></li>
+{% endblock %}
+{% block my_account %}{% endblock %}
+{% block ssh_key %}active{% endblock %}
+{% block accounts_container %}
+
+<!-- SSH Keys -->
+<div class="col-md-12">
+    <h2 class="my-0">SSH Keys</h2>
+    <small>SSH keys allow you to establish a secure connection between your computer and GT-Fende.</small>
+</div>
+<div class="col-md-12">
+    
+    <form class="form-horizontal" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="new_ssh_key" class="control-label font-weight-bold">Key:</label>
+            <textarea rows="10" class="form-control" id="new_ssh_key" name="new_ssh_key" placeholder="Insert SSH Key"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="ssh_key_title" class="control-label font-weight-bold">Infrastructure</label>
+            <div class="row">
+                <div class="col-md-9">
+                    <select name="infra" class="form-control">
+                        {% for infra in infras %}
+                        <option value="{{ infra.name }}">{{ infra.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary wait-clock py-2 w-100">Add Key</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-md-12">
+    <div class="my-5 py-5 border-top d-flex">
+        <div class="col-md-2">
+            <label class="float-right control-label font-weight-bold">Your SSH keys:</label>
+        </div>
+        {% load sshkeys %}
+        {% get_keys request.user.username as keys %}
+        <div class="col-md-10 pl-2 pr-0">
+            <ul class="ssh_list overflow-hidden p-0">
+                {% if keys %}
+                {% for key in keys %}
+                <li class="border-bottom">
+                    <label><i class="fal fa-key fa-fw"></i>PublicKey:</label>
+                    <p>{{ key.public_key }}</p>
+                    <div class="d-flex justify-content-between">
+                        <span>
+                            <p>Infra: {{ key.infra }}</p>
+                            <p>Fingerprint: {{ key.fingerprint }}</p>
+                            <p>Created: {{ key.created_at }}</p>
+                        </span>
+                        <a href="{% url 'accounts:remove_key' key.infra_id %}">
+                            <button class="my-auto btn btn-sm btn-danger">Remove</button>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+                {% else %}
+                <li class="border-bottom d-flex justify-content-between">
+                    <p>No key registered</p>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- SSH Keys -->
+{% endblock %}

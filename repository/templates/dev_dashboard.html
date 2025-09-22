@@ -1,0 +1,14 @@
+{% extends "bases/dev_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block top_dashboard %}active{% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Repository:dev_dashboard' %}">Dashboard</a></li>
+{% endblock %}
+
+{% block page_content %}
+<p>Welcome to the dashboard</p>
+{% endblock page_content %}
+

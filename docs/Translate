@@ -1,0 +1,4 @@
+Colocar {% trans "Texto em inglês" %} em todo texto que precisa ter tradução
+python manage.py makemessages -> Comando utilizado para definir as novas mensagens que precisam de tradução e gerar o arquivo django.po
+Acessar locale/br/LC_MESSAGES/django.po e editar o arquivo com a tradução em Português na msgstr "Texto em português"
+Após traduzir, rodar o python manage.py compilemessages

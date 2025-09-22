@@ -1,0 +1,24 @@
+<div class="row">
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endfor %}
+
+    <div class="form-group">
+        {% for field in form %}
+            <label class="control-label col-md-12 col-sm-12 col-12"
+                   for="{{ field.label|slugify }}">{{ field.label }}
+            </label>
+            <div class="col-md-12 col-sm-12 col-12">
+                {{ field.help_text|safe }}
+                {{ field }}
+                <ul class="parsley-errors-list filled" id="parsley-id-7">
+                    {% for error in field.errors %}
+                        <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</div>

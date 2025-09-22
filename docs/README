@@ -1,0 +1,29 @@
+Banco de dados: sqlite3
+Django Version: 1.9 ( Para instalar: pip install Django==1.9 )
+
+Para rodar uma versão local pela primeira vez (configuração inicial):
+1. cd fende (diretório raíz)
+2. cd scripts
+3. sudo pip install -r requirements.txt (Satisfaz todas as dependências e instala os pacotes necessários)
+4. ./createdb (Cria uma base de dados inicial para a versão local)
+5. cd .. (voltar para o diretório raíz)
+6. cd scripts
+7. sudo ./runserver
+
+Para rodar uma versão local:
+1. cd fende (diretório raíz)
+2. cd scripts
+3. sudo ./runserver
+___________________________________________
+
+[Login padrão:
+ username = gt-fende
+ senha = rnp#12345
+]
+
+______________________________________________
+
+Versões:
+v3: Current
+v2: git checkout ec4cfad32b5509fe190dc78eef4ec36a3a34ad95
+v1: git clone https://git.rnp.br/gt-fende/web-frontend

@@ -1,0 +1,88 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+
+
+{% block top_infra %}active{% endblock %}
+{% block top_infra_add %}active{% endblock %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:infrastructure_form' %}">{% trans "Infrastructure Edit" %}</a></li>
+{% endblock %}
+
+{% block page_content %}
+{% fende_widget location='start' id='infrastructure' title=_("Infrastructure Edit") icon="fa-tasks" %}
+<form method="POST" class="post-form"> {% csrf_token %}
+    <div class="row">
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        <div class="form-group col-sm-8">
+            <label>{{ form.name.label }}:</label>
+            {{ form.name }}
+            <ul class="parsley-errors-list filled" id="parsley-id-7">
+                {% for error in form.name.errors %}
+                <li class="parsley-required">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>{{ form.ip.label }}</label>
+            {{ form.ip }}
+            {% for error in form.ip.errors %}
+            <li class="parsley-required">{{ error }}</li>
+            {% endfor %}
+        </div>
+        <div class="form-group col-sm-4">
+            <label>{{ form.technology.label }}:</label>
+            {{ form.technology }}
+            {% for error in form.technology.errors %}
+            <li class="parsley-required">{{ error }}</li>
+            {% endfor %}
+        </div>
+        <div class="form-group col-sm-4">
+            <label>{% trans 'Infrastructure Status' %}:</label>
+            <select class="form-control" name="status">
+                <option value="{% trans 'Active' %}">{% trans 'Active' %}</option>
+                <option value="{% trans 'Inactive' %}">{% trans 'Inactive' %}</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>{{ form.permission.label }}:</label>
+            {{ form.permission }}
+            {% for error in form.permission.errors %}
+            <li class="parsley-required">{{ error }}</li>
+            {% endfor %}
+        </div>
+        {% include "infras/technology_form.html"%}   
+    </div>
+    <button type="submit" class="save btn btn-success w-100">{% trans "Submit" %}</button>
+</form>
+{% fende_widget location='end' %}
+{% endblock page_content %}
+
+
+{% block extra_footer %}
+<script>
+    function toggletechnology(){
+        var select = $('#id_technology').val();
+        // console.log(select);
+        if(select){
+            $('button.save').addClass('hide');
+            $('.all_infra').addClass('hide');
+            $('.' + select).removeClass('hide');
+            if (select != '') {
+                $('button.save').removeClass('hide');
+            }
+        }
+    }
+    $('#id_technology').change(function () {
+        toggletechnology();
+    });
+    toggletechnology();
+</script>
+{% endblock %}

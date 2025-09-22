@@ -1,0 +1,38 @@
+{% extends "bases/dev_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+
+{% block top_repositories %}active{% endblock %}
+
+{% block page_content %}
+{% fende_widget location='start' widget_type='no-padding' id='update_list' title=_("Update List")%}
+<table id="dt_basic" class="table table-striped table-bordered">
+    <thead>                         
+        <tr>
+            <th><i class="fa fa-fw  fa-tags txt-color-blue hidden-md hidden-sm hidden-xs"></i> {% trans "VNF Name" %}</th>
+            <th><i class="fa fa-fw fa-exclamation-circle  txt-color-blue hidden-md hidden-sm hidden-xs"></i> {% trans "Version" %}</th>
+            <th><i class="fa fa-fw fa-exclamation-circle  txt-color-blue hidden-md hidden-sm hidden-xs"></i> {% trans "Abstract" %}</th>
+            <th><i class="fa fa-fw  fa-eye   txt-color-blue hidden-md hidden-sm hidden-xs"></i> {% trans "Link" %}</th>
+            <th><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> {% trans "Active Since" %}</th>
+            <th><i class="fal fa-fw fa-tasks"></i>
+                {% trans "Actions" %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Populando a tabela com informações da tabela Requests -->
+        {% for VNF in vnf_list %}                                           
+        <tr>
+            <td>{{ VNF.VNF_name }}</td>
+            <td>{{ VNF.version }}</td>
+            <td>{{ VNF.abstract }}</td>
+            <td>{{ VNF.link }}</td>
+            <td>{{ VNF.create_date }}</td>
+            <td><a><button type="button" href="#" onClick="InfoWindow=window.open('/repository/dev/update/submit/{{ VNF.VNF_name }}/{{ VNF.version }}','InfoWindow',width=500,height=200); return false;" class="btn btn-info">New Version</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% fende_widget location='end'%}
+{% endblock page_content %}

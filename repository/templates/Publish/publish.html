@@ -1,0 +1,85 @@
+{% extends "bases/dev_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block top_publish %}active{% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Repository:dev_publish' %}">{% trans "Repository Submission - Git" %}</a></li>
+{% endblock %}
+{% block page_content %}
+    {% fende_widget location='start' id='publish' title=_("Repository Submission - Git") tutorial=_("tutorial/publish.html") %}
+        <form method="POST" class="post-form row"> {% csrf_token %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="form-group col-sm-8 {% if form.VNF_name.errors %} has-error{% endif %}">
+                <label for="inputVNFName">VNF Name:</label>
+                {{ form.VNF_name.help_text|safe }}
+                {{ form.VNF_name }}
+                {% for error in form.VNF_name.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-4 {% if form.institution.errors %} has-error{% endif %}">
+                <label for="inputInstitution">Institution:</label>
+                {{ form.institution.help_text|safe }}
+                {{ form.institution }}
+                {% for error in form.institution.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-3 {% if form.version.errors %} has-error{% endif %}">
+                <label for="inputVersion">Version:</label>
+                {{ form.version.help_text|safe }}
+                {{ form.version }}
+                {% for error in form.version.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-3 {% if form.category.errors %} has-error{% endif %}">
+                <label>Category:</label>
+                {{ form.category.help_text|safe }}
+                {{ form.category }}
+                {% for error in form.category.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-6 {% if form.link.errors %} has-error{% endif %}">
+                <label for="inputLink">Link:</label>
+                {{ form.link.help_text|safe }}
+                {{ form.link }}
+                {% for error in form.link.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-12 {% if form.abstract.errors %} has-error{% endif %}">
+                <label for="inputAbstract">Abstract:</label>
+                {{ form.abstract.help_text|safe }}
+                {{ form.abstract }}
+                {% for error in form.abstract.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group col-sm-12 {% if form.full_description.errors %} has-error{% endif %}">
+                <label for="inputFullDescription">Full Description:</label>
+                {{ form.full_description.help_text|safe }}
+                {{ form.full_description }}
+                {% for error in form.full_description.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-success w-100">{% trans "Submit" %}</button>
+            </div>
+        </form>
+    {% fende_widget location='end' %}
+
+
+
+{% endblock page_content %}
+

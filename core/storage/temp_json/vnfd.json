@@ -1,0 +1,41 @@
+{
+	"vnfd": {
+		"name": "CHANGE",
+		"description": "CHANGE",
+		"service_types": [
+			{
+				"service_type": "vnfd"
+			}
+		],
+		"attributes": {
+			"vnfd": {
+				"tosca_definitions_version": "tosca_simple_profile_for_nfv_1_0_0",
+				"metadata": {
+					"template_name": "sample-tosca-vnfd"
+				},
+				"topology_template": {
+					"node_templates": {
+						"VD_FENDE": {
+							"type": "tosca.nodes.nfv.VDU.Tacker",
+							"capabilities": {
+								"nfv_compute": {
+									"properties": {
+										"num_cpus": "CHANGE",
+										"mem_size": "CHANGE",
+										"disk_size": "CHANGE"
+									}
+								}
+							},
+							"properties": {
+								"image": "CHANGE",
+								"availability_zone": "nova",
+								"mgmt_driver": "noop"
+							}
+						},
+						"CP_CHANGE"
+					}
+				}
+			}
+		}
+	}
+}

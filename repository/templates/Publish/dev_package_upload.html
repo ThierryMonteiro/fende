@@ -1,0 +1,89 @@
+{% extends "bases/dev_base.html" %}
+{% load advanced_inputs %}
+{% load i18n %}
+{% block top_publish %}active{% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a
+            href="{% url 'Repository:dev_publish' %}">{% trans "Repository Submission - Upload" %}</a></li>
+{% endblock %}
+
+{% block page_content %}
+    {% fende_widget location='start' id='form_json' title=_("Repository Submission - Upload") icon="fa-tasks" %}
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="row">
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputVersion">{% trans "Name" %}:</label>
+                    {{ form.VNF_name }}
+                    {% for error in form.VNF_name.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="inputVersion">{% trans "Description" %}:</label>
+                    {{ form.full_description }}
+                    {% for error in form.full_description.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <label for="inputVersion">{% trans 'Version' %}:</label>
+                        {{ form.version }}
+                        {% for error in form.version.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <label for="inputVersion">{% trans 'Category' %}:</label>
+                        {{ form.category }}
+                        {% for error in form.category.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <label for="inputVersion">{% trans 'Institution' %}:</label>
+                        {{ form.institution }}
+                        {% for error in form.institution.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputVersion">{% trans 'Abstract' %}:</label>
+                    {{ form.abstract }}
+                    {% for error in form.abstract.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {#  ZIPFILE #}
+            <div class="col-md-12 form-group mt-5">
+                <div class="range">
+                    <label for="zip_files">{% trans 'Zip File' %}:</label>
+                    <div class="pl-1 overflow-hidden">
+                        <label class="control-label" for="file">File</label>
+                        {{ form.file }}
+                        <p class="help-block mb-1">Zip Suportado</p>
+                        {% for error in form.file.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="save btn btn-success w-100">{% trans "Submit" %}</button>
+            </div>
+        </div>
+    </form>
+    {% fende_widget location='end' %}
+{% endblock page_content %}

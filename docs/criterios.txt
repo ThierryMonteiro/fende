@@ -1,0 +1,34 @@
+eth_type: Specifies Ethernet frame type (See IEEE 802.3)
+eth_src: Ethernet source address
+eth_dst: Ethernet destination address
+vlan_id: VLAN ID
+vlan_pcp: VLAN Priority
+mpls_label: MPLS Label
+mpls_tc: MPLS Traffic Class
+ip_dscp: IP DSCP (6 bits in ToS field)
+ip_ecn: IP ECN (2 bits in ToS field)
+ip_src_prefix: IP source address prefix
+ip_dst_prefix: IP destination address prefix
+ip_proto: IP protocol number or name
+destination_port_range: -
+source_port_range: -
+network_src_port_id: -
+network_dst_port_id: -
+network_id: -
+network_name: -
+tenant_id: OpenStack Tenant ID
+icmpv4_type: ICMP type
+icmpv4_code: ICMP code
+arp_op: ARP opcode
+arp_spa: ARP source ipv4 address
+arp_tpa: ARP target ipv4 address
+arp_sha: ARP source hardware address
+arp_tha: ARP target hardware address
+ipv6_src: IPv6 source address
+ipv6_dst: IPv6 destination address
+ipv6_flabel: IPv6 Flow Label
+icmpv6_type: ICMPv6 type
+icmpv6_code: ICMPv6 code
+ipv6_nd_target: Target address for ND
+ipv6_nd_sll: Source link-layer for ND
+ipv6_nd_tll: Target link-layer for ND

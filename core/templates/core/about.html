@@ -1,0 +1,49 @@
+{% extends "core/template.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% block content %}
+<div class="row">
+    <div class="container">
+        <div class="widget-body">
+            <div class="web-title mt-10">
+                <h1>{% trans "Federated Ecosystem for OfferiNg, Distribution, and Execution of Virtual Network Functions" %}</h1>
+            </div>
+            <div class="jumbotron">
+                <p style="text-indent: 4em;">
+                    {% trans "FENDE is an ecossystem to support the desing, development and instantiation of NFV-based services, in addition to a marketplace for offering and distribution of Virtual Network Functions (VNFs). FENDE presents itself as a unique system of its kind, and enables the distribution of both networks functions and services, in a manner that is akin to virtual marketplaces (e.g., Google Play and Apple Store). FENDE also allows the management of services and functions, including Service Function Chainning (SFC) capabilities and management to help in the creation of many network functions to supply a determined network service." %} 
+                </p>
+                <div class="row">
+                <div class="col-md-6">
+                <h3 class="text-primary">{% trans "Currently, FENDE ecossystem provides:" %}</h3>
+                <div class="bs-example">
+                    <ul style="list-style-type:circle">
+                        <li><strong>{% trans "A VNFs repository implementation; "%}</strong></li>
+                        <li><strong>{% trans "Federated Login (CAFe);"%}</strong></li>
+                        <li><strong>{% trans "Web Front-end with different users' panels (i.e., developers, reviewers, and customers);" %}</strong></li>
+                        <li><strong>{% trans "Execution environment (Click-on-OSv);" %}</strong></li>
+                        <li><strong>{% trans "Management of VNFs lifecycle in hardware and software layer;" %}</strong></li>
+                        <li><strong>{% trans "SFCs creation and lifecycle management;" %}</strong></li>
+                        <li><strong>{% trans "VNFs monitoring;" %}</strong></li>
+                        <li><strong>{% trans "OpenStack-based cloud infrastructure for services instantiation." %}</strong></li>
+                    </ul>
+                </div>
+                    <h3 class="text-primary">{% trans "Differentials" %}</h3>
+                    <ul style="list-style-type: none">
+                        <li class="text-success"><i class="fa fa-check"></i> <strong><u>{% trans "First complete" %}</u> {% trans "marketplace for NFV (offering, distribution, and execution);" %}</strong></li>
+                        <li><i class="fa fa-sitemap"></i> <strong>{% trans "Modular and extensible architecture based on ETSI standards;" %}</strong></li>
+                        <li><i class="fa fa-rocket"></i> <strong>{% trans "Full set of operations;" %}</strong></li>
+                        <li><i class="fa fa-user"></i> <strong>{% trans "Support to heterogeneous, scalable and distributed environments;" %}</strong></li>
+                    </ul>
+                    <p class="mt-10 text-center">
+                        <a href="http://coral.ufsm.br/gt-fende/index.html" class="btn btn-primary btn-lg" role="button">{% trans "Learn more" %}</a>
+                    </p>
+                </div>
+                <div class="col-md-6"><iframe width="100%" height="500vw" src="https://www.youtube.com/embed/XevHzdLVRb8?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block top_reviewer %}active{% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Repository:review_list' %}">{% trans "Review" %}</a></li>
+{% endblock %}

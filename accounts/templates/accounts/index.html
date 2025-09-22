@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block title %}{{ block.super }} | Account{% endblock %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'accounts:index' %}">{% trans "My Account" %}</a></li>
+{% endblock %}
+
+{% block page_content %}
+<!-- CONTENT -->
+<div class="col-md-12">
+    <h2 class="text-uppercase">Welcome {{ user.get_short_name }}</h2>
+</div>
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="{% url 'accounts:index' %}"
+        class="list-group-item {% block my_account %}active{% endblock %}">{% trans "My Account" %}</a>
+        <a href="{% url 'accounts:ssh_key' %}"
+        class="list-group-item {% block ssh_key %}{% endblock %}">{% trans "SSH Keys" %}</a>
+    </div>
+</div>
+<div class="col-md-9">
+    <div class="row mx-5">
+        {% block accounts_container %}
+        <div class="col-md-6">
+            <h2>Change Profile</h2>
+            <form class="form-horizontal" action="" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    {% for field in profile_form %}
+                    <div class="form-group{% if field.errors %} has-error{% endif %}">
+                        <label for="{{ field.auto_id }}" class="control-label font-weight-bold">{{ field.label }}</label>
+                        {% if field.label == 'Birthday' %}
+                        <div class="form-inline">{% endif %}
+                            {{ field }}
+                            {% if field.label == 'Birthday' %}</div>{% endif %}
+                            {% for error in field.errors %}
+                            <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        <div class="float-right">
+                            <button type="submit" name="profile" value="True" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-6">
+                
+                <h2>Change Password</h2>
+                <form class="form-horizontal" action="" method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        {% for field in password_form %}
+                        <div class="form-group{% if field.errors %} has-error{% endif %}">
+                            <label for="{{ field.auto_id }}" class="control-label font-weight-bold">{{ field.label }}</label>
+                            {% render_field field class='form-control' %}
+                            {% for error in field.errors %}
+                            <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        <div class="float-right">
+                            <button type="submit" name="password" value="True" class="btn btn-primary w-100">Salvar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+    <!-- ENDCONTENT -->
+    {% endblock %}
+    

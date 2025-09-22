@@ -1,0 +1,58 @@
+<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    logger="syslog.logger" clockSkew="180">
+
+    <ApplicationDefaults
+		entityID="https://${SERVER_NAME}/shibboleth"
+        REMOTE_USER="eppn persistent-id targeted-id">
+
+        <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
+            checkAddress="false" handlerSSL="true" cookieProps="https"
+            exportLocation="http://localhost/Shibboleth.sso/GetAssertion" exportACL="127.0.0.1">
+<!--
+            <SSO discoveryProtocol="SAMLDS" ECP="true" discoveryURL="https://ds.cafeexpresso.rnp.br/WAYF.php">
+-->
+	    <SSO discoveryProtocol="SAMLDS" ECP="true" discoveryURL="https://${SERVER_NAME}/Shibboleth.sso/DS">
+            SAML2 SAML1
+            </SSO>
+            <SessionInitiator type="Chaining" Location="/DS" id="DS" relayState="cookie">
+                <SessionInitiator type="SAML2" acsIndex="1" acsByIndex="false" template="bindingTemplate.html"/>
+                <SessionInitiator type="Shib1" acsIndex="5"/>
+                <SessionInitiator type="SAMLDS" URL="https://ds.cafeexpresso.rnp.br/WAYF.php"/>
+            </SessionInitiator>
+
+<!--
+            <Logout>Local</Logout>
+-->
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+            <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+            <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
+
+        </Sessions>
+
+        <Errors supportContact="root@localhost"
+            logoLocation="/shibboleth/logo.jpg"
+            styleSheet="/shibboleth/main.css"/>
+
+        <MetadataProvider type="XML" url="https://ds.cafeexpresso.rnp.br/metadata/ds-metadata.xml"
+             backingFilePath="ds-metadata-cache.xml" legacyOrgNames="true" maxRefreshDelay="7200">
+        </MetadataProvider>
+
+
+        <AttributeExtractor type="XML" validate="true" path="attribute-map.xml" />
+        <AttributeResolver type="Query" subjectMatch="true"/>
+        <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+        <CredentialResolver type="File" key="/etc/shibboleth/sp-key.pem"
+                            certificate="/etc/shibboleth/sp-cert.pem"
+							keyName="${HOSTNAME}"/>
+
+    </ApplicationDefaults>
+
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+    <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+
+</SPConfig>

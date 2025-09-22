@@ -1,0 +1,27 @@
+"CP_CHANGE": {
+	"type": "tosca.nodes.nfv.CP.Tacker",
+	"properties": {
+		"order": "CHANGE",
+		"management": false,
+		"anti_spoofing_protection": false
+	},
+	"requirements": [
+		{
+			"virtualLink": {
+				"node": "CHANGE"
+			}
+		},
+		{
+			"virtualBinding": {
+				"node": "VD_FENDE"
+			}
+		}
+	]
+},
+"CHANGE": {
+	"type": "tosca.nodes.nfv.VL",
+	"properties": {
+		"vendor": "Tacker",
+		"network_name": "CHANGE"
+	}
+}

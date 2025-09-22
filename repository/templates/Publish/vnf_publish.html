@@ -1,0 +1,460 @@
+{% extends "bases/dev_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block top_publish %}active{% endblock %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a
+    href="{% url 'Repository:dev_publish' %}">{% trans "Repository Submission - Builder" %}</a></li>
+    {% endblock %}
+    
+    
+    {% block page_content %}
+    
+    {% fende_widget location='start' id='form_json' title=_("Repository Submission - Builder") icon="fa-tasks" %}
+    <ul class="nav nav-pills nav-justified w-100 nav-step">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#config">{% trans "Marketplace Policies" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#descriptor">{% trans "Configuration" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#management">{% trans "Lifecycle Management" %}</a>
+        </li>
+    </ul>
+    <form method="POST" class="post-form" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="tab-content py-3">
+            <div class="tab-pane fade show active" id="config" role="tabpanel">
+                <div class="row">
+                    {% for seletor in seletores %}
+                    <div class="col-md-6">
+                        <div class="permissions-config mb-5">
+                            <label>{{ seletor.1 }}:</label>
+                            <span class="d-flex justify-content-between mb-3 frame-wrap config-radios">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="{{ seletor.0 }}all" name="{{ seletor.0 }}"
+                                    class="custom-control-input" checked="checked" value="all">
+                                    <label class="custom-control-label" for="{{ seletor.0 }}all">{% trans "All" %}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="{{ seletor.0 }}none" name="{{ seletor.0 }}"
+                                    class="custom-control-input" value="none">
+                                    <label class="custom-control-label" for="{{ seletor.0 }}none">{% trans "None" %}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="{{ seletor.0 }}personalizado"
+                                    class="custom-control-input checkpersonalizado" name="{{ seletor.0 }}">
+                                    <label class="custom-control-label"
+                                    for="{{ seletor.0 }}personalizado">{% trans "Custom" %}</label>
+                                </div>
+                            </span>
+                            <select class="personalizado select2" multiple="multiple">
+                                <option></option>
+                                {% for item in institutions %}
+                                <option value="{{ item.name }}">{{ item.name }}</option>
+                                {% endfor %}
+                                
+                            </select>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade w-100" id="descriptor" role="tabpanel">
+                <div class="range px-3 pb-5">
+                    <label><h4 class="fw-700">{% trans "VNF Information" %}</h4></label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="inputVersion">{% trans "Name" %}:</label>
+                                <input class="form-control" required id="id_name" name="name" placeholder="{% trans 'Name' %}"
+                                type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputVersion">{% trans "Description" %}:</label>
+                                <textarea required class="form-control" id="id_description" name="description"
+                                placeholder="{% trans 'Description' %}" type="text" rows="6"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-row mb-4">
+                                <div class="col">
+                                    <label for="inputVersion">{% trans 'Version' %}:</label>
+                                    <input class="form-control" required id="id_version" name="version"
+                                    placeholder="{% trans 'Version' %}" type="text">
+                                </div>
+                                <div class="col">
+                                    <label for="inputVersion">{% trans 'Category' %}:</label>
+                                    <select id="inputCategory" class="form-control" name="category">
+                                        <option></option>
+                                        {% for item in categories %}
+                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="inputVersion">{% trans 'Institution' %}:</label>
+                                    <select id="inputInstitution" class="form-control" name="institution">
+                                        {% for item in institutions %}
+                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputVersion">{% trans 'Abstract' %}:</label>
+                                <textarea required class="form-control" id="id_abstract" name="abstract"
+                                placeholder="Abstract" type="text" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="range px-3 mt-3 pt-5">
+                    <label><h4 class="fw-700">{% trans 'Resource Configuration' %}</h4></label>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <div class="range">
+                                <label for="mem_size">{% trans 'RAM Memory' %}:</label>
+                                <input class="range__input" type="range" value="0" min="0" max="4" step="1"
+                                list="memory_number" name="mem_size" id="mem_size"/>
+                                <datalist class="range__list" id="memory_number">
+                                    <option class="range__opt" value="0">512 Mb</option>
+                                    <option class="range__opt" value="1">1024 Mb</option>
+                                    <option class="range__opt" value="2">2048 Mb</option>
+                                    <option class="range__opt" value="3">4096 Mb</option>
+                                    <option class="range__opt" value="4">8192 Mb</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="range">
+                                <label for="num_cpus">CPUs:</label>
+                                <input class="range__input" type="range" value="0" min="0" max="3" step="1"
+                                list="core_number" name="num_cpus" id="num_cpus"/>
+                                <datalist class="range__list" id="core_number">
+                                    <option class="range__opt" value="0">1 Core</option>
+                                    <option class="range__opt" value="1">2 Core</option>
+                                    <option class="range__opt" value="2">4 Core</option>
+                                    <option class="range__opt" value="3">8 Core</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="range">
+                                <label for="disk_size">{% trans 'Disk Size' %}:</label>
+                                <input class="range__input" type="range" value="0" min="0" max="4" step="1"
+                                list="disk_number" name="disk_size" id="disk_size"/>
+                                <datalist class="range__list" id="disk_number">
+                                    <option class="range__opt" value="0">1 Gb</option>
+                                    <option class="range__opt" value="1">5 Gb</option>
+                                    <option class="range__opt" value="2">10 Gb</option>
+                                    <option class="range__opt" value="3">50 Gb</option>
+                                    <option class="range__opt" value="4">100 Gb</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col justify-content-center d-flex">
+                            <label>{% trans "CP Traffic:" %}</label>
+                            <div class="custom-control custom-checkbox ml-4">
+                                <input type="checkbox" class="custom-control-input" name="CP_traffic" checked="checked"
+                                id="CP_traffic">
+                                <label class="custom-control-label" for="CP_traffic">{% trans "Enable" %}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="management" role="tabpanel">
+                <div class="range px-3">
+                    <label><h4 class="fw-700">Scripts</h4></label>
+                    <div class="row">
+                        <!-- DIV ZIP -->
+                        {#  LOGFILE #}
+                        <div class="col-md-8 form-group m-0">
+                            <label class="position-relative p-0" for="id_logfile">{% trans 'Log Path' %}</label>
+                            <input type="text" name="logfile" class="form-control" id="id_logfile" aria-describedby="logHelp" placeholder="Path">
+                            <small id="logHelp" class="form-text text-muted">{% trans 'Enter the path to the log file.' %}
+                            </small>
+                        </div>
+                        
+                        {# CHECKBOX API#}
+                        <div class="col-md-4 custom-control custom-checkbox d-flex align-items-center ml-3 ml-md-0">
+                            <input type="checkbox" class="custom-control-input" id="id_active" name="active">
+                            <label class="custom-control-label" for="id_active">{% trans 'Include API' %}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 toggle-radio-button my-3">
+                            <input type="radio" name="management-type" id="send_bt" checked="checked"/>
+                            <label for="send_bt">{% trans 'Upload' %}</label>
+                            <input type="radio" name="management-type" id="write_bt"/>
+                            <label for="write_bt">{% trans 'Write' %}</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div id="write" class="col-12 hide">
+                            {% for error in scriptsform.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            <div class="row">
+                                {% for field in scriptsform %}
+                                <div class="col-md-4 form-group">
+                                    <label class="control-label d-block w-100"
+                                    for="{{ field.label|slugify }}">{{ field.label }}</label>
+                                    {{ field.help_text|safe }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                    <ul class="parsley-errors-list filled" id="parsley-id-7">
+                                        {% for error in field.errors %}
+                                        <li class="parsley-required">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- DIV WRITE -->
+                        <!-- DIV ZIP -->
+                        <div id="send" class="col-12">
+                            {% for error in zipform.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-group">
+                                {% for field in zipform %}
+                                <div class="py-3 pl-1 px-md-4 overflow-hidden">
+                                    <label class="control-label"
+                                    for="{{ field.label|slugify }}">{{ field.label }}</label>
+                                    {{ field.help_text|safe }}
+                                    {{ field }}
+                                    <p class="help-block mb-0">{% trans 'Zip Supported' %}</p>
+                                    {% if field.errors %}
+                                    <ul class="parsley-errors-list filled" id="parsley-id-7">
+                                        {% for error in field.errors %}
+                                        <li class="parsley-required">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# APIFORM #}
+                <div class="api mt-3 hide">
+                    <div class="range px-3">
+                        <label><h4 class="fw-700">API</h4></label>
+                        <div class="row">
+                            <div class="col-12">
+                                {% for error in apiform.non_field_errors %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% for field in apiform %}
+                            <div class="col-md-{% if  forloop.counter < 5 %}3{% else %}6{% endif %} form-group">
+                                <label for="{{ field.label|slugify }}">{{ field.label }}</label>
+                                {{ field }}
+                                <small class="form-text text-muted m-0">{{ field.help_text|safe }}</small>
+                            </div>
+                            {% if field.errors %}
+                            <ul class="parsley-errors-list filled" id="parsley-id-7">
+                                {% for error in field.errors %}
+                                <li class="parsley-required">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="formset-box">
+                            <hr>
+                            {% for form in formset %}
+                            <div id="{{ formset.prefix }}-{{ forloop.counter0 }}" class="formset">
+                                <div class="row">
+                                    <div class="col-12 formset-header">
+                                        <h4 class="formset-title d-flex">{% trans 'Calls' %}<span class="formset-padrao"></span>
+                                            <a class="remove-formset ni ni-close ml-auto my-auto text-danger"></a>
+                                        </h4>
+                                    </div>
+                                    {% for field in form.visible_fields %}
+                                    <div class="col-md-{% if forloop.last %}12{% else %}3{% endif %} form-group {{ field.label }}">
+                                        <label>{{ field.label }}</label>
+                                        {{ field }}
+                                    </div>
+                                    {% if field.errors %}
+                                    {% for error in field.errors %}
+                                    <label class="error">{{ error }}</label>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {{ form.id }}
+                                    <div class="col-12">
+                                        <a class="btn btn-xs add-formset js-waves-off text-white">{% trans 'Add' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {{ formset.management_form }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <a class="btn btn-sm btn-primary min-w-25 btnPrevious" href="#">{% trans "Previous" %}</a>
+                <a class="btn btn-sm btn-primary ml-auto min-w-25 btnNext" href="#">{% trans "Next" %}</a>
+                <button class="btn btn-sm btn-success ml-auto min-w-25 hide btnSubmit" type="submit">{% trans "Submit" %}</button>
+                <button class="hide btnSend" type="submit">{% trans "Submit" %}</button>
+            </div>
+        </div>
+    </form>
+    {% fende_widget location='end' %}
+    
+    {% endblock page_content %}
+    
+    
+    
+    {% block extra_footer %}
+    <script src="{% static 'js/formset.js' %}"></script>
+    <script>
+        /* 
+        ** Toggle do radio upload/write
+        */
+        $(".toggle-radio-button input[type=radio]").change(function () {
+            if ($('#send_bt').prop('checked')) {
+                $('#write').addClass('hide');
+                $('#write textarea').removeAttr('required');
+                $('#send input').attr('required', true);
+                $('#send').removeClass('hide');
+            } else {
+                $('#send').addClass('hide');
+                $('#send input').removeAttr('required');
+                $('#write textarea').attr('required', true);
+                $('#write').removeClass('hide');
+            }
+        });
+        
+        checkbox = document.getElementById("id_active")
+        $(function () {
+            $('#id_active').change(function () {
+                if (checkbox.checked) {
+                    $('.api').removeClass('hide');
+                } else {
+                    $('.api').addClass('hide');
+                }
+            });
+        });
+        
+        /* 
+        ** Desativa ou ativa o select personalizado
+        */
+        $(".personalizado").select2({
+            placeholder: "Select",
+            disabled: true,
+        });
+        $(function () {
+            $('.permissions-config [type="radio"]').change(function () {
+                var selectedpersonalizado = $(this).closest('.permissions-config').children('.personalizado')
+                if ($(this).hasClass('checkpersonalizado')) {
+                    selectedpersonalizado.prop("disabled", false);
+                } else {
+                    selectedpersonalizado.prop("disabled", true);
+                }
+            });
+        });
+
+        /*
+        ** Select específico da tab de políticas do marketplace
+        ** Define o valor a partir dos options selecionados no select multi
+        */
+        $("select.personalizado").on("change", function () {
+            let valor = $(this).val();
+            $(this).siblings('.config-radios').find('.checkpersonalizado').val("'" + valor + "'");
+            console.log("Valor Escolhido foi: " + valor);
+        });
+
+        /* 
+        ** Chama funções de verificação dos botões e tabs
+        */
+        $('.nav-link').click(function () {
+            verifystep();
+        });
+        $('.btnNext').click(function () {
+            navstep = $('.nav-step .nav-item a.active');
+            navstep.closest('.nav-item').next('li').find('a').trigger('click');
+            verifystep();
+        });
+        $('.btnPrevious').click(function () {
+            navstep = $('.nav-step .nav-item a.active');
+            navstep.closest('.nav-item').prev('li').find('a').trigger('click');
+            verifystep();
+        });
+        
+        /* 
+        ** Função de verificação dos botões inferiores
+        ** Exibir e Oculta dependendo da etapa encontrada
+        */
+        verifystep();
+        function verifystep() {
+            $(".nav-step .previous").removeClass('previous');
+            $(".nav-step .nav-item a.active").closest('li').prevAll().find('a').addClass('previous');
+            navstep = $('.nav-step .nav-item a.active').parent().index();
+            // Oculta primeiro Botão
+            (navstep == 0) ? $('.btnPrevious').hide() : $('.btnPrevious').show();
+            // Oculta ultimo Botão
+            if (navstep == $('.nav-step li').length - 1) {
+                $('.btnNext').hide()
+                $('.btnSubmit').removeClass('hide');
+            } else {
+                $('.btnSubmit').addClass('hide');
+                $('.btnNext').show();
+            }
+        }
+
+        /* 
+        ** Verificação de campos obrigatórios vazios, voltando para tab especifica
+        */
+        $('.btnSubmit').click( function(){
+            var tabs = [];
+            /* 
+            ** Gera array com tabs na qual os input required estão vazios
+            ** Adiciona classe error, estilo de borda vermelha nos inputs
+            */
+            $("input[required], textarea[required], select[required]").each(function() {
+                if( !$(this).val() ) {
+                    tabs.push($(this).closest('.tab-pane').attr('id'));
+                    $(this).addClass('error');
+                }
+            });
+            /* 
+            ** Clica na primeira tab encontrada
+            */
+            if (tabs.length > 0) {
+                $('a[href^="#'+tabs[0]+'"]').click();
+            }
+            /* 
+            ** Clica no botão escondido após as verificações anteriores
+            ** Caso nada seja encontrado é enviado normalmente
+            */
+            setTimeout(function(){
+                $('.btnSend').click();
+            }, 500);
+        });
+
+        /* 
+        ** Remove a classe error após inserção de dado no input obrigatório
+        */
+        $("input[required], textarea[required], select[required]").change(function() {
+            if( $(this).val() ) {
+                $(this).removeClass('error');
+            }
+        });
+    </script>
+    {% endblock %}

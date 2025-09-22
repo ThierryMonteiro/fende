@@ -1,0 +1,18 @@
+#Para realizar um deploy em um servidor apache:
+
+1. cd fende (pasta raíz do projeto)
+2. cd /docs/Apache_deploy/
+3. Copie todos os arquivos .conf para a pasta sites-available do apache (cp *.conf /etc/apache2/sites-available)
+4. cd shibboleth-instalation
+5. Execute o install.md
+5. Copie os arquivos nas pastas etc e var para as respectivas pastas do sistema
+6. cd .. (retornar para a pasta Apache_deploy)
+7. Copie a pasta sp para /var/www/ (cp -R sp /var/www/)
+8. cd .. (retornar para a pasta raíz do projeto)
+9. cd scripts
+10. sudo pip install -r requirements.txt (Satisfaz todas a dependências e instala os pacotes necessários)
+11. ./createdb (Cria uma base de dados inicial para experimentação)
+
+
+
+-> Configurações testadas em um Ubuntu Server 16.04.4 LTS

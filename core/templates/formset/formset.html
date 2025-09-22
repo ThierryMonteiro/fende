@@ -1,0 +1,75 @@
+<div class="formset-box">
+    
+    {% for form in formset %}
+    <div id="{{ formset.prefix }}-{{ forloop.counter0 }}" class="formset  m-0 p-0">
+        <div class="row">
+            <div class="col-sm-12 formset-header">
+                <div class="d-flex justify-content-between">
+                    <h4 class="formset-title">{{ title }}<span class="formset-padrao"></span></h4>
+                    <i class="remove-formset ni ni-close my-auto text-danger"></i>
+                </div>
+            </div>
+            
+            {% for field in form.visible_fields %}
+            <div class="col-sm-6 {{ field.label }}">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label>{{ field.label }}</label>
+                        <i class="fal fa-fw fa-info-circle" data-type="{{ field.label }}" onClick="acl_help( )"></i>
+                        {% if field.errors %}<label class="error">{% for error in field.errors %}{{ error }}{% endfor %}</label>{% endif %}
+                        {{ field }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-sm-12 acl-output-help"></div>
+            {{ form.id }}
+            
+            <div class="col-sm-12 mt-3">
+                <a class="btn btn-xs btn-info add-formset text-white" onClick="acl_help_new_form()">Adicionar novo</a>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+    
+    {{ formset.management_form }}
+    
+</div>
+<div class="acl-output hide">
+    <!--
+        TODO
+        OBRIGATORIO UMA DIV COM ID TENDO O TIPO(CRITERION OU VALUE)EM SEGUIDA O VALUE DO SELECT UNIDOS POR UM HÍFEN
+        INTERNAMENTE DESTA DIV NECESSARIO OUTRA DIV "<div class="bg-acl-help p-3 mb-3">" SERVE PARA DA ESPAÇAMENTO E COR
+            AS TAGS INTERNAS (<strong> E <p>) NÃO SÃO OBRIGATÓRIAS MAS AJUDAM NO ESPAÇAMENTO E DA VISUALIZAÇÃO
+                (PREFERIVEL DEIXAR ASSIM, ALTERAR O TEXTO INTERNO DA TAG "P")
+                ESTA DIV ACL-OUTPUT PODE SER MOVIDA PARA A VIEW DEPLOY.HTML SE NECESSARIO
+                REMOVER APOS ALTERAÇÃO
+            -->
+            
+            {% for acl in acls %}
+            <!-- CRITERION -->
+            <div id="Criterion-{{ acl.name }}">
+                <div class="bg-acl-help p-3 mb-3">
+                    <strong>Criterion: </strong>
+                    <pre class="text-white m-0">{{ acl.criterion }}</pre>
+                </div>
+            </div>
+            
+            <!-- VALUE -->
+            <div id="Value-{{ acl.name }}">
+                <div class="bg-acl-help p-3 mb-3">
+                    <strong>Value:</strong>
+                    <pre class="text-white m-0">{{ acl.value }}</pre>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        
+        <!-- PLACEHOLDER -->
+        <div class="acl-placeholder hide">
+            {% for acl in acls %}
+            <div id="{{ acl.name }}">{{ acl.placeholder }}</div>
+            {% endfor %}
+        </div>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+<html lang="en-us" id="extr-page">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123288077-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-123288077-1');
+    </script>
+    <meta charset="utf-8">
+    <title>FENDE - NFV Marketplace</title>
+    <meta name="description" content="FENDE - NFV Marketplace">
+    <meta name="author" content="GT-Fende">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" href="{% static "img/fende.png" %}" type="image/x-icon">
+    <link rel="icon" href="{% static "img/fende.png" %}" type="image/x-icon">
+
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/front-site/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/front-site/font-awesome.min.css" %}">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/front-site/smartadmin-production.min.css" %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/app.css" %}">
+    <!-- Classes Utilizaveis do Bootstrap 4  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/front-site/bt-4.css" %}">
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+</head>
+
+<body class="website ">
+<div class="col-md-12">
+    <!--================== NAVBAR =================== -->
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <nav class="navbar bg-fende-light-marine mb-0">
+                <div class="col-sm-3 col-md-2 logo-brand">
+                    <a class="navbar-brand p-1 ml-3" href="/"><img src="{% static "img/logo.png" %}" alt="FENDE"></a>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse"
+                                data-target="#menu-fende" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-10 pr-0">
+                    <div class="collapse navbar-collapse mr-3" id="menu-fende">
+                        <ul class="nav navbar-nav">
+                            <!--================== NAVBAR LEFT =================== -->
+                            <li class="{% if active_view == 'home' %} active {% endif %}"><a
+                                    href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                            <li class="{% if active_view == 'team' %} active {% endif %}">
+                                <a href="{% url 'team' %}">{% trans "Team" %}</a>
+                            </li>
+                            <li class="{% if active_view == 'publications' %} active {% endif %}">
+                                <a href="{% url 'publications' %}">{% trans "Publications" %}</a>
+                            </li>
+                            <li class="{% if active_view == 'about' %} active {% endif %}">
+                                <a href="{% url 'about' %}">{% trans "About" %}</a>
+                            </li>
+                            <!--================== NAVBAR LEFT =================== -->
+                            <!--================== NAVBAR RIGHT =================== -->
+                            <div class="navbar-right d-md-inline-flex">
+                                <!--================== SWITCH LANGUAGE =================== -->
+                                <li class="dropdown language">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {% trans "Language" %}<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <li class="dropdown-item {% if request.LANGUAGE_CODE == language.code %} active {% endif %}">
+                                                <a onclick="postlang('{{ language.code }}')">
+                                                    <img
+                                                            {% if language.code == 'pt-br' %}
+                                                                src="http://flags.fmcdn.net/data/flags/w580/br.png"
+                                                            {% else %}
+                                                                src="http://flags.fmcdn.net/data/flags/w580/us.png"
+                                                            {% endif %}
+                                                                width="20px"
+                                                                height="13px">
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <!--================== SWITCH LANGUAGE =================== -->
+                                {% if request.user.is_authenticated %}
+                                    <li class="item-login"><a
+                                            href="{% url 'Marketplace:index' %}">{% trans "Back" %}</a></li>
+                                {% else %}
+                                    <li class="item-login"><a href="#" data-toggle="modal"
+                                                              data-target="#login-modal">{% trans "Login" %}</a></li>
+                                {% endif %}
+                            </div>
+                            <!--================== NAVBAR RIGHT =================== -->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--================== NAVBAR =================== -->
+    <!--================== DINAMIC CONTENT =================== -->
+    {% block content %}
+    {% endblock %}
+    <!--================== DINAMIC CONTENT =================== -->
+    <!--================== PARTNERS =================== -->
+    {% block partners %}
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="col-md-8 partners-box">
+                        <h5>{% trans "Powered by" %}:</h5>
+                        <img src="{% static "img/logos/ufsm.png" %}" alt="Federal University of Santa Maria">
+                        <img src="{% static "img/logos/ufrgs.png" %}" alt="Federal University of Rio Grande do Sul">
+                        <img src="{% static "img/logos/ufpr.png" %}" alt="Federal University of Paraná">
+                    </div>
+                    <div class="col-md-4 partners-box">
+                        <h5>{% trans "Sponsor" %}:</h5>
+                        <img src="{% static "img/logos/rnp.png" %}" alt="Rede Nacional de Pesquisa">
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <div class="partners-box">
+                        <h5>{% trans "Partners" %}:</h5>
+                        <img src="{% static "img/logos/ufc.png" %}" alt="UFC">
+                        <img src="{% static "img/logos/unicamp.png" %}" alt="UNICAMP">
+                        <img src="{% static "img/logos/uzh.png" %}" alt="UZH">
+                        <!-- <img src="{% static "img/logos/aveiro.png" %}" alt="Aveiro"> -->
+                        <img src="{% static "img/logos/gent.png" %}" alt="Gent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!--================== FOOTER =================== -->
+    <footer>
+        <div class="row bg-fende-dark-marine">
+            <div class="container text-white pt-4">
+                <div class="row">
+                    <div class="col-md-4 sitemap">
+                        <h5>{% trans "Sitemap" %}</h5>
+                        <div class="footer-widget">
+                            <ul class="fa-ul">
+                                <li class="{% if active_view == 'home' %} active {% endif %}"><i
+                                        class="fa fa-chevron-right pr-3"></i><a
+                                        href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                                <li class="{% if active_view == 'team' %} active {% endif %}"><i
+                                        class="fa fa-chevron-right pr-3"></i><a
+                                        href="{% url 'team' %}">{% trans "Team" %}</a></li>
+                                <li class="{% if active_view == 'publications' %} active {% endif %}"><i
+                                        class="fa fa-chevron-right pr-3"></i><a
+                                        href="{% url 'publications' %}">{% trans "Publications" %}</a></li>
+                                <li class="{% if active_view == 'about' %} active {% endif %}"><i
+                                        class="fa fa-chevron-right pr-3"></i><a
+                                        href="{% url 'about' %}">{% trans "About" %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 contato">
+                        <h5>{% trans "Contact" %}</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="pl-5">
+                                    <b>{% trans "Project email" %}:</b><a href="mailto:eco.fende@gmail.com">
+                                    eco.fende@gmail.com</a><br>
+                                    <b>{% trans "Coordinator email" %}:</b><a href="mailto:csantos@inf.ufsm.br">
+                                    csantos@inf.ufsm.br</a><br>
+                                    (Carlos Raniery Paula dos Santos)<br>
+                                    <b>{% trans "Phone" %}:</b> +55 (55) 3220-6111
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="pl-5">
+                                    <b>{% trans "Address" %}:</b>
+                                    Avenida Roraima, 1000<br>
+                                    Santa Maria, RS, CEP: 97105-900<br>
+                                    Sala 1204-B, Anexo C, Prédio 70<br>
+                                    {% trans "Department of Applied Computing" %}<br>
+                                    {% trans "Federal University of Santa Maria (UFSM)" %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex col-md-12 py-2 mt-5 border-top">
+                        <div class="col-6">Copyright: <span>&copy</span> 2017 - 2019</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--================== FOOTER =================== -->
+</div>
+<!--================== MODAL LOGIN =================== -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation" class="sign-in active"><a href="#sign-in" aria-controls="sign-in" role="tab"
+                                                              data-toggle="tab">{% trans "Sign in" %}</a></li>
+            <li role="presentation" class="sign-up"><a href="#sign-up" aria-controls="sign-up" role="tab"
+                                                       data-toggle="tab">{% trans "Register" %}</a></li>
+        </ul>
+        <div class="modal-container d-flex">
+            <img class="mx-auto" src="{% static "img/logo.png" %}" alt="FENDE">
+            <div class="tab-content w-100">
+                <div role="tabpanel" class="tab-pane active" id="sign-in">
+                    <div class="text-center">
+                        <h1>{% trans "Login to Your Account" %}</h1>
+                    </div>
+                    <form action="{% url 'login' %}" method="post" id="login-form" class="text-left mt-5">
+                        {% csrf_token %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary w-100  mt-3 ">{% trans "Sign in" %}</button>
+                        <div class="CAFe text-center mt-3 mb-5">
+                            <p>-{% trans "Or Login With" %} -</p>
+                            <img src="{% static "img/cafe.png" %}" width="100px">
+                            <a href="https://gt-fende.inf.ufrgs.br/Shibboleth.sso/Login"
+                               class="btn btn-secondary w-100 mt-2">{% trans "Federated Login" %}</a>
+                        </div>
+                    </form>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sign-up">
+                    <div class="text-center">
+                        <h1>{% trans "Create Your Account" %}</h1>
+                    </div>
+                    <form action="{% url 'register' %}" method="post" class="text-left mt-5">
+                        {% csrf_token %}
+                        {% for error in formup.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                        {% for field in formup %}
+                            <div class="form-group">
+                                <label>{{ field.label }}</label>
+                                {% if field.label == 'Birthday' %}
+                                    <div class="form-inline">{% endif %}
+                                {{ field }}
+                                {% if field.label == 'Birthday' %}</div>{% endif %}
+                                <small>{{ field.help_text }}</small>
+                                {% for error in field.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary w-100 mt-3 mb-5">{% trans "Register" %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================== MODAL LOGIN =================== -->
+
+<!--================ MODAL WAIT CLOCK ================== -->
+<div class="modal fade wait-clock-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="wait-clock" data-keyboard="false1" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-5">
+            <div class="wait-text text-center mb-5">
+                <h1>{% trans "Wait" %}</h1>
+            </div>
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================ MODAL WAIT CLOCK ================== -->
+
+<!--================================================== -->
+<script src="{% static 'js/front-site/jquery-3.3.1.min.js' %}"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script> if (!window.jQuery.ui) {
+    document.write('<script src="{% static "js/front-site/jquery-ui.min.js" %}"><\/script>');
+} </script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="{% static 'js/front-site/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/front-site/jquery.validate.min.js' %}"></script>
+<script src="{% static 'js/front-site/jquery.maskedinput.min.js' %}"></script>
+<!--[if IE 8]><h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+<![endif]-->
+
+<script>
+    //runAllForms();
+    $('.wait-clock').click(function () {
+        var wait = $(this).data('wait');
+        $('.wait-clock-modal .wait-text h1').empty().append(wait);
+        $('body').css("cssText", "padding-right: 15px !important;");
+        $('.wait-clock-modal').modal('show');
+    });
+    $(function () {
+        // Validation
+        $("#login-form").validate({
+            // Rules for form validation
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                }
+            },
+            // Messages for form validation
+            messages: {
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                password: {
+                    required: 'Please enter your password'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+    });
+</script>
+
+{# set language #}
+<script>
+    {% if form.non_field_errors or form.errors %}
+        $('#login-modal').modal('show');
+    {% endif %}
+    {% if formup.errors %}
+        $('#login-modal').modal('show');
+        $('#login-modal #sign-in').removeClass('active');
+        $('#login-modal #sign-up').addClass('active');
+        $('#login-modal .nav-tabs .sign-in').removeClass('active');
+        $('#login-modal .nav-tabs .sign-up').addClass('active');
+    {% endif %}
+
+    var CSRF_TOKEN = getCookie('csrftoken');
+
+    // Retorno de um cookie válido.
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $('.panel-title>a').click(function () {
+        if ($(this).children().hasClass('fa-plus-square')) {
+            $(this).closest('.panel-group').find('.panel-title i').removeClass("fa-minus-square").addClass("fa-plus-square");
+            $(this).children().removeClass("fa-plus-square").addClass("fa-minus-square");
+        } else {
+            $(this).children().removeClass("fa-minus-square").addClass("fa-plus-square");
+        }
+    });
+
+    function postlang(code) {
+        var urlToPost = '{% url 'set_language' %}';
+        $.post(urlToPost, {
+                'next': '{{ request.path }}',
+                'language': code,
+                'csrfmiddlewaretoken': CSRF_TOKEN,
+            }
+        ).done(function () {
+                window.location = '/';
+        });
+    }
+</script>
+
+{% block extra_footer %}
+{% endblock %}
+</body>
+</html>

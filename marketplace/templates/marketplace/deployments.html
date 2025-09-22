@@ -1,0 +1,193 @@
+{% extends "marketplace_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load advanced_inputs %}
+{% load services %}
+
+{% block top_management %}active{% endblock %}
+{% block top_deployments %}active{% endblock %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:deployments' %}">Deployments</a></li>
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+{% fende_widget location='start' id='deploy_service' title=_("Deployments") %}
+<table id="tab1" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <i class="fas fa-fw fa-signature"></i>
+                {% trans "Service Name" %}
+            </th>
+            <th>
+                <i class="fas fa-server"></i>
+                {% trans "Infrastructure" %}
+            </th>
+            <th>
+                <i class="far fa-calendar-alt"></i>
+                {% trans "Creation Date" %}
+            </th>
+            <th>
+                <i class="far fa-calendar-alt"></i>
+                {% trans "Last Update" %}
+            </th>
+            <th class="w-35">
+                <i class="fas fa-clipboard-list"></i>
+                {% trans "Status" %}
+            </th>
+            <th>
+                <i class="fas fa-percentage"></i>
+                {% trans "Percent" %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in deployments %}
+        <tr data-id="{{ item.id }}" data-step="{{ item.step }}">
+            <td>{{ item.name }}</td>
+            <td>{{ item.client }}</td>
+            <td>{{ item.created_date|date:"M. d Y h:i A" }}</td>
+            <td class="last_update">{{ item.last_update_date|date:"M. d Y h:i A" }}</td>
+            <td class="_status">
+                <button type="button" class="btn btn-secondary btn-xs modal-full-log mr-1" data-toggle="modal" data-target="#fulllogs" data-id="{{ item.id }}">Logs</button>
+                <span class="fende-wr">{{ item.status }}</span>
+            </td>
+            <td class="step">
+                {% if item.step == "8" %}
+                <span class="badge badge-success"><i class="fas fa-check"></i></span>
+                {% else %}
+                <span class="badge badge-info"><i class="fas fa-hourglass-half fa-spin"></i></span>
+                {% endif %}
+                {{ item.step|get_step }}%
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% fende_widget location="end" %}
+
+<div class="modal" tabindex="-1" role="dialog" id="fulllogs">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Full Logs</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre class="fulllogs"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-logs-refresh">
+                    <i class="fas fa-sync"></i>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+
+<!--SCRIPT TABELAS -->
+{% block table %}
+{% fende_widget location='table' %}
+{% endblock %}
+<!--SCRIPT TABELAS -->
+
+<!-- SCRIPTS ADICIONAIS -->
+{% block extra_footer %}
+
+<script>
+    
+    $(document).ready(function(){
+        /* FUNÇÃO PARA PREENCHIMENTO DA TABELA PRIMEIRA VEZ */
+        $(function preencheTabela(){
+            $('tr[data-step]').each(function () {
+                var id = $(this).attr('data-id');
+                var step = $(this).attr('data-step');
+                refreshDeploy(id);
+            });
+        });
+
+        /* FUNÇÃO INTERVALO PARA REQUEST, APENAS ROWS QUE NÃO ESTÃO COMPLETAS */
+        setInterval(function requests() {
+            $('tr[data-step]:not([data-step="8"])').each(function () {
+                var id = $(this).attr('data-id');
+                var step = $(this).attr('data-step');
+                refreshDeploy(id);
+            });
+        }, 10000);
+        
+        
+        /* FUNÇÃO DE RETORNO DO STATUS */
+        function refreshDeploy(id) {
+            $.ajax({
+                url: '/api/service/' + id,
+                type: 'GET',
+                contentType: 'application/json',
+                timeout: 2000,
+                success: function (result) {
+                    $('tr[data-id="' + id + '"] ._status>.fende-wr').html(result['status']);
+                    $('tr[data-id="' + id + '"] .last_update').html(result['last_update']);
+                    $('tr[data-id="' + id + '"]').attr("data-step", result['step']);
+                    let badge
+                    if(result['step'] == 8){
+                        badge = '<span class="badge badge-success mr-1"><i class="fas fa-check"></i></span>';
+                    } else if(result['step'] == 'error'){
+                        badge = '<span class="badge badge-danger mr-1"><i class="fas fa-times"></i></span>'
+                    } else {
+                        badge = '<span class="badge badge-info mr-1"><i class="fas fa-hourglass-half fa-spin"></i></span>'
+                    }
+                    
+                    badge += (result['step']*100/8) + "%";
+                    $('tr[data-id="' + id + '"] .step').html(badge);
+                    // console.log(result)
+                },
+                error: function () {
+                    let badge = '<span class="badge badge-danger mr-1"><i class="fas fa-times"></i></span>';
+                    $('tr[data-id="' + id + '"] .step').html(badge);
+                    $('tr[data-id="' + id + '"] ._status>.fende-wr').html("Ocorreu um erro ao carregar os dados.");
+                }
+            });
+        }
+        
+        /* MODAIS DO FULLLOG */
+        $('.modal-full-log').click(function(){
+            var id = $(this).attr('data-id');
+            $('.modal .btn-logs-refresh').attr("data-id", id);
+            fulllogs(id);
+        });
+        /* BOTÃO REFRESH INTERNO DO MODAL */
+        $('.btn-logs-refresh').click(function(){
+            var id = $(this).attr('data-id');
+            fulllogs(id);
+        });
+
+        /* AJAX PARA FULLLOG */
+        function fulllogs(id){
+            $('.fulllogs').empty();
+            $.ajax({
+                url: '/api/service/logs/' + id,
+                type: 'GET',
+                contentType: 'application/json',
+                timeout: 2000,
+                success: function (result) {
+                    $.each( result, function( key, r ) {
+                        var d = new Date(r['created_date']);
+                        $('.fulllogs').html('['+ d +'] "'+ r['message'] +'"<br>');
+                    });
+                },
+                error: function (error) {
+                    console.log('ERROR:' + error)
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
+<!-- SCRIPTS ADICIONAIS -->

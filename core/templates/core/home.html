@@ -1,0 +1,99 @@
+{% extends "core/template.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% block content %}
+    <div class="row bg-white">
+        <div class="container">
+            <div class="web-title mt-10">
+                <h1>{% trans "Welcome to FENDE platform!" %}</h1>
+            </div>
+            <div class="col-md-6 mb-10">
+                <h3>{% trans "Submit, acquire, and deploy VNFs and SFCs through a centralized marketplace" %} </h3>
+                <a href="http://coral.ufsm.br/gt-fende/en/pages/project.html"
+                   class="btn btn-fende btn-large">{% trans "Find out more" %}</a>
+            </div>
+            <div class="col-md-6 mb-10">
+                <ul class="box-info">
+                    <li class="text-success"><p><i class="fa fa-check"></i>
+                        <strong><u>{% trans "First complete" %}</u> {% trans "marketplace for NFV (offering, distribution, and execution);" %}
+                        </strong></p></li>
+                    <li><p><i class="fa fa-sitemap"></i>
+                        <strong>{% trans "Modular and extensible architecture based on ETSI standards;" %}</strong></p>
+                    </li>
+                    <li><p><i class="fa fa-rocket"></i> <strong>{% trans "Full set of operations;" %}</strong></p></li>
+                    <li><p><i class="fa fa-user"></i>
+                        <strong>{% trans "Support to heterogeneous, scalable and distributed environments;" %}</strong>
+                    </p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row bg-slide">
+        <h1 class="text-center">{% trans 'Featured Products' %}</h1>
+        <div id="product-carrousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for service in services %}
+                    <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %}class="active"{% endif %}>
+                {% endfor %}
+            </ol>
+            <!-- Indicators -->
+            <div class="container py-4 border-top">
+                <div class="carousel-inner services" role="listbox">
+                    {% for service in services %}
+                        <div class="item {% if forloop.first %}active{% endif %}">
+                            <div class="col-sm-3">
+                                {% if service.id > 2 %}
+                                    <div class="ribbon-new">{% trans "NEW" %}</div>
+                                {% else %}
+                                    <div class="ribbon-hot">{% trans "HOT" %}</div>
+                                {% endif %}
+                                <img class="w-100 p-5" src="/static/img/catalog/{{ service.category.name }}.jpg">
+                            </div>
+                            <div class="col-sm-9 information-vnfs pl-5">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <a href="{% url 'services' service.id %}">
+                                            <h1 class="mb-3 mt-0">{{ service }}</h1>
+                                        </a>
+                                        <span class="badge badge-fende p-2">{{ service.category }}</span>
+                                        {# todo: colocar tags #}
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p class="m-0">
+                                            <strong>{% trans 'Review:' %}</strong> (3)
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </p>
+                                        <p class="m-0"><strong>{% trans 'Version:' %}</strong> {{ service.version }}</p>
+                                        <p class="m-0"><strong>{% trans 'Abstract:' %}</strong> {{ service.abstract }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <p>
+                                            <strong>{% trans 'Description:' %}</strong> {{ service.full_description|truncatewords:30 }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <a class="left carousel-control" href="#product-carrousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#product-carrousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

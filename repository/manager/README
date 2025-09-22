@@ -1,0 +1,15 @@
+[RESTApi]
+
+Implementando utilizando o Eve REST API Framework. Para instalar: pip install eve
+
+Para rodar o servidor: python server.py
+
+PS: O servidor REST deve estar na pasta raíz do repositório para realizar as operações de gerenciamento.
+
+Exemplos de requests:
+Criar repositório: http://servidor/repository/create/<name_id>/<url_do_repositório>
+Atualizar repositório: http://servidor/repository/update/<name_id>
+Receber conteúdo de um VNFD: http://servidor/vnfd/<name_id>
+Receber conteúdo de um NSD: http://servidor/nsd/<name_id>
+Receber conteúdo de um arquivo CONFIG: http://servidor/config/<name_id>
+

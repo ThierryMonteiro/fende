@@ -1,0 +1,15 @@
+{% extends "bases/dev_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+
+{% block page_content %}
+{% fende_widget location='start' id='update' title=_("Repository Submission")%}
+<div class="col-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+    <form method="POST" class="post-form"> {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-secondary">{% trans "Submit" %}</button>
+    </form>
+</div>
+{% fende_widget location='end'%}
+{% endblock page_content %}

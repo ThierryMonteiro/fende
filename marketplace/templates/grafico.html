@@ -1,0 +1,191 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block page_content %}
+{% fende_widget location='start' title=_("Service Details") icon="fa-area-chart" %}
+<div class="row">
+	<div class="col-md-12">
+		<h6 class="mb-4">Service Name: Service 1 </h6>
+	</div>
+	<div class="col-md-3">
+		<p><i class="fa fa-user fa-fw"></i>Desenvolvedor: GT-FENDE</p>
+		<p><i class="fa fa-tags fa-fw"></i>Tags: <a href="#">UFSM</a>, <a href="#">UFRGS</a></p>
+		<p><i class="fa fa-sitemap fa-fw"></i>Categoria: Protection</p>
+		<p><i class="fas fa-code-branch fa-fw"></i>Versão: 1.0</p>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="d-flex justify-content-between">
+					<span><i class="fas fa-memory pr-2"></i><strong>Memory:</strong> 8Gb</span>
+					<span><i class="fas fa-hdd pr-2"></i><strong>Disk:</strong> SDD - 20Gb</span>
+					<span><i class="fas fa-microchip pr-2"></i><strong>CPU:</strong> 1Core</span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="d-flex justify-content-end">
+					<span class="btn btn-sm btn-fende px-3 mr-3"><i class="fas fa-terminal pr-2 fa-pulse"></i>Console</span>
+					<a class="btn btn-sm btn-info px-3" href="https://github.com/giovannivenancio/firewall_test"><i class="fa fa-link fa-fw"></i>Acessar Repositório</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h6 >Service Path:</h6>
+				<div class="align-center border mt-3">
+					<ul class="sfc-path inline-block p-0 mt-4">
+						<li class="inline-block"><span class="path-box">DPI</span></li>
+						<li class="inline-block"><span class="path-box">Load Balancer</span></li>
+						<li class="inline-block"><span class="path-box">Firewall</span></li>
+						<li class="inline-block"><span class="path-box">SFC1</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<style>
+
+	</style>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="mt-5">
+			<h6>Dados em Tempo Real:</h6>
+		</div>
+		<div class="row mt-4">
+			<div class="form-group col-sm-2">
+				<label>Service:</label>
+				<select id="selectedVNFs" class="select2" placeholder="Tags">
+					<option value="92543218-e4bd-48c3-9438-1d043951b3e6,e5bc1df6-ae1e-4322-843f-58ff5c108db2">Global</option>
+					<option value="e5bc1df6-ae1e-4322-843f-58ff5c108db2">DPI</option>
+					<option value="92543218-e4bd-48c3-9438-1d043951b3e6">Click</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-2">
+				<label>Time Range (Minutes)</label>
+				<select id="time_range" class="select2" placeholder="Tags">
+					<option selected value="1">1 Minute</option>
+					<option value="5">5 Minutes</option>
+					<option value="15">15 Minutes</option>
+					<option value="30">30 Minutes</option>
+					<option value="60">60 Minutes</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-2">
+				<label>Update Time (Seconds)</label>
+				<select id="update_time" class="select2" placeholder="Tags">
+					<option selected value="15">15 Seconds</option>
+					<option value="30">30 Seconds</option>
+					<option value="45">45 Seconds</option>
+					<option value="60">60 Seconds</option>
+					<option value="180">180 Seconds</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-6">
+				<label>Graphs:</label>
+				<div class="smart-form d-flex justify-content-between justify-content-around pt-1 radio-graph">
+					<label class="toggle">
+						<input class="checkbox-CPU" type="checkbox" name="CPU" checked>
+						<i data-swchon-text="ON" data-swchoff-text="OFF"></i>CPU
+					</label>
+					<label class="toggle">
+						<input class="checkbox-Memory" type="checkbox" name="Memory" checked>
+						<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Memory
+					</label>
+					<label class="toggle">
+						<input class="checkbox-Disk" type="checkbox" name="Disk" checked>
+						<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Disk
+					</label>
+					<label class="toggle">
+						<input class="checkbox-Network" type="checkbox" name="Network" checked>
+						<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Network
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="position:relative; min-height: 250px;">
+	<div class="d-flex justify-content-center align-items-center" id="loader"></div>
+	<div class="col-md-6"><div id="CPU"></div></div>
+	<div class="col-md-6"><div id="Memory"></div></div>
+	<div class="col-md-6"><div id="Disk"></div></div>
+	<div class="col-md-6"><div id="Network"></div></div>
+</div>
+<style>
+	.loader,
+	.loader:after {
+		border-radius: 50%;
+		width: 10em;
+		height: 10em;
+	}
+	.loader {
+		color: black;
+		margin: 60px auto;
+		font-size: 10px;
+		position: relative;
+		text-indent: -9999em;
+		border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+		border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+		border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+		border-left: 1.1em solid #223445;
+		-webkit-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-animation: load8 1.1s infinite linear;
+		animation: load8 1.1s infinite linear;
+	}
+	@-webkit-keyframes load8 {
+		0% {
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+	@keyframes load8 {
+		0% {
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+	#loadingDiv {
+		overflow: hidden;
+		position: absolute;
+		z-index: 1049;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:#fff;
+	}
+</style>
+
+{% fende_widget location='end' %}
+
+{% endblock %}
+{% block extra_footer %}
+<script async defer src="/static/js/plugin/ploty/plotly-latest.min.js"></script>
+<script async defer src="/static/js/grafico/graph.js"></script>
+
+<script>
+	$('#loader').append('<div style="" id="loadingDiv"><center class="mt-5">Carregando Gráficos...</center><div class="loader">Loading...</div></div>');
+		$(window).on('load', function(){
+			setTimeout(removeLoader, 1550); //wait for page load PLUS two seconds.
+		});
+		function removeLoader(){
+			$( "#loadingDiv" ).fadeOut(500, function() {
+			// fadeOut complete. Remove the loading div
+			$( "#loadingDiv" ).remove(); //makes page more lightweight
+			__iniGraph();
+		});  
+	}
+</script>
+{% endblock %}

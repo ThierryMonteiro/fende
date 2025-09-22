@@ -1,0 +1,531 @@
+{% load static %}
+{% load user_tags %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}GT-FENDE{% endblock %}</title>
+    <meta name="description" content="Blank">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/fende.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/fende.png' %}" type="image/x-icon">
+    
+    <!-- base css -->
+    <link rel="stylesheet" href="{% static 'css/vendors.bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome5.7/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.min.css'' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="mod-bg-1">
+    <!-- BEGIN Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <!-- BEGIN Left Aside -->
+            <aside class="page-sidebar">
+                <div class="page-logo">
+                    <a href="#" class="page-logo-link press-scale-down d-flex align-items-center" data-toggle="modal" data-target="#modal-shortcut">
+                        <img src="{% static 'img/fende.png' %}" alt="GT-FENDE"  style="max-height: 50px;">
+                        <span class="page-logo-text mr-1 text-uppercase">
+                            {% if request.user.username|length > 35 %}
+                            {{ request.user.email }}
+                            {% else %}
+                            {{ request.user }}
+                            {% endif %}
+                        </span>
+                        <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                    </a>
+                </div>
+                <nav id="js-primary-nav" class="primary-nav" role="navigation">
+                    <ul id="js-nav-menu" class="nav-menu {{ request.session.actor }}">
+                        {% comment %} All Users {% endcomment %}
+                        <li class="{% block top_catalog %}{% endblock %}">
+                            <a href="{% url 'Marketplace:index' %}" title="Marketplace">
+                                <i class="fal fa-shopping-cart"></i>
+                                <span class="nav-link-text">Marketplace</span>
+                            </a>
+                        </li>
+                        {% comment %} Consultant {% endcomment %}
+                        {% if request.session.actor == 'consultant' or not request.session.actor %}
+                        <li class="{% block top_service %}{% endblock %}">
+                            <a href="{% url 'Marketplace:catalog_vnfs' %}" title="Consultant">
+                                <i class="fal fa-share-square"></i>
+                                <span class="nav-link-text">{% trans "Build Service" %}</span>
+                            </a>
+                        </li>
+                        <li class="{% block top_infra %}{% endblock %}">
+                            <a href="javascript:void(0);" title="{% trans 'Infrastructures' %}">
+                                <i class="fas fa-network-wired"></i>
+                                <span class="nav-link-text">{% trans "Infrastructures" %}</span>
+                            </a>
+                            <ul>
+                                <li class="{% block top_infra_list %}{% endblock %}">
+                                    <a href="{% url 'Marketplace:infrastructure_list' %}" title="Add">
+                                        <i class="fal fa-list"></i>
+                                        <span class="nav-link-text">{% trans "List" %}</span>
+                                    </a>
+                                </li>
+                                <li class="{% block top_infra_add %}{% endblock %}">
+                                    <a href="{% url 'Marketplace:infrastructure_form' %}" title="Add">
+                                        <i class="fal fa-plus"></i>
+                                        <span class="nav-link-text">{% trans "Add" %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        
+                        {% comment %} Tenant {% endcomment %}
+                        {% if request.session.actor == 'tenant' or not request.session.actor %}
+                        <li class="{% block top_management %}{% endblock %}">
+                            <a href="javascript:void(0);" title="{% trans 'Management' %}">
+                                <i class="fal fa-share-square"></i>
+                                <span class="nav-link-text">{% trans "Management" %}</span>
+                            </a>
+                            <ul>
+                                <li class="{% block top_purchased %}{% endblock %}">
+                                    <a href="{% url 'Marketplace:purchased' %}" title="Purchased">
+                                        <i class="fal fa-badge-check"></i>
+                                        <span class="nav-link-text">{% trans "Purchased" %}</span>
+                                    </a>
+                                </li>
+                                <li class="{% block top_sfc %}{% endblock %}">
+                                    <a href="{% url 'Marketplace:sfc_list' %}" title="Service">
+                                        <i class="fal fa-link"></i>
+                                        <span class="nav-link-text">{% trans "Services" %}</span>
+                                    </a>
+                                </li>
+                                <li class="{% block top_deployments %}{% endblock %}">
+                                    <a href="{% url 'Marketplace:deployments' %}" title="Deployments">
+                                        <i class="fas fa-hourglass-half"></i>
+                                        <span class="nav-link-text">{% trans "Deployments" %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        
+                        
+                        {% comment %} Developer {% endcomment %}
+                        {% if request.session.actor == 'developer' %}
+                        <li class="{% block top_publish %}{% endblock %}">
+                            <a href="javascript:void(0);">
+                                <i class="fal fa-exchange"></i>
+                                <span class="nav-link-text">{% trans "Package Submission" %}</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'Repository:dev_vnf_publish' %}" title="{% trans 'Package Builder' %}">
+                                        <i class="fal fa-caret-right"></i>
+                                        <span class="nav-link-text">{% trans 'Package Builder' %}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'Repository:dev_package_upload' %}" title="{% trans 'Package Upload' %}">
+                                        <i class="fal fa-caret-right"></i>
+                                        <span class="nav-link-text">{% trans 'Package Upload' %}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'Repository:dev_publish' %}" title="{% trans 'Git Repository' %}">
+                                        <i class="fal fa-caret-right"></i>
+                                        <span class="nav-link-text">{% trans "Git Repository" %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="{% block top_submitted %}{% endblock %}">
+                            <a href="{% url 'Repository:dev_submission_status' %}" title="{% trans 'Submitted Packages' %}">
+                                <i class="fal fa-check"></i>
+                                <span class="nav-link-text">{% trans 'Submitted Packages' %}</span>
+                            </a>
+                        </li>
+                        <li class="{% block top_manage %}{% endblock %}">
+                            <a href="javascript:void(0);">
+                                <i class="fal fa-cog"></i>
+                                <span class="nav-link-text">{% trans "Manage" %}</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'Repository:dev_myrepositories' %}">
+                                        <i class="fal fa-caret-right"></i>
+                                        <span class="nav-link-text">{% trans "My Repositories" %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        
+                        
+                        {% comment %} Reviewer {% endcomment %}
+                        {% if request.session.actor == 'reviewer' %}
+                        <li class="{% block top_reviewer %}{% endblock %}">
+                            <a href="javascript:void(0);" title="Reviewer">
+                                <i class="fal fa-wrench"></i>
+                                <span class="nav-link-text">{% trans "Review" %}</span>
+                            </a>
+                            <ul>
+                                <li class="{% block top_reviewer_repository %}{% endblock %}">
+                                    <a href="{% url 'Repository:review_list' %}" title="Repositories">
+                                        <i class="fal fa-link"></i>
+                                        <span class="nav-link-text">{% trans "Repository" %}</span>
+                                    </a>
+                                </li>
+                                <li class="{% block top_reviewer_VNFDS %}{% endblock %}">
+                                    <a href="{% url 'Repository:vnfd_list' %}" title="VNFD">
+                                        <i class="fal fa-file-code"></i>
+                                        <span class="nav-link-text">VNFDs</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        
+                        {% comment %} All Users {% endcomment %}
+                        <li class="{% block top_about %}{% endblock %}">
+                            <a href="{% url 'about' %}" title="Documentation">
+                                <i class="fal fa-file"></i>
+                                <span class="nav-link-text">{% trans "About" %} GT-FENDE</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <!-- END Left Aside -->
+            <div class="page-content-wrapper">
+                <!-- Page Header -->
+                <header class="page-header" role="banner">
+                    <!-- Buttom hide menu -->
+                    <div class="hidden-md-down position-relative">
+                        <a href="javascript:void(0);" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Hide Navigation">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="ml-5 header-icon hidden-md-down">
+                        <!-- BREADCRUMB -->
+                        <ol class="breadcrumb page-breadcrumb">
+                            {% block breadcrumb %}
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Home'%}</a></li>
+                            {% endblock %}
+                        </ol>
+                        <!-- BREADCRUMB -->
+                    </div>
+                    <div class="hidden-lg-up">
+                        <a href="javascript:void(0);" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <!-- END Buttom hide menu -->
+                    <div class="ml-auto d-flex">
+                        <div class="d-flex">
+                            <span class="header-actor">{% trans "You're in:" %}
+                                <span class="project-selector {{ request.session.actor }}">
+                                    <strong>
+                                        {% if request.session.actor == 'tenant' %}
+                                        {% trans "CUSTOMER" %}
+                                        {% elif request.session.actor == 'consultant' %}
+                                        {% trans "CONSULTANT" %}
+                                        {% elif request.session.actor == 'developer' %}
+                                        {% trans "DEVELOPER" %}
+                                        {% else %}
+                                        {% trans "REVIEWER" %}
+                                        {% endif %} 
+                                    </strong>
+                                </span>
+                            </span>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0);" data-toggle="dropdown" title="Settings" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <i class="fal fa-cog"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+                                <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+                                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                                        <div class="info-card-text">
+                                            <div class="fs-lg text-truncate text-truncate-lg text-uppercase">
+                                                {% if request.user.username|length > 35 %}
+                                                {{ request.user.email }}
+                                                {% else %}
+                                                {{ request.user }}
+                                                {% endif %}
+                                            </div>
+                                            <span class="text-truncate text-truncate-md opacity-80">
+                                                {% if request.session.actor == 'tenant' %}
+                                                {% trans "CUSTOMER" %}
+                                                {% elif request.session.actor == 'consultant' %}
+                                                {% trans "CONSULTANT" %}
+                                                {% elif request.session.actor == 'developer' %}
+                                                {% trans "DEVELOPER" %}
+                                                {% else %}
+                                                {% trans "REVIEWER" %}
+                                                {% endif %} 
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="{% url 'accounts:index' %}" class="dropdown-item">
+                                    <span>Account Settings</span>
+                                </a>
+                                <div class="dropdown-multilevel dropdown-multilevel-left">
+                                    <div class="dropdown-item">
+                                        Language
+                                    </div>
+                                    <div class="dropdown-menu">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                        <a onclick="postlang('{{ language.code }}')" class="dropdown-item {% if request.LANGUAGE_CODE == language.code %} active {% endif %}" data-action="lang">
+                                            {% if language.code == 'pt-br' %}
+                                            Português
+                                            {% else %}
+                                            English (US)
+                                            {% endif %}
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider m-0"></div>
+                                <a class="dropdown-item fw-500 pt-3 pb-3" href="{% url 'logout' %}" title="Sign Out">
+                                    <span data-i18n="drpdwn.page-logout">{% trans "Sign Out" %}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <main id="js-page-content" role="main" class="page-content">
+                    <!-- PAGE ALERT -->
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <div class="d-flex flex-start w-100">
+                            <div class="mr-4 hidden-md-down my-auto">
+                                <span class="icon-stack icon-stack-lg">
+                                    <i class="fal fa-exclamation-triangle icon-stack-3x opacity-100"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex flex-fill">
+                                <div class="flex-fill">
+                                    <span class="h5">Alert</span>
+                                    <p class="m-0">{{ message }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    {% endif %}
+                    <!-- PAGE ALERT -->
+                    <!-- PAGE CONTENT -->
+                    <div class="row">
+                        {% block page_content %}
+                        {% endblock %}
+                    </div>
+                    <!-- PAGE CONTENT -->
+                </main>
+                <!-- BEGIN Page Footer -->
+                <footer class="page-footer" role="contentinfo">
+                    <div class="d-flex align-items-center flex-1 text-muted">
+                        <span class="hidden-md-down">GT-FENDE - Web MarketPlace Application </span>
+                    </div>
+                    <div>
+                        <ul class="list-table m-0">
+                            <li>© 2017-2019</li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!--================ MODAL WAIT CLOCK ================== -->
+    <div class="modal fade wait-clock-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="wait-clock" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content p-5">
+                <div class="wait-text text-center mb-5">
+                    <h1>Aguarde</h1>
+                </div>
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================ MODAL WAIT CLOCK ================== -->
+    <!-- this overlay is activated only when mobile menu is triggered -->
+    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+    
+    <!-- BEGIN Shortcuts -->
+    <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog" aria-labelledby="modal-shortcut" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top modal-transparent m-0" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <ul class="app-list w-auto h-auto p-0 text-left">
+                        <li>
+                            <a href="{% url 'accounts:index' %}" class="app-list-item">
+                                <div class="icon-stack">
+                                    <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
+                                    <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
+                                    <i class="ni ni-user icon-stack-1x text-white"></i>
+                                </div>
+                                <span class="app-list-name text-white">
+                                    {% trans "My Profile" %}
+                                </span>
+                            </a>
+                        </li>
+                        {% if request.user|has_group:"Reviewer" %}
+                        <li>
+                            <a href="{% url 'actor' 'reviewer' %}" class="app-list-item text-white border-0 m-0 {% if request.session.actor == 'reviewer' %}active{% endif %}">
+                                <div class="icon-stack">
+                                    <i class="base base-7 icon-stack-3x opacity-100 color-purple-600 "></i>
+                                    <i class="base base-7 icon-stack-2x opacity-100 color-purple-400 "></i>
+                                    <i class="ni ni-note icon-stack-1x text-white"></i>
+                                </div>
+                                <span class="app-list-name">
+                                    {% trans "Reviewer" %}
+                                </span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if request.user|has_group:"Developer" %}
+                        <li>
+                            <a href="{% url 'actor' 'developer' %}" class="app-list-item text-white border-0 m-0 {% if request.session.actor == 'developer' %}active{% endif %}">
+                                <div class="icon-stack">
+                                    <i class="base base-7 icon-stack-3x opacity-100 color-info-500 "></i>
+                                    <i class="base base-7 icon-stack-2x opacity-100 color-info-300 "></i>
+                                    <i class="fal fa-code icon-stack-1x text-white"></i>
+                                </div>
+                                <span class="app-list-name">
+                                    {% trans "Developer" %}
+                                </span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if request.user|has_group:"Consultant" %}
+                        <li>
+                            <a href="{% url 'actor' 'consultant' %}" class="app-list-item text-white border-0 m-0 {% if request.session.actor == 'consultant' %}active{% endif %}">
+                                <div class="icon-stack">
+                                    <i class="base base-7 icon-stack-3x opacity-100 color-warning-500 "></i>
+                                    <i class="base base-7 icon-stack-2x opacity-100 color-warning-300 "></i>
+                                    <i class="ni ni-speech icon-stack-1x text-black"></i>
+                                </div>
+                                <span class="app-list-name">
+                                    {% trans "Consultant" %}
+                                </span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'actor' 'tenant' %}" class="app-list-item text-white border-0 m-0 {% if request.session.actor == 'tenant' %}active{% endif %}">
+                                <div class="icon-stack">
+                                    <i class="base base-7 icon-stack-3x opacity-100 color-danger-500 "></i>
+                                    <i class="base base-7 icon-stack-2x opacity-100 color-danger-300 "></i>
+                                    <i class="fal fa-shopping-cart icon-stack-1x text-white"></i>
+                                </div>
+                                <span class="app-list-name">
+                                    {% trans "Customer" %}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END Shortcuts -->
+    <!--================================================== -->
+    {% block script %}
+    <!-- END Page Wrapper -->
+    <script src="{% static 'js/vendors.bundle.js' %}"></script>
+    <script src="{% static 'js/app.bundle.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script type="text/javascript">
+        // REMOVE LAST TAB DO NAVEGADOR
+        localStorage.removeItem('lastTab');
+        // Usado no menu lateral
+        var classHolder = document.getElementsByTagName("BODY")[0],
+        themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+        {},
+        themeURL = themeSettings.themeURL || '',
+        themeOptions = themeSettings.themeOptions || '';
+        // TROCAR LINGUAGEM
+        var CSRF_TOKEN = getCookie('csrftoken');
+        
+        // Retorno de um cookie válido.
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        $('.panel-title>a').click(function () {
+            if ($(this).find('i').hasClass('fa-plus-square')) {
+                $(this).closest('.panel-group').find('.panel-title i').removeClass("fa-minus-square").addClass("fa-plus-square");
+                $(this).find('i').removeClass("fa-plus-square").addClass("fa-minus-square");
+            } else {
+                $(this).find('i').removeClass("fa-minus-square").addClass("fa-plus-square");
+            }
+        });
+        
+        function postlang(code) {
+            var urlToPost = "{% url 'set_language' %}";
+            $.post(urlToPost, {
+                'next': '{{ request.path }}',
+                'language': code,
+                'csrfmiddlewaretoken': CSRF_TOKEN,
+            }
+            )
+            .done(function () {
+                window.location = '/marketplace/';
+            });
+        }
+        
+        // FIM TROCAR LINGUAGEM
+        
+        $('.wait-clock').click(function () {
+            var wait = $(this).data('wait');
+            wClock(wait);
+        });
+        
+        function wClock(wait = null){
+            $('.modal').modal('hide');
+            if (wait) {
+                $('.wait-clock-modal .wait-text h1').empty().append(wait);
+            }
+            $('.wait-clock-modal').modal('show');
+            $('body').css("cssText", "padding-right: 15px !important;");
+        };
+        $('.breadcrumb').children().last().children().addClass('disabled');
+        /* Impossibilita do dropdown fechar caso clicado internamente */
+        $('.tutorial .dropdown-menu').bind('click', function (e) {
+            e.stopPropagation()
+        });
+        
+        $('.nav  a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+        $('.select2').select2({
+            width: '100%'
+        });
+    </script>
+    {% endblock %}
+    <!-- SCRIPTS ADICIONAIS-->
+    {% block table %}
+    {% endblock %}
+    <!-- SCRIPTS ADICIONAIS-->
+    {% block extra_footer %}
+    {% endblock %}
+    <!-- SCRIPTS ADICIONAIS-->
+</body>
+</html>

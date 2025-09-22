@@ -1,0 +1,14 @@
+*pyc
+*.log
+db.sqlite3
+tacker.conf
+repository/migrations/*
+!repository/migrations/__init__.py
+[0-9]*.py
+.idea
+local_settings.py
+nohup.out
+static/*
+logs/*
+media/*
+venv

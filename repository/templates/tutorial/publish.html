@@ -1,0 +1,34 @@
+<div class="p-3">
+    <div class="row">
+        <div class="col-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link bg-fusion-100 mb-2 active" data-toggle="pill" href="#tab-repositories-r1" role="tab" aria-controls="tab-repositories-r1"><span class="badge bg-fusion-900 mr-3">1</span>Submit</a>
+                <a class="nav-link bg-fusion-100 mb-2" data-toggle="pill" href="#tab-repositories-r2" role="tab" aria-controls="tab-repositories-r2"><span class="badge bg-fusion-900 mr-3">2</span>Registration Requests</a>
+            </div>
+        </div>
+        <div class="col-10 border">
+            <div class="tab-content p-2" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="tab-repositories-r1" role="tabpanel" aria-labelledby="tab-repositories-r1-tab">
+                    <p>
+                        In the Submit page, Developers can submit a new VNF to be integrated in the FENDE catalog. To do so, Developers can fill the form available with the following information:
+                    </p>
+                    <ul>
+                        <li>Institution: name of the institution which supports the VNF development;</li>
+                        <li>VNF Name: name of the VNF to be displayed in the FENDE catalog;</li>
+                        <li>Version: the version of the VNF (e.g., 1.5);</li>
+                        <li>Category: the category that represents the VNF functionality;</li>
+                        <li>Abstract: a brief description of the VNF. It will be displayed in the FENDE catalog;</li>
+                        <li>Full Description: a complete description of the VNF;</li>
+                        <li>Link: a link to the Git repository which hosts the VNF and his descriptors according to FENDE repository standards. See Developer’s Documentation for more information.</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="tab-repositories-r2" role="tabpanel" aria-labelledby="tab-repositories-r2-tab">
+                    <p>
+                        In the Registration Requests page, the developer can access information about all VNFs submitted to the FENDE catalog and their respective status (i.e., Accepted, To Review, and Rejected). Once reviewed, comments from the reviewers can be accessed by clicking on "See Comments" button when available.
+                        For information organizing, two distinct tables are presented in the Registration Requests page, one for the requests for insert new VNFs in the catalog (Repository Requests) and other for the requests to update a VNF (new version) already registered in the catalog (Update Requests).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

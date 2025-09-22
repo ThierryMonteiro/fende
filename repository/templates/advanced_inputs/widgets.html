@@ -1,0 +1,50 @@
+{% ifequal location 'start' %}
+<div class="w-100 col-{{ coluna }}">
+    <div id="panel_{{ id }}" class="panel">
+        <div class="panel-hdr bg-fusion-400">
+            <h2>{{ title }}</h2>
+            <div class="panel-toolbar">
+                <button class="btn btn-panel bg-transparent w-auto h-auto rounded-0 " data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+            </div>
+            {% if tutorial %}
+            <div class="panel-toolbar">
+                    <button class="btn-toolbar-master fende" data-toggle="dropdown" aria-expanded="true">
+                        Help <i class="fal fa-question-circle"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-animated dropdown-menu-right w-100" x-placement="bottom-end" style="border: 4px solid rgb(87, 135, 191);">
+                            {% include tutorial %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="panel-container show">
+            <div class="panel-content">
+                {% endifequal %}
+                
+                
+                
+                
+                {% ifequal location 'end' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endifequal %}
+{% ifequal location 'table' %}
+<link rel="stylesheet" href="/static/css/datagrid/datatables/datatables.bundle.css">
+<script src="/static/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script>
+            $(document).ready(function(){
+                $('table').dataTable();
+                $('.dataTables_filter label').addClass('d-flex');
+                let containers = document.querySelectorAll('.dataTables_wrapper  > div:nth-child(2) > div.col-sm-12');
+                containers.forEach(container => {
+                    let table = container.firstElementChild;
+                    let tableResponsive = container.appendChild(document.createElement('div'));
+                    tableResponsive.classList.add('table-responsive');
+                    tableResponsive.appendChild(table);
+                })
+            });
+
+        </script>
+    {% endifequal %}

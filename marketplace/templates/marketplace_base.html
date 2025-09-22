@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block top_marketplace %}active{% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Marketplace:index' %}">Marketplace</a></li>
+{% endblock %}

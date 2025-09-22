@@ -1,0 +1,144 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block top_catalog %}active{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:index' %}">{% trans "Services" %}</a></li>
+{% endblock %}
+{% block top_catalogvnf %}active{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+{% fende_widget widget_type="no-padding" location='start' id='publish' title=_("My Services") icon="fa-bars" %}
+{% if my_services %}
+<table id="tab1" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th><i class="fal fa-fw fa-user"></i>
+                {% trans "Institution" %}
+            </th>
+            <th data-hide="phone"><i
+                class="fal fa-fw  fa-tags"></i>
+                {% trans "Name" %}
+            </th>
+            <th><i class="fas fa-code-branch fa-fw"></i>
+                {% trans "Path" %}
+            </th>
+            <th><i class="fal fa-fw fa-sitemap"></i>
+                {% trans "Category" %}
+            </th>
+            <th><i class="fal fa-fw fa-sitemap"></i>
+                {% trans "tags" %}
+            </th>
+            <th><i class="fal fa-fw fa-user"></i>
+                {% trans "Customers" %}
+            </th>
+            <th><i class="fal fa-fw fa-tasks"></i>
+                {% trans "Actions" %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Populando a tabela com informações da tabela Requests -->
+        {% for item in my_services %}
+        <tr>
+            <td>{{ item.institution }}</td>
+            <td>{{ item.sfc_name }}</td>
+            <td>{% for vnf in item.vnfs.all %}{{ vnf }}, {% endfor %}</td>
+            <td>{{ item.category }}</td>
+            <td>{% for tag in item.tag.all %}{{ tag }}, {% endfor %}</td>
+            <td><a class="btn btn-xs w-100 btn-secondary text-white" data-toggle="modal" data-target="#client{{ item.id }}">{{ item.clients.count }}</a></td>
+            <td>
+                <a href="{{ item.update_url }}">
+                    <button type="button" class="btn w-100 btn-xs btn-info">{% trans "Editar" %}</button>
+                </a>
+            </td>
+        </tr>
+        <!--================ MODAL CLIENTES ================== -->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="client{{ item.id }}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content pt-5 px-5">
+                    <div class="modal-header">
+                        <h5>{% trans 'List of Clients' %}</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for client in item.clients %}
+                        <li class="list-group-item">{{ client.client }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-success px-5">{% trans 'OK' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================ END MODAL ================== -->
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1 class="text-center">{% trans "None service available." %}</h1>
+{% endif %}
+{% fende_widget location='end' %}
+
+{% fende_widget widget_type="no-padding" location='start' id='publish' title=_("All Services") icon="fa-bars" %}
+{% if services %}
+<table id="tab2" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th><i class="fal fa-fw fa-user"></i>
+                {% trans "Institution" %}
+            </th>
+            <th data-hide="phone"><i
+                class="fal fa-fw  fa-tags"></i>
+                {% trans "Name" %}
+            </th>
+            <th><i class="fal fa-fw fa-code-fork"></i>
+                {% trans "Path" %}
+            </th>
+            <th><i class="fal fa-fw fa-sitemap"></i>
+                {% trans "Category" %}
+            </th>
+            <th><i class="fal fa-fw fa-tags"></i>
+                {% trans "tags" %}
+            </th>
+            <th><i class="fal fa-fw fa-tasks"></i>
+                {% trans "Actions" %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Populando a tabela com informações da tabela Requests -->
+        {% for item in my_services %}
+        <tr>
+            <td>{{ item.institution }}</td>
+            <td>{{ item.sfc_name }}</td>
+            <td>{% for vnf in item.vnfs.all %}{{ vnf }}, {% endfor %}</td>
+            <td>{{ item.category }}</td>
+            <td>{% for tag in item.tag.all %}{{ tag }}, {% endfor %}</td>
+            <td class="p-2 text-center">
+                <a href="">
+                    <button type="button" class="btn w-100 btn-xs btn-danger">{% trans "Editar" %}</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1>
+    <center>{% trans "None service available." %}</center>
+</h1>
+{% endif %}
+{% fende_widget location='end' %}
+{% endblock %}
+
+<!--SCRIPT TABELAS -->
+{% block table %}
+{% fende_widget location='table' %}
+{% endblock %}
+<!--SCRIPT TABELAS -->

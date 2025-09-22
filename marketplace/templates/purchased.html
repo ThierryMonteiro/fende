@@ -1,0 +1,240 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block top_management %}active{% endblock %}
+{% block top_purchased %}active{% endblock %}
+{% load services %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:purchased' %}">Services</a></li>
+{% endblock %}
+{% block page_content %}
+{% fende_widget widget_type='no-padding' location='start' id='vnfs' title=_("My Services") tutorial=_("tutorial/vnfs.html") %}
+{% if services %}
+<div class="table-responsive">
+    <table id="tab1" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    <i class="fal fa-fw fa-user"></i>
+                    ID
+                </th>
+                <th>
+                    <i class="fal fa-fw fa-user"></i>
+                    {% trans "Consultant" %}
+                </th>
+                <th><i class="fal fa-fw  fa-tags"></i>
+                    {% trans "SFC" %}
+                    {% trans "Name" %}
+                </th>
+                <th>
+                    <i class="fal fa-code-branch fa-fw"></i>
+                    {% trans "Version" %}
+                </th>
+                <th>
+                    <i class="fal fa-fw fa-sitemap"></i>
+                    {% trans "Category" %}
+                </th>
+                <th><i class="fal fa-fw fa-tasks"></i>
+                    {% trans "Actions" %}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Populando a tabela com informações da tabela Requests -->
+            {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.consultant }}</td>
+                <td>{{ service.sfc_name }}</td>
+                <td>{{ service.version }}</td>
+                <td>{{ service.category }}</td>
+                <td>
+                    <div class="d-md-flex justify-content-between">
+                        <a href="{% url 'Marketplace:deploy' service.id %}" class="btn btn-xs min-w-25 btn-success btn-actions">Deploy</a>
+                        <button type="button" data-toggle="modal" data-target="#pathmodal-{{ service.id }}" class="btn btn-xs min-w-25 btn-info btn-actions" >Functions</button>
+                        <button type="button" data-toggle="modal" data-target="#servicemodal{{ service.id }}" class="btn btn-xs min-w-25 btn-dark btn-actions" >Descriptors</button>
+                    </div>
+                </td>
+            </tr>
+            <div id="createModal{{ forloop.counter }}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">{% trans "Create service" %}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="GET">
+                                <div class="form-group">
+                                    <label for="sel1">{% trans "Infrastructure" %}</label>
+                                    <select name="infrastructure" class="form-control">
+                                        {% for infra in infrastructures %}
+                                        <option>{{ infra.name }}</option>
+                                        {% endfor %}
+                                        <option>{% trans "Select for me..." %}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sel2">{% trans "Select based on..." %}</label>
+                                    <select name="parameter" class="form-control">
+                                        <option value="" selected disabled hidden>{% trans "Choose parameter" %} </option>
+                                        <option value='CPU'>{% trans "CPU Usage" %}</option>
+                                        <option value='MEM'>{% trans "Total memory" %}</option>
+                                        <option value='BW'>{% trans "Bandwidth" %}</option>
+                                    </select>
+                                </div>
+                                <form action="../create/{{ service.repository_id }}/{{ service.service_name }}/" method="post">
+                                    <div class="modal-body">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="sel1">{% trans "Infrastructure" %}</label>
+                                            <select name="infrastructure" class="form-control">
+                                                {% for infra in infrastructures %}
+                                                <option>{{ infra.name }}</option>
+                                                {% endfor %}
+                                                <option>{% trans "Select for me..." %}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sel2">{% trans "Select based on..." %}</label>
+                                            <select name="parameter" class="form-control">
+                                                <option value="" selected disabled hidden>{% trans "Choose parameter" %}</option>
+                                                <option value='CPU'>{% trans "CPU Usage" %}</option>
+                                                <option value='MEM'>{% trans "Total memory" %}</option>
+                                                <option value='BW'>{% trans "Bandwidth" %}</option>
+                                            </select>
+                                        </div>
+                                        <input type='hidden' name='repository' value="{{ service.repository_id }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                                        <button type="submit" class="btn btn-primary" onclick="document.getElementById('overlay').style.display = 'block';"> {% trans "Create" %}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h1>
+        <center>{% trans "You don't have any Service available." %}</center>
+    </h1>
+    {% endif %}
+    {% fende_widget location='end' %}
+    
+    {% for service in services %}
+    <div id="servicemodal{{ service.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{% trans "Descriptors" %}</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    {% for vnf in service.vnfs.all %}
+                    {% get_vnfd vnf.catalog.repository_id as vnfdes %}
+                    <h3>{{ vnf }}</h3>
+                    <div class="form-group">
+                        <pre class="border function-fende" id="vnfd_modal{{ vnf.catalog.repository_id }}" name="vnfd_data{{ vnf.catalog.repository_id }}"> {{ vnfdes }} </pre>
+                    </div>
+                    {% endfor %}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Service Path -->
+    <div class="modal fade" id="pathmodal-{{ service.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{% trans "SFC Path" %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="align-center border mb-5">
+                        <ul class="sfc-path d-inline-block py-0 mt-4 w-100">
+                            {% for vnf in service.vnfs.all %}
+                                {% get_vnfd vnf.catalog.repository_id as vnfdes %}
+                                <li class="d-inline-block position-relative"><span class="path-box-no-hover" data-toggle="modal">{{ vnf }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    
+    {% endblock page_content %}
+    
+    <!--SCRIPT TABELAS -->
+    {% block table %}
+    {% fende_widget location='table' %}
+    {% endblock %}
+    <!--SCRIPT TABELAS -->
+    
+    {% block script %}
+    {{ block.super }}
+    <script>
+        var id = null
+        
+        function create_vnf(id, vnf_name, language) {
+            alert("VNF " + vnf_name + " will be created. This could take a few minutes.")
+            
+            $.post("../create/", {
+                'repository': id,
+                'vnf_name': vnf_name,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            function (data, status) {
+                sleep(4000);
+                location.reload();
+            }
+            )
+        }
+        
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+            }
+        }
+    </script>
+    {% endblock %}
+    
+    {% block extra_footer %}
+    <script>
+        function show_vnfd(id) {
+            $.post("{% url 'Marketplace:show_vnfd' %}", {
+                'repository': id,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            function (data, status) {
+                document.getElementById("vnfd_modal" + id).value = data;
+                alert(status + data);
+            }
+            );
+        }
+        
+    </script>
+    {% endblock %}
+    

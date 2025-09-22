@@ -1,0 +1,25 @@
+Estrutura do Repositório
+
++ Folder: /
+-- VNF file (e.g., OVA file) *
+++ Folder: Configs *
+--- config.json *
+++ Folder: Descriptors *
+--- VNFD.json *
+--- NSD.json
+++ Folder: Source
+--- VNF Source Code file(s)
+--------------
+| * required |
+--------------
+
+Modelo de <config.json>
+
+{
+ "FENDE": {
+	"permissions": {
+		"see_source_code": "all",
+		"contract_VNF": "UFRGS;UFSM;UFPR"
+			}
+      	  }
+}

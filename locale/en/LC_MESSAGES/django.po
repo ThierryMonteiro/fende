@@ -1,0 +1,1430 @@
+#: accounts/forms.py:49 accounts/forms.py:85 marketplace/forms.py:130
+msgid "Password"
+msgstr ""
+
+#: accounts/forms.py:51
+msgid "Password confirmation"
+msgstr ""
+
+#: accounts/forms.py:53
+msgid "Enter the same password as before, for verification."
+msgstr ""
+
+#: accounts/templates/accounts/index.html:8
+#: accounts/templates/accounts/index.html:19
+msgid "My Account"
+msgstr ""
+
+#: accounts/templates/accounts/index.html:21
+#: accounts/templates/accounts/ssh.html:8
+msgid "SSH Keys"
+msgstr ""
+
+#: core/templates/base.html:58
+msgid "Build Service"
+msgstr ""
+
+#: core/templates/base.html:62 core/templates/base.html.py:64
+msgid "Infrastructures"
+msgstr ""
+
+#: core/templates/base.html:70
+msgid "List"
+msgstr ""
+
+#: core/templates/base.html:76
+#: marketplace/templates/marketplace/catalog_vnfs.html:51
+#: repository/templates/Publish/vnf_publish.html:300
+msgid "Add"
+msgstr ""
+
+#: core/templates/base.html:87 core/templates/base.html.py:89
+msgid "Management"
+msgstr ""
+
+#: core/templates/base.html:95
+msgid "Purchased"
+msgstr ""
+
+#: core/templates/base.html:101
+#: marketplace/templates/marketplace/services.html:8
+msgid "Services"
+msgstr ""
+
+#: core/templates/base.html:107
+#: marketplace/templates/marketplace/deployments.html:16
+msgid "Deployments"
+msgstr ""
+
+#: core/templates/base.html:121
+msgid "Package Submission"
+msgstr ""
+
+#: core/templates/base.html:125 core/templates/base.html.py:127
+msgid "Package Builder"
+msgstr ""
+
+#: core/templates/base.html:131 core/templates/base.html.py:133
+msgid "Package Upload"
+msgstr ""
+
+#: core/templates/base.html:137 core/templates/base.html.py:139
+msgid "Git Repository"
+msgstr ""
+
+#: core/templates/base.html:145 core/templates/base.html.py:147
+#: repository/templates/Publish/status.html:11
+msgid "Submitted Packages"
+msgstr ""
+
+#: core/templates/base.html:153
+msgid "Manage"
+msgstr ""
+
+#: core/templates/base.html:159 repository/templates/my_repositories.html:10
+#: repository/templates/my_repositories.html:16
+msgid "My Repositories"
+msgstr ""
+
+#: core/templates/base.html:173 repository/templates/bases/review_base.html:7
+msgid "Review"
+msgstr ""
+
+#: core/templates/base.html:179
+msgid "Repository"
+msgstr ""
+
+#: core/templates/base.html:197 core/templates/core/template.html.py:74
+#: core/templates/core/template.html:174
+msgid "About"
+msgstr ""
+
+#: core/templates/base.html:217 core/templates/core/template.html.py:66
+#: core/templates/core/template.html:165
+msgid "Home"
+msgstr ""
+
+#: core/templates/base.html:230
+msgid "You're in:"
+msgstr ""
+
+#: core/templates/base.html:234 core/templates/base.html.py:263
+msgid "CUSTOMER"
+msgstr ""
+
+#: core/templates/base.html:236 core/templates/base.html.py:265
+msgid "CONSULTANT"
+msgstr ""
+
+#: core/templates/base.html:238 core/templates/base.html.py:267
+msgid "DEVELOPER"
+msgstr ""
+
+#: core/templates/base.html:240 core/templates/base.html.py:269
+msgid "REVIEWER"
+msgstr ""
+
+#: core/templates/base.html:299
+msgid "Sign Out"
+msgstr ""
+
+#: core/templates/base.html:380
+msgid "My Profile"
+msgstr ""
+
+#: core/templates/base.html:393
+msgid "Reviewer"
+msgstr ""
+
+#: core/templates/base.html:407 marketplace/templates/marketplace.html:178
+#: marketplace/templates/marketplace/catalog_vnfs.html:20
+#: marketplace/templates/sfc_path.html:154
+#: repository/templates/Review/review_list.html:20
+#: repository/templates/Review/vnfd_list.html:20
+#: repository/templates/bases/dev_base.html:7
+msgid "Developer"
+msgstr ""
+
+#: core/templates/base.html:421
+#: marketplace/templates/marketplace/service_info.html:57
+#: marketplace/templates/purchased.html:26
+msgid "Consultant"
+msgstr ""
+
+#: core/templates/base.html:434
+msgid "Customer"
+msgstr ""
+
+#: core/templates/core/about.html:10
+msgid ""
+"Federated Ecosystem for OfferiNg, Distribution, and Execution of Virtual "
+"Network Functions"
+msgstr ""
+
+#: core/templates/core/about.html:14
+msgid ""
+"FENDE is an ecossystem to support the desing, development and instantiation "
+"of NFV-based services, in addition to a marketplace for offering and "
+"distribution of Virtual Network Functions (VNFs). FENDE presents itself as a "
+"unique system of its kind, and enables the distribution of both networks "
+"functions and services, in a manner that is akin to virtual marketplaces (e."
+"g., Google Play and Apple Store). FENDE also allows the management of "
+"services and functions, including Service Function Chainning (SFC) "
+"capabilities and management to help in the creation of many network "
+"functions to supply a determined network service."
+msgstr ""
+
+#: core/templates/core/about.html:18
+msgid "Currently, FENDE ecossystem provides:"
+msgstr ""
+
+#: core/templates/core/about.html:21
+msgid "A VNFs repository implementation; "
+msgstr ""
+
+#: core/templates/core/about.html:22
+msgid "Federated Login (CAFe);"
+msgstr ""
+
+#: core/templates/core/about.html:23
+msgid ""
+"Web Front-end with different users' panels (i.e., developers, reviewers, and "
+"customers);"
+msgstr ""
+
+#: core/templates/core/about.html:24
+msgid "Execution environment (Click-on-OSv);"
+msgstr ""
+
+#: core/templates/core/about.html:25
+msgid "Management of VNFs lifecycle in hardware and software layer;"
+msgstr ""
+
+#: core/templates/core/about.html:26
+msgid "SFCs creation and lifecycle management;"
+msgstr ""
+
+#: core/templates/core/about.html:27
+msgid "VNFs monitoring;"
+msgstr ""
+
+#: core/templates/core/about.html:28
+msgid "OpenStack-based cloud infrastructure for services instantiation."
+msgstr ""
+
+#: core/templates/core/about.html:31
+msgid "Differentials"
+msgstr ""
+
+#: core/templates/core/about.html:33 core/templates/core/home.html.py:19
+msgid "First complete"
+msgstr ""
+
+#: core/templates/core/about.html:33 core/templates/core/home.html.py:19
+msgid "marketplace for NFV (offering, distribution, and execution);"
+msgstr ""
+
+#: core/templates/core/about.html:34 core/templates/core/home.html.py:22
+msgid "Modular and extensible architecture based on ETSI standards;"
+msgstr ""
+
+#: core/templates/core/about.html:35 core/templates/core/home.html.py:24
+msgid "Full set of operations;"
+msgstr ""
+
+#: core/templates/core/about.html:36 core/templates/core/home.html.py:26
+msgid "Support to heterogeneous, scalable and distributed environments;"
+msgstr ""
+
+#: core/templates/core/about.html:39
+msgid "Learn more"
+msgstr ""
+
+#: core/templates/core/home.html:9
+msgid "Welcome to FENDE platform!"
+msgstr ""
+
+#: core/templates/core/home.html:12
+msgid ""
+"Submit, acquire, and deploy VNFs and SFCs through a centralized marketplace"
+msgstr ""
+
+#: core/templates/core/home.html:14
+msgid "Find out more"
+msgstr ""
+
+#: core/templates/core/home.html:33
+msgid "Featured Products"
+msgstr ""
+
+#: core/templates/core/home.html:49
+msgid "NEW"
+msgstr ""
+
+#: core/templates/core/home.html:51
+msgid "HOT"
+msgstr ""
+
+#: core/templates/core/home.html:66
+#: marketplace/templates/marketplace/service_info.html:46
+msgid "Review:"
+msgstr ""
+
+#: core/templates/core/home.html:73 marketplace/templates/info.html.py:26
+#: marketplace/templates/instances.html:170
+#: marketplace/templates/marketplace.html:148
+#: marketplace/templates/marketplace/catalog_vnfs.html:79
+#: marketplace/templates/marketplace/service_info.html:90
+#: marketplace/templates/sfc_path.html:24
+msgid "Version:"
+msgstr ""
+
+#: core/templates/core/home.html:74 marketplace/templates/info.html.py:28
+#: marketplace/templates/marketplace/catalog_vnfs.html:81
+#: repository/templates/Review/details.html:20
+#: repository/templates/Review/review_list.html:78
+msgid "Abstract:"
+msgstr ""
+
+#: core/templates/core/home.html:79
+#: marketplace/templates/marketplace/catalog_vnfs.html:82
+#: marketplace/templates/marketplace/service_info.html:69
+#: repository/templates/Review/details.html:21
+#: repository/templates/Review/review_list.html:79
+msgid "Description:"
+msgstr ""
+
+#: core/templates/core/publications.html:8 core/templates/core/template.html:71
+#: core/templates/core/template.html:171
+msgid "Publications"
+msgstr ""
+
+#: core/templates/core/publications.html:22
+msgid "Presentations"
+msgstr ""
+
+#: core/templates/core/publications.html:30
+msgid "Reports"
+msgstr ""
+
+#: core/templates/core/team.html:9 core/templates/core/team.html.py:28
+#: core/templates/core/template.html:68 core/templates/core/template.html:168
+msgid "Team"
+msgstr ""
+
+#: core/templates/core/team.html:11
+msgid ""
+"This project have a team with vast experience in Network Management and "
+"Network Functions Virtualization (NFV). Our team is composed by four PhD. "
+"researchers ,"
+msgstr ""
+
+#: core/templates/core/team.html:11
+msgid ""
+"Besides, there are postgraduate and ungraduate students involved in the "
+"project."
+msgstr ""
+
+#: core/templates/core/team.html:12
+msgid "Coordinator"
+msgstr ""
+
+#: core/templates/core/team.html:17
+msgid "Assistant Coordinator"
+msgstr ""
+
+#: core/templates/core/team.html:22
+msgid "Collaborators"
+msgstr ""
+
+#: core/templates/core/team.html:30
+msgid "Manager"
+msgstr ""
+
+#: core/templates/core/team.html:30 core/templates/core/team.html.py:31
+#: core/templates/core/team.html:33
+msgid "PhD. Student in Computer Science"
+msgstr ""
+
+#: core/templates/core/team.html:31
+msgid "Collaborator"
+msgstr ""
+
+#: core/templates/core/team.html:32 core/templates/core/team.html.py:36
+msgid "MSc. Student in Computer Science"
+msgstr ""
+
+#: core/templates/core/team.html:34
+msgid "Computer Science Student"
+msgstr ""
+
+#: core/templates/core/team.html:35
+msgid "Information Systems Student"
+msgstr ""
+
+#: core/templates/core/team.html:39 core/templates/core/template.html.py:143
+msgid "Partners"
+msgstr ""
+
+#: core/templates/core/template.html:82
+msgid "Language"
+msgstr ""
+
+#: core/templates/core/template.html:107
+msgid "Back"
+msgstr ""
+
+#: core/templates/core/template.html:110
+msgid "Login"
+msgstr ""
+
+#: core/templates/core/template.html:131
+msgid "Powered by"
+msgstr ""
+
+#: core/templates/core/template.html:137
+msgid "Sponsor"
+msgstr ""
+
+#: core/templates/core/template.html:160
+msgid "Sitemap"
+msgstr ""
+
+#: core/templates/core/template.html:179
+msgid "Contact"
+msgstr ""
+
+#: core/templates/core/template.html:183
+msgid "Project email"
+msgstr ""
+
+#: core/templates/core/template.html:185
+msgid "Coordinator email"
+msgstr ""
+
+#: core/templates/core/template.html:188
+msgid "Phone"
+msgstr ""
+
+#: core/templates/core/template.html:193
+msgid "Address"
+msgstr ""
+
+#: core/templates/core/template.html:197
+msgid "Department of Applied Computing"
+msgstr ""
+
+#: core/templates/core/template.html:198
+msgid "Federal University of Santa Maria (UFSM)"
+msgstr ""
+
+#: core/templates/core/template.html:217 core/templates/core/template.html:242
+msgid "Sign in"
+msgstr ""
+
+#: core/templates/core/template.html:219 core/templates/core/template.html:275
+msgid "Register"
+msgstr ""
+
+#: core/templates/core/template.html:226
+msgid "Login to Your Account"
+msgstr ""
+
+#: core/templates/core/template.html:244
+msgid "Or Login With"
+msgstr ""
+
+#: core/templates/core/template.html:247
+msgid "Federated Login"
+msgstr ""
+
+#: core/templates/core/template.html:253
+msgid "Create Your Account"
+msgstr ""
+
+#: core/templates/core/template.html:289
+msgid "Wait"
+msgstr ""
+
+#: marketplace/templates/grafico.html:6 marketplace/templates/sfc_path.html:15
+msgid "Service Details"
+msgstr ""
+
+#: marketplace/templates/info.html:25
+#: marketplace/templates/marketplace/catalog_vnfs.html:76
+#: repository/templates/Review/details.html:15
+#: repository/templates/Review/review_list.html:73
+msgid "VNF Name:"
+msgstr ""
+
+#: marketplace/templates/info.html:27 marketplace/templates/instances.html:171
+#: marketplace/templates/marketplace.html:151
+#: marketplace/templates/marketplace/catalog_vnfs.html:80
+#: marketplace/templates/marketplace/service_info.html:91
+#: marketplace/templates/sfc_path.html:23
+#: repository/templates/Review/details.html:19
+#: repository/templates/Review/review_list.html:77
+msgid "Category:"
+msgstr ""
+
+#: marketplace/templates/info.html:29 marketplace/templates/instances.html:168
+#: marketplace/templates/marketplace/catalog_vnfs.html:77
+#: marketplace/templates/marketplace/service_info.html:88
+#: repository/templates/Review/details.html:16
+#: repository/templates/Review/review_list.html:74
+msgid "Developer:"
+msgstr ""
+
+#: marketplace/templates/info.html:32
+msgid "Instance information"
+msgstr ""
+
+#: marketplace/templates/infras/list.html:13
+#: marketplace/templates/infras/list.html:17
+msgid "Infrastructures List"
+msgstr ""
+
+#: marketplace/templates/infras/list.html:22
+#: marketplace/templates/instances.html:19
+#: marketplace/templates/marketplace/services.html:24
+#: marketplace/templates/marketplace/services.html:101
+#: marketplace/templates/purchased.html:30 marketplace/templates/sfc.html:23
+#: repository/templates/Publish/dev_package_upload.html:23
+#: repository/templates/Publish/vnf_publish.html:73
+#: repository/templates/Publish/vnf_publish.html:74
+msgid "Name"
+msgstr ""
+
+#: marketplace/templates/infras/list.html:35
+#: marketplace/templates/instances.html:38 marketplace/templates/sfc.html:26
+msgid "Create Date"
+msgstr ""
+
+#: marketplace/templates/infras/list.html:38
+#: marketplace/templates/instances.html:41
+#: marketplace/templates/marketplace/catalog_vnfs.html:36
+#: marketplace/templates/marketplace/services.html:39
+#: marketplace/templates/marketplace/services.html:113
+#: marketplace/templates/purchased.html:41 marketplace/templates/sfc.html:27
+#: repository/templates/Publish/status.html:26
+#: repository/templates/Publish/status.html:84
+#: repository/templates/Publish/update_list.html:20
+#: repository/templates/Review/review_list.html:25
+#: repository/templates/Review/vnfd_list.html:26
+#: repository/templates/my_repositories.html:40
+msgid "Actions"
+msgstr ""
+
+#: marketplace/templates/infras/list.html:51
+msgid "Edit"
+msgstr ""
+
+#: marketplace/templates/infras/technology_form.html:5
+#: marketplace/templates/infras/technology_form.html:38
+#: marketplace/templates/infras/technology_form.html:82
+msgid "Authentication"
+msgstr ""
+
+#: marketplace/templates/infras/technology_form.html:82
+#: marketplace/templates/marketplace/vnf_api.html:45
+#: repository/templates/Publish/vnf_publish.html:23
+msgid "Configuration"
+msgstr ""
+
+#: marketplace/templates/infras/update.html:12
+#: marketplace/templates/infras/update.html:16
+msgid "Infrastructure Edit"
+msgstr ""
+
+#: marketplace/templates/infras/update.html:48
+#: marketplace/templates/infrastructure.html:66
+msgid "Infrastructure Status"
+msgstr ""
+
+#: marketplace/templates/infras/update.html:50
+#: marketplace/templates/infrastructure.html:68
+msgid "Active"
+msgstr ""
+
+#: marketplace/templates/infras/update.html:51
+#: marketplace/templates/infrastructure.html:69
+msgid "Inactive"
+msgstr ""
+
+#: marketplace/templates/infras/update.html:63
+#: marketplace/templates/infrastructure.html:83
+#: marketplace/templates/marketplace/catalog_vnfs.html:69
+#: repository/templates/Publish/dev_package_upload.html:84
+#: repository/templates/Publish/publish.html:77
+#: repository/templates/Publish/update.html:11
+#: repository/templates/Publish/vnf_publish.html:313
+#: repository/templates/Publish/vnf_publish.html:314
+msgid "Submit"
+msgstr ""
+
+#: marketplace/templates/infrastructure.html:12
+#: marketplace/templates/infrastructure.html:35
+msgid "Infrastructure Submission"
+msgstr ""
+
+#: marketplace/templates/instances.html:9
+#: marketplace/templates/instances.html:13
+#: marketplace/templates/marketplace/catalog_vnfs.html:33
+msgid "Instances"
+msgstr ""
+
+#: marketplace/templates/instances.html:13
+msgid "tutorial/instances.html"
+msgstr ""
+
+#: marketplace/templates/instances.html:31
+#: marketplace/templates/marketplace/deploy.html:39
+#: marketplace/templates/marketplace/deployments.html:27
+#: marketplace/templates/purchased.html:72
+#: marketplace/templates/purchased.html:93 marketplace/templates/sfc.html:25
+msgid "Infrastructure"
+msgstr ""
+
+#: marketplace/templates/instances.html:34
+msgid "SFC Member"
+msgstr ""
+
+#: marketplace/templates/instances.html:53 marketplace/templates/sfc.html:106
+msgid "RUNNING"
+msgstr ""
+
+#: marketplace/templates/instances.html:55 marketplace/templates/sfc.html:104
+msgid "STOPPED"
+msgstr ""
+
+#: marketplace/templates/instances.html:63 marketplace/templates/sfc.html:50
+#: repository/templates/Review/review_list.html:48
+#: repository/templates/Review/vnfd_list.html:42
+#: repository/templates/Review/vnfd_list.html:54
+#: repository/templates/my_repositories.html:56
+msgid "Options"
+msgstr ""
+
+#: marketplace/templates/instances.html:67
+#: marketplace/templates/sfc_path.html:64
+msgid "Restart"
+msgstr ""
+
+#: marketplace/templates/instances.html:70
+#: marketplace/templates/sfc_path.html:67
+msgid "Stop"
+msgstr ""
+
+#: marketplace/templates/instances.html:74 marketplace/templates/sfc.html:60
+msgid "Delete"
+msgstr ""
+
+#: marketplace/templates/instances.html:78 marketplace/templates/sfc.html:59
+#: marketplace/templates/sfc_path.html:70
+#: repository/templates/Review/vnfd_list.html:33
+msgid "Update"
+msgstr ""
+
+#: marketplace/templates/instances.html:81
+#: marketplace/templates/instances.html:99
+#: marketplace/templates/sfc_path.html:73
+#: marketplace/templates/sfc_path.html:96
+msgid "Resize Allocation"
+msgstr ""
+
+#: marketplace/templates/instances.html:88
+msgid "Statistics"
+msgstr ""
+
+#: marketplace/templates/instances.html:105
+#: marketplace/templates/sfc_path.html:30
+#: marketplace/templates/sfc_path.html:102
+#: marketplace/templates/sfc_path.html:216
+msgid "Memory"
+msgstr ""
+
+#: marketplace/templates/instances.html:125
+#: marketplace/templates/sfc_path.html:31
+#: marketplace/templates/sfc_path.html:123
+#: marketplace/templates/sfc_path.html:220
+msgid "Disk"
+msgstr ""
+
+#: marketplace/templates/instances.html:140
+#: marketplace/templates/instances.html:178
+#: marketplace/templates/marketplace/vnf_api.html:107
+#: marketplace/templates/marketplace/vnf_api.html:121
+#: marketplace/templates/purchased.html:113
+#: marketplace/templates/purchased.html:149 marketplace/templates/sfc.html:121
+#: marketplace/templates/sfc_path.html:137
+#: marketplace/templates/sfc_path.html:164
+#: marketplace/templates/sfc_path.html:255
+#: repository/templates/Review/review_list.html:84
+#: repository/templates/Review/review_list.html:113
+#: repository/templates/Review/review_list.html:142
+#: repository/templates/Review/vnfd_list.html:86
+#: repository/templates/Review/vnfd_list.html:110
+#: repository/templates/Review/vnfd_list.html:129
+#: repository/templates/my_repositories.html:109
+#: repository/templates/my_repositories.html:140
+msgid "Close"
+msgstr ""
+
+#: marketplace/templates/instances.html:141
+#: repository/templates/my_repositories.html:110
+msgid "Save changes"
+msgstr ""
+
+#: marketplace/templates/instances.html:153
+msgid "No VNF instantiated."
+msgstr ""
+
+#: marketplace/templates/instances.html:165
+#: marketplace/templates/sfc_path.html:150
+#: repository/templates/Publish/vnf_publish.html:69
+msgid "VNF Information"
+msgstr ""
+
+#: marketplace/templates/instances.html:169
+#: marketplace/templates/marketplace.html:145
+#: marketplace/templates/marketplace/catalog_vnfs.html:78
+#: marketplace/templates/marketplace/service_info.html:89
+#: repository/templates/Review/details.html:17
+#: repository/templates/Review/review_list.html:75
+msgid "Institution:"
+msgstr ""
+
+#: marketplace/templates/instances.html:172
+msgid "Full Description:"
+msgstr ""
+
+#: marketplace/templates/instances.html:173
+msgid "Link:"
+msgstr ""
+
+#: marketplace/templates/instances.html:174
+#: marketplace/templates/marketplace.html:154
+#: marketplace/templates/marketplace.html:183
+#: marketplace/templates/marketplace/service_info.html:92
+msgid "Create:"
+msgstr ""
+
+#: marketplace/templates/logs.html:8
+msgid "Instance Logs"
+msgstr ""
+
+#: marketplace/templates/logs.html:12 marketplace/templates/sfc_path.html:79
+msgid "Logs"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:11
+msgid "Categories"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:13
+#: repository/templates/Publish/vnf_publish.html:41
+#: repository/templates/my_repositories.html:92
+#: repository/templates/my_repositories.html:100
+msgid "All"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:54
+#: marketplace/templates/marketplace.html:181
+#: marketplace/templates/marketplace/catalog_vnfs.html:30
+#: marketplace/templates/marketplace/services.html:30
+#: marketplace/templates/marketplace/services.html:107
+#: marketplace/templates/purchased.html:38
+#: marketplace/templates/sfc_path.html:157
+#: repository/templates/Publish/dev_package_upload.html:47
+#: repository/templates/Publish/vnf_publish.html:91
+msgid "Category"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:61
+msgid "Results"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:75
+#: marketplace/templates/marketplace.html:77
+msgid "Search..."
+msgstr ""
+
+#: marketplace/templates/marketplace.html:91
+#: repository/templates/Publish/dev_package_upload.html:30
+#: repository/templates/Publish/vnf_publish.html:78
+#: repository/templates/Publish/vnf_publish.html:80
+msgid "Description"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:99
+#: marketplace/templates/marketplace.html:139
+msgid "Specifications"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:107
+msgid "Composite"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:120
+msgid "Tags"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:124
+msgid "includes tax"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:126
+msgid "Acquired"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:128
+msgid "Acquire"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:135
+msgid "Product Description"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:142
+#: marketplace/templates/sfc_path.html:21
+msgid "Consultant:"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:179
+#: marketplace/templates/marketplace/service_info.html:56
+#: marketplace/templates/marketplace/services.html:20
+#: marketplace/templates/marketplace/services.html:97
+#: marketplace/templates/sfc_path.html:155
+#: repository/templates/Publish/dev_package_upload.html:54
+#: repository/templates/Publish/vnf_publish.html:100
+msgid "Institution"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:180
+#: marketplace/templates/marketplace/catalog_vnfs.html:27
+#: marketplace/templates/marketplace/service_info.html:58
+#: marketplace/templates/purchased.html:34
+#: marketplace/templates/sfc_path.html:156
+#: repository/templates/Publish/dev_package_upload.html:40
+#: repository/templates/Publish/status.html:21
+#: repository/templates/Publish/status.html:80
+#: repository/templates/Publish/update_list.html:15
+#: repository/templates/Publish/vnf_publish.html:86
+#: repository/templates/Publish/vnf_publish.html:88
+#: repository/templates/my_repositories.html:28
+msgid "Version"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:182
+#: marketplace/templates/marketplace/service_info.html:65
+#: repository/templates/Publish/dev_package_upload.html:62
+#: repository/templates/Publish/update_list.html:16
+#: repository/templates/Publish/vnf_publish.html:109
+#: repository/templates/Review/review_list.html:22
+#: repository/templates/Review/vnfd_list.html:22
+#: repository/templates/my_repositories.html:32
+msgid "Abstract"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:238
+msgid "No Products available."
+msgstr ""
+
+#: marketplace/templates/marketplace.html:247
+msgid "Are you sure that you want to acquire this VNF?"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:251
+msgid "Cancel"
+msgstr ""
+
+#: marketplace/templates/marketplace.html:252
+msgid "Confirm"
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:8
+#: marketplace/templates/marketplace/catalog_vnfs.html:13
+msgid "Catalog VNFs"
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:24
+#: repository/templates/Publish/status.html:20
+#: repository/templates/Publish/status.html:79
+#: repository/templates/Publish/update_list.html:14
+#: repository/templates/Review/review_list.html:21
+#: repository/templates/Review/vnfd_list.html:21
+#: repository/templates/my_repositories.html:24
+msgid "VNF Name"
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:61
+msgid "None VNF available."
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:66
+msgid "VNFs Order"
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:74
+#: marketplace/templates/sfc_path.html:58
+msgid "VNF Information:"
+msgstr ""
+
+#: marketplace/templates/marketplace/catalog_vnfs.html:83
+#: repository/templates/Review/details.html:22
+#: repository/templates/Review/review_list.html:80
+msgid "Repository:"
+msgstr ""
+
+#: marketplace/templates/marketplace/deploy.html:14
+msgid "Deploy Service"
+msgstr ""
+
+#: marketplace/templates/marketplace/deploy.html:70
+msgid "Deploy"
+msgstr ""
+
+#: marketplace/templates/marketplace/deployments.html:23
+msgid "Service Name"
+msgstr ""
+
+#: marketplace/templates/marketplace/deployments.html:31
+msgid "Creation Date"
+msgstr ""
+
+#: marketplace/templates/marketplace/deployments.html:35
+msgid "Last Update"
+msgstr ""
+
+#: marketplace/templates/marketplace/deployments.html:39
+msgid "Status"
+msgstr ""
+
+#: marketplace/templates/marketplace/deployments.html:43
+msgid "Percent"
+msgstr ""
+
+#: marketplace/templates/marketplace/service_info.html:53
+msgid "Price"
+msgstr ""
+
+#: marketplace/templates/marketplace/service_info.html:73
+msgid "Composite:"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:13
+#: marketplace/templates/purchased.html:14
+msgid "My Services"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:27
+#: marketplace/templates/marketplace/services.html:104
+msgid "Path"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:33
+#: marketplace/templates/marketplace/services.html:110
+msgid "tags"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:36
+msgid "Customers"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:55
+#: marketplace/templates/marketplace/services.html:128
+msgid "Editar"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:64
+msgid "List of Clients"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:75
+msgid "OK"
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:86
+#: marketplace/templates/marketplace/services.html:138
+msgid "None service available."
+msgstr ""
+
+#: marketplace/templates/marketplace/services.html:90
+msgid "All Services"
+msgstr ""
+
+#: marketplace/templates/marketplace/sfc_construct.html:128
+msgid "Select one or more files to create a slide"
+msgstr ""
+
+#: marketplace/templates/marketplace/vnf_api.html:10
+msgid "VNF_API"
+msgstr ""
+
+#: marketplace/templates/marketplace/vnf_api.html:15
+msgid "VNF API"
+msgstr ""
+
+#: marketplace/templates/purchased.html:14
+msgid "tutorial/vnfs.html"
+msgstr ""
+
+#: marketplace/templates/purchased.html:29
+msgid "SFC"
+msgstr ""
+
+#: marketplace/templates/purchased.html:67
+msgid "Create service"
+msgstr ""
+
+#: marketplace/templates/purchased.html:77
+#: marketplace/templates/purchased.html:98
+msgid "Select for me..."
+msgstr ""
+
+#: marketplace/templates/purchased.html:81
+#: marketplace/templates/purchased.html:102
+msgid "Select based on..."
+msgstr ""
+
+#: marketplace/templates/purchased.html:83
+#: marketplace/templates/purchased.html:104
+msgid "Choose parameter"
+msgstr ""
+
+#: marketplace/templates/purchased.html:84
+#: marketplace/templates/purchased.html:105
+msgid "CPU Usage"
+msgstr ""
+
+#: marketplace/templates/purchased.html:85
+#: marketplace/templates/purchased.html:106
+msgid "Total memory"
+msgstr ""
+
+#: marketplace/templates/purchased.html:86
+#: marketplace/templates/purchased.html:107
+msgid "Bandwidth"
+msgstr ""
+
+#: marketplace/templates/purchased.html:114
+#: marketplace/templates/sfc_path.html:160
+msgid "Create"
+msgstr ""
+
+#: marketplace/templates/purchased.html:127
+msgid "You don't have any Service available."
+msgstr ""
+
+#: marketplace/templates/purchased.html:137
+msgid "Descriptors"
+msgstr ""
+
+#: marketplace/templates/purchased.html:161
+msgid "SFC Path"
+msgstr ""
+
+#: marketplace/templates/sfc.html:16
+msgid "SFCs"
+msgstr ""
+
+#: marketplace/templates/sfc.html:16
+msgid "tutorial/sfc.html"
+msgstr ""
+
+#: marketplace/templates/sfc.html:36 marketplace/templates/sfc.html.py:91
+msgid "ACTIVE"
+msgstr ""
+
+#: marketplace/templates/sfc.html:38 marketplace/templates/sfc.html.py:93
+msgid "INACTIVE"
+msgstr ""
+
+#: marketplace/templates/sfc.html:46
+msgid "See"
+msgstr ""
+
+#: marketplace/templates/sfc.html:54
+msgid "Soft restart"
+msgstr ""
+
+#: marketplace/templates/sfc.html:55
+msgid "Full restart"
+msgstr ""
+
+#: marketplace/templates/sfc.html:56
+msgid "Soft stop"
+msgstr ""
+
+#: marketplace/templates/sfc.html:57
+msgid "Full stop"
+msgstr ""
+
+#: marketplace/templates/sfc.html:58
+msgid "Start"
+msgstr ""
+
+#: marketplace/templates/sfc.html:72
+msgid "No SFC instantiated."
+msgstr ""
+
+#: marketplace/templates/sfc.html:82
+msgid "SFC Information"
+msgstr ""
+
+#: marketplace/templates/sfc.html:88
+msgid "Name:"
+msgstr ""
+
+#: marketplace/templates/sfc.html:89
+msgid "Status:"
+msgstr ""
+
+#: marketplace/templates/sfc.html:98
+msgid "Created Date:"
+msgstr ""
+
+#: marketplace/templates/sfc.html:99
+msgid "VNFs Path:"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:18
+msgid "Service Name:"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:32
+#: marketplace/templates/sfc_path.html:212
+msgid "CPU"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:61
+msgid "Console"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:76
+msgid "Info"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:138
+msgid "Save Changes"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:153
+msgid "IP"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:158
+msgid "Full Description"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:159
+#: repository/templates/Publish/update_list.html:17
+msgid "Link"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:175
+msgid "Real Time Data"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:179
+msgid "Service:"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:188
+msgid "Time Range (Minutes)"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:190
+msgid "Minute"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:191
+#: marketplace/templates/sfc_path.html:192
+#: marketplace/templates/sfc_path.html:193
+#: marketplace/templates/sfc_path.html:194
+msgid "Minutes"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:198
+msgid "Update Time (Seconds)"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:200
+#: marketplace/templates/sfc_path.html:201
+#: marketplace/templates/sfc_path.html:202
+#: marketplace/templates/sfc_path.html:203
+#: marketplace/templates/sfc_path.html:204
+msgid "Seconds"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:208
+msgid "Graphs:"
+msgstr ""
+
+#: marketplace/templates/sfc_path.html:224
+msgid "Network"
+msgstr ""
+
+#: repository/templates/Publish/dev_package_upload.html:9
+#: repository/templates/Publish/dev_package_upload.html:13
+msgid "Repository Submission - Upload"
+msgstr ""
+
+#: repository/templates/Publish/dev_package_upload.html:72
+msgid "Zip File"
+msgstr ""
+
+#: repository/templates/Publish/publish.html:10
+#: repository/templates/Publish/publish.html:13
+msgid "Repository Submission - Git"
+msgstr ""
+
+#: repository/templates/Publish/publish.html:13
+msgid "tutorial/publish.html"
+msgstr ""
+
+#: repository/templates/Publish/status.html:15
+msgid "Repository status"
+msgstr ""
+
+#: repository/templates/Publish/status.html:23
+#: repository/templates/Publish/status.html:82
+msgid "Submission Date"
+msgstr ""
+
+#: repository/templates/Publish/status.html:24
+#: repository/templates/Publish/status.html:83
+msgid "Decision"
+msgstr ""
+
+#: repository/templates/Publish/status.html:39
+#: repository/templates/Publish/status.html:42
+#: repository/templates/Publish/status.html:94
+#: repository/templates/Review/review_list.html:38
+#: repository/templates/Review/review_list.html:41
+#: repository/templates/Review/vnfd_list.html:37
+#: repository/templates/my_repositories.html:62
+#: repository/templates/my_repositories.html:65
+msgid "Access"
+msgstr ""
+
+#: repository/templates/Publish/status.html:55
+#: repository/templates/Publish/status.html:104
+msgid "Not available yet"
+msgstr ""
+
+#: repository/templates/Publish/status.html:62
+#: repository/templates/Publish/status.html:109
+msgid "See Comments"
+msgstr ""
+
+#: repository/templates/Publish/status.html:74
+msgid "VNFD status"
+msgstr ""
+
+#: repository/templates/Publish/status.html:134
+#: repository/templates/Review/review_list.html:100
+#: repository/templates/Review/review_list.html:127
+#: repository/templates/Review/vnfd_list.html:73
+#: repository/templates/Review/vnfd_list.html:97
+msgid "Review Comments"
+msgstr ""
+
+#: repository/templates/Publish/update.html:7
+msgid "Repository Submission"
+msgstr ""
+
+#: repository/templates/Publish/update_list.html:9
+msgid "Update List"
+msgstr ""
+
+#: repository/templates/Publish/update_list.html:18
+#: repository/templates/my_repositories.html:36
+msgid "Active Since"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:11
+#: repository/templates/Publish/vnf_publish.html:17
+msgid "Repository Submission - Builder"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:20
+msgid "Marketplace Policies"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:26
+msgid "Lifecycle Management"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:46
+#: repository/templates/my_repositories.html:91
+#: repository/templates/my_repositories.html:99
+msgid "None"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:52
+msgid "Custom"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:117
+msgid "Resource Configuration"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:122
+msgid "RAM Memory"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:149
+msgid "Disk Size"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:164
+msgid "CP Traffic:"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:168
+msgid "Enable"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:181
+msgid "Log Path"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:183
+msgid "Enter the path to the log file."
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:190
+msgid "Include API"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:196
+msgid "Upload"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:198
+msgid "Write"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:238
+msgid "Zip Supported"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:283
+msgid "Calls"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:311
+msgid "Previous"
+msgstr ""
+
+#: repository/templates/Publish/vnf_publish.html:312
+msgid "Next"
+msgstr ""
+
+#: repository/templates/Review/details.html:12
+#: repository/templates/Review/review_list.html:53
+#: repository/templates/Review/review_list.html:69
+msgid "Details"
+msgstr ""
+
+#: repository/templates/Review/details.html:18
+#: repository/templates/Review/review_list.html:76
+msgid "New version:"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:7
+msgid "Review List"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:13
+msgid "Repositories Requests"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:19
+#: repository/templates/Review/vnfd_list.html:19
+msgid "Type"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:24
+#: repository/templates/Review/vnfd_list.html:24
+msgid "Date"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:57
+#: repository/templates/Review/vnfd_list.html:58
+#: repository/templates/Review/vnfd_list.html:111
+msgid "Approve"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:60
+#: repository/templates/Review/review_list.html:114
+#: repository/templates/Review/vnfd_list.html:59
+#: repository/templates/Review/vnfd_list.html:87
+msgid "Reject"
+msgstr ""
+
+#: repository/templates/Review/review_list.html:143
+msgid "Accept"
+msgstr ""
+
+#: repository/templates/Review/vnfd_list.html:8
+msgid "VNFD List"
+msgstr ""
+
+#: repository/templates/Review/vnfd_list.html:14
+msgid "VNFDs Requests"
+msgstr ""
+
+#: repository/templates/Review/vnfd_list.html:25
+msgid "Request"
+msgstr ""
+
+#: repository/templates/Review/vnfd_list.html:46
+msgid "Comments"
+msgstr ""
+
+#: repository/templates/Review/vnfd_list.html:122
+msgid "Comments from developer"
+msgstr ""
+
+#: repository/templates/my_repositories.html:16
+msgid "tutorial/repositories.html"
+msgstr ""
+
+#: repository/templates/my_repositories.html:69
+msgid "Change Policy"
+msgstr ""
+
+#: repository/templates/my_repositories.html:72
+msgid "Update VNFD"
+msgstr ""
+
+#: repository/templates/my_repositories.html:80
+msgid "Policy Update"
+msgstr ""
+
+#: repository/templates/my_repositories.html:89
+msgid "Contract VNF"
+msgstr ""
+
+#: repository/templates/my_repositories.html:93
+#: repository/templates/my_repositories.html:101
+msgid "Specific"
+msgstr ""
+
+#: repository/templates/my_repositories.html:97
+msgid "See code source"
+msgstr ""
+
+#: repository/templates/my_repositories.html:126
+msgid "Submit a new VNFD file"
+msgstr ""
+
+#: repository/templates/my_repositories.html:133
+msgid "Describe the VNFD modifications"
+msgstr ""
+
+#: repository/templates/my_repositories.html:141
+msgid "Send VNFD"
+msgstr ""

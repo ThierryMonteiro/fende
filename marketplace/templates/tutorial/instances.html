@@ -1,0 +1,86 @@
+<div class="p-3">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                In the Instances page, you can manage all VNFs instantiated. Besides, you can see details about each instance available, such as IP address and VNF status (i.e., Running, Stopped or Paused). In the last column of the Instances table, you can use a set of options related to specific VNF instances.
+            </p>
+            <p>
+                Navigate through the items below to obtain information about each available action.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+             <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li class="active">
+                    <a href="#tab-instance-r1" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">1</span>Restart</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r2" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">2</span>Stop</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r3" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">3</span>Delete</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r4" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">4</span>Update</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r5" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">5</span>Resize Allocation</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r6" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">6</span>Info</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r7" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">7</span>Statistics</a>
+                </li>
+                <li>
+                    <a href="#tab-instance-r8" data-toggle="tab"><span class="mr-3 badge bg-color-blueDark txt-color-white">8</span>Logs</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content border p-3">
+                <div class="tab-pane active" id="tab-instance-r1">
+                    <p>
+                        Restarts the selected instance. This action can be useful to apply new settings or when the instance appears to be misbehaving.
+                    </p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r2">
+                    <p>
+                        Stops the selected instance. When stopped, the instance will not process packets neither compose service chains.
+                    </p>
+                </div>
+
+                <div class="tab-pane" id="tab-instance-r3">
+                    <p>
+                        Removes the selected instance from the infrastructure. Once deleted, all customized settings of the VNF will be lost. A new instance with standard configurations can be created in the VNF page.
+                    </p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r4">
+                    <p>
+                        This option updates the descriptors of the selected VNF instance.
+                    </p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r5">
+                    <p>
+                        This action allows the customer to set a new amount of resources to be used for supply the customer demands (e.g., memory, CPUs, and disk). The maximum amount of resources available is defined according to the contracted plan.
+                    </p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r6">
+                    <p>
+                        Shows detailed information about the selected instance and respective VNF repository.
+                    </p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r7">
+                    <p>
+                    Shows real-time statistics about the selected instance. These statistics include the resources being used by the instance (i.e., CPU, memory, and disk) and the number of packets being processed(transmitted and received). It is useful for performance analysis and network management activities.</p>
+                </div>
+                <div class="tab-pane" id="tab-instance-r8">
+                    <p>
+                        Shows relevant low-level operational information about the life cycle of the selected instance. It includes all records from the execution until the instance be removed from the infrastructure.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

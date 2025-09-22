@@ -1,0 +1,154 @@
+{% extends "marketplace_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load advanced_inputs %}
+{% load services %}
+{% block top_service %}active{% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Marketplace:sfc_construct' %}">{{ title_page }}</a></li>
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+    {% fende_widget location='start' id='contruct_service' title=title_page %}
+        <form class="row" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="form-group col-sm-12">
+                <label>VNF Path:</label>
+                <select multiple class="select2" placeholder="Tags" name="vnfs_path" disabled>
+                    {% for id, vnf in request.GET.vnfs|get_vnfs %}
+                        <option selected
+                                value="{{ vnf }}{{ forloop.counter }}">{{ vnf }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {% for id, vnf in request.GET.vnfs|get_vnfs %}
+                <input type="hidden" name="vnf-{{ forloop.counter }}" value="{{ id }}">
+                {% if forloop.last %}
+                    <input type="hidden" name="vnfs-count" value="{{ forloop.counter }}">
+                {% endif %}
+            {% endfor %}
+
+            <div class="form-group col-sm-8">
+                <label>{{ form.sfc_name.label }}</label>
+                {{ form.sfc_name }}
+                {% if form.sfc_name.errors %}
+                    <label class="error">
+                        {% for error in form.sfc_name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+            <div class="form-group col-sm-4">
+                <label>{{ form.institution.label }}</label>
+                {{ form.institution }}
+                {% if form.institution.errors %}
+                    <label class="error">
+                        {% for error in form.institution.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+            <div class="form-group col-sm-3">
+                <label>{{ form.version.label }}</label>
+                {{ form.version }}
+                {% if form.version.errors %}
+                    <label class="error">
+                        {% for error in form.version.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+            <div class="form-group col-sm-3">
+                <label>{{ form.price.label }}</label>
+                {{ form.price }}
+                {% if form.price.errors %}
+                    <label class="error">
+                        {% for error in form.price.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+            <div class="form-group col-sm-3">
+                <label>{{ form.category.label }}</label>
+                {{ form.category }}
+                {% if form.category.errors %}
+                    <label class="error">
+                        {% for error in form.category.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+            <div class="form-group col-sm-3">
+                <label>{{ form.tag.label }}</label>
+                {{ form.tag }}
+            </div>
+            <div class="form-group col-sm-12">
+                <label>{{ form.full_description.label }}</label>
+                {{ form.full_description }}
+                {% if form.full_description.errors %}
+                    <label class="error">
+                        {% for error in form.full_description.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                {% endif %}
+            </div>
+
+            {% for field in form %}
+                {% if forloop.counter > 7 %}
+                    {% if field.label == 'Repository' %}
+                        <div class="hidden">
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        <div class="form-group col-sm-4">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <label class="error">
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </label>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div class="form-group col-sm-12">
+                <div class="border pt-3 pb-2 px-4">
+                    <label for="imageInput">Prints:</label>
+                    <input type="file" id="imageInput" name="files" multiple="multiple">
+                    <p class="help-block">{% trans 'Select one or more files to create a slide' %}</p>
+                    <input type="hidden" name="countImage" id="countImage" value="0">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-success w-100">Save</button>
+            </div>
+        </form>
+    {% fende_widget location='end' %}
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+<!-- SCRIPTS ADICIONAIS -->
+{% block extra_footer %}
+    <script type="text/javascript">
+        /*Contagem de arquivos selecionados*/
+        $('input#imageInput').change(function () {
+            var files = $(this)[0].files;
+            $('#countImage').val(files.length);
+        });
+        /*Borda arquivos obrigatórios*/
+        $(document).ready(function () {
+            $('.error').siblings('input').css({"border": "1px solid red"});
+            $('.error').siblings('.select2').children('.select2-choice').css({"border": "1px solid red"});
+        });
+    </script>
+{% endblock %}
+<!-- SCRIPTS ADICIONAIS -->

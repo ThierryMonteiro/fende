@@ -1,0 +1,26 @@
+{% extends "bases/review_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href="{% url 'Repository:review_details' %}{{ repository.request_id }}">Repository Details</a></li>
+{% endblock %}
+
+{% block page_content %}
+
+{% fende_widget location='start' widget_type='default' id='details' title=_("Details") size='long'%}
+
+<html>
+<p> <strong>{% trans "VNF Name:" %}</strong> {{ repository.VNF_name }} </p>
+<p> <strong>{% trans "Developer:" %}</strong> {{ repository.developer }} </p>
+<p> <strong>{% trans "Institution:" %}</strong> {{ repository.institution }} </p>
+<p> <strong>{% trans "New version:" %}</strong> {{ repository.version }} </p>
+<p> <strong>{% trans "Category:" %}</strong> {{ repository.category }} </p>
+<p> <strong>{% trans "Abstract:" %}</strong> {{ repository.abstract }} </p>
+<p> <strong>{% trans "Description:" %}</strong> {{ repository.full_description }} </p>
+<p> <strong>{% trans "Repository:" %}</strong> {{ repository.link }} </p>
+</html>
+
+
+{% endblock page_content %}

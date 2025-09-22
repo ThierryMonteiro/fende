@@ -1,0 +1,216 @@
+{% extends "marketplace_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load advanced_inputs %}
+{% block top_management %}active{% endblock %}
+{% block top_purchased %}active{% endblock %}
+{#{% load services %}#}
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:deploy' service.id %}">Deploy {{ service.sfc_name }}</a></li>
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+{% fende_widget location='start' id='deploy_service' title=_("Deploy Service") %}
+<form class="row" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="form-group col-sm-12">
+        <label>VNF Path:</label>
+        <select multiple class="select2 w-100" placeholder="Path VNFS" name="vnfs_path" disabled>
+            {% for vnf in service.vnfs.all %}
+            <option selected value="{{ vnf.id }}{{ forloop.counter }}">{{ vnf.catalog.VNF_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
+    
+    <div id="name" class="form-group col-md-12 col-sm-6 col-xs-6">
+        <label>{{ form.name.label }}</label>
+        {{ form.name.help_text|safe }}
+        {{ form.name }}
+    </div>    
+    
+    <div class="form-group col-md-12 col-sm-12 col-12">
+        <input id="id_select_0" name="select" value="infrastructure" checked type="radio" onchange="select_infra()">
+        <span style="padding-right: 20px">{% trans "Infrastructure" %}</span>
+        <input id="id_select_1" name="select" value="parameter" onchange="select_parameter()" type="radio">
+        <span>Parameter</span>
+    </div>
+    
+    <div id="infra" class="form-group col-md-6 col-sm-6 col-xs-6">
+        <label>{{ form.infrastructure.label }}</label>
+        {{ form.infrastructure.help_text|safe }}
+        {{ form.infrastructure }}
+    </div>
+    
+    <div id="parameter" hidden class="form-group col-md-6 col-sm-6 col-xs-6">
+        <label>{{ form.parameter.label }}</label>
+        {{ form.parameter.help_text|safe }}
+        {{ form.parameter }}
+    </div>
+    
+    <!-- <div class="form-group col-md-6 col-sm-6 col-xs-6 infras" data-infra="2,3"> -->
+    <div class="form-group col-md-6 col-sm-6 col-xs-6 infras">
+        <label>{{ form.type.label }}</label>
+        {{ form.type.help_text|safe }}
+        {{ form.type }}
+    </div>
+
+    <div id="expose_port" class="form-group col-md-6 col-sm-6 col-xs-6">
+        <label>{{ form.expose_port.label }}</label>
+        {{ form.expose_port.help_text|safe }}
+        {{ form.expose_port }}
+    </div>
+    
+    <!-- Tab documentos adicionais -->
+    <!-- <div role="tabpanel" class="col-sm-12 tab-pane formset-tab infras" id="tab_documento" data-infra="1,2"> -->
+    <div role="tabpanel" class="col-sm-12 tab-pane formset-tab infras" id="tab_documento">
+        {% include 'formset/formset.html' with title="ACL" acls=acls %}
+    </div>
+    
+    <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary wait-clock w-100">{% trans "Deploy" %}</button>
+    </div>
+</form>
+{% fende_widget location="end" %}
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+<!-- SCRIPTS ADICIONAIS -->
+{% block extra_footer %}
+<script src="{% static 'js/formset.js' %}"></script>
+<script>
+    $('#id_infrastructure').change(function(){
+        var infra = $(this).val();
+        $('div[data-infra]').each(function(){
+            var data = $(this).attr('data-infra').split(",");
+            if(data.indexOf(infra) > -1){
+                $(this).removeClass('hide');
+            } else {
+                $(this).addClass('hide');
+            }
+        });
+    });
+
+    /*Functions para div de ajuda do acl */
+    function acl_help( ){
+        var target = event.target;
+        /*Recebe o tipo (CRITERION OU VALUE)*/
+        var help_type = $(target).data('type');
+        
+        /*salva as divs para reset do onclick*/
+        var aclCriterionDiv = $(target).parents('.row').children('.Criterion');
+        var aclValueDiv = $(target).parents('.row').children('.Value');
+        
+        /*Reset onclick se clicar no outro info da mesma linha */
+        $(aclCriterionDiv).find('.form-line i').attr("onclick","acl_help()");
+        $(aclValueDiv).find('.form-line i').attr("onclick","acl_help()");
+        
+        /*Recebe valor do select*/
+        var CriterionVal = $(aclCriterionDiv).find('select').val();
+        
+        /*Recebe valor em HTML da div referente ao select*/
+        var CriterionHtml = $('.acl-output #' + help_type + '-' + CriterionVal).html();
+        
+        /*Adiciona a div de ajuda o HTML completo*/
+        $(target).parents('.row').children('.acl-output-help').empty().append(CriterionHtml);
+        
+        /*Altera function do click*/
+        $(target).attr("onclick","acl_help_empty()");
+    }
+    
+    /*Reseta todos os onclick e limpa as divs de ajuda*/
+    function acl_help_new_form(){
+        $('.form-line i').attr("onclick","acl_help()");
+        $('.acl-output-help').empty();
+    }
+    
+    /*Reseta as divs de ajuda da linha e altera o onclick para abrir novamente*/
+    function acl_help_empty(){
+        var target = event.target;
+        var help_type = $(target).data('type');
+        $(target).parents('.row').children('.acl-output-help').empty();
+        $(target).attr("onclick","acl_help( )");
+    }
+    /*Functions para div de ajuda do acl */
+    /*Functions para placeholder acl*/
+    $(".Criterion select").change(function () {
+        var Selectplaceholder = $(this).val();
+        var placeholderText = $('.acl-placeholder #'+Selectplaceholder).text();
+        $(this).parents('.row').children('.Value').find('input').attr("placeholder", placeholderText);
+    });
+    
+    /*Functions para placeholder acl*/
+    
+    
+    function select_infra() {
+        document.getElementById('infra').hidden = false;
+        document.getElementById('parameter').hidden = true;
+    }
+    
+    function select_parameter() {
+        document.getElementById('infra').hidden = true;
+        document.getElementById('parameter').hidden = false;
+    }
+    
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input').each(function () {
+            var teste = $(this).attr('name');
+            var name = teste.replace('-' + (total - 1) + '-', '-' + total + '-');
+            var id = 'id_' + name;
+            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        var conditionRow = $('.form-row:not(:last)');
+        conditionRow.find('.btn.add-form-row')
+        .removeClass('btn-success').addClass('btn-danger')
+        .removeClass('add-form-row').addClass('remove-form-row')
+        .html('<span class="fal fa-minus" aria-hidden="true"></span>');
+        return false;
+    }
+    
+    function deleteForm(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.form-row').remove();
+            var forms = $('.form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    
+    $(document).on('click', '.add-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('.form-row:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.remove-form-row', function (e) {
+        e.preventDefault();
+        deleteForm('form', $(this));
+        return false;
+    });
+</script>
+
+
+{% endblock %}
+<!-- SCRIPTS ADICIONAIS -->

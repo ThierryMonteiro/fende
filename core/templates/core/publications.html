@@ -1,0 +1,38 @@
+{% extends "core/template.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="container">
+            <div class="web-title mt-10">
+                <h1>{% trans "Publications" %}</h1>
+            </div>
+            <ol>
+                <li>L. Bondan, M. F. Franco, L. Marcuzzo, G. Venancio, R. L. Santos, R. J. Pfitscher, E. J. Scheid, B. Stiller, F. De Turck, E. P. Duarte, A. E. Schaeffer-Filho, C. R. P. Santos, and L. Z. Granville., <b>"FENDE: Marketplace-Based Distribution, Execution, and Life Cycle Management of VNFs"</b>, IEEE Communications Magazine, 57(1): January 2019, pp1389-1406. - <a href="https://ieeexplore.ieee.org/document/8613268/ ">Paper</a></li>
+                <li>Garcia, V. F. ; Tavares, T. N.; Marcuzzo, L. C.; Raniery, C.; Venancio, G.; Procopio, E.; Franco, Muriel F.; Bondan, L.; Granville, L. Z.; Schaeffer-Filho, A.; Turck, F., <b>"On the Design and Development of Emulation Platforms for NFV-based Infrastructures"</b>, International Journal of Grid and Utility Computing (IJGUC), 2019. To appear.</li>
+                <li>Vênancio, G.; Garcia, V. F.; Marcuzzo, L. C.; Tavares, T. N.; Franco, M. F.; Bondan, L.; Schaeffer-Filho, A.; Raniery, C.; Granville, L. Z.; Procópio, E., <b>"Beyond VNFM: Filling the Gaps of the ETSI VNF Manager to Fully Support VNF Lifecycle Operations"</b>, International Journal of Network Management (IJNM), 2019. To appear.</li>
+                <li>Huff, A.; Venâncio, G.; Marcuzzo, L.; Garcia, V.; Santos, C.; Duarte, E., <b>"Uma abordagem Holística para a Definição de Service Chains Utilizando Click-on-OSv sobre Diferentes Plataforms NFV"</b>, 2018 Simpósio Brasileiro de Redes de Computadores e sistemas Distribuídos (SBRC) - <a href="http://ojs.sbc.org.br/index.php/sbrc/article/view/2489/2453">Paper</a> </li>	   	   
+                <li>Souza, G.; Garcia, V.; Marcuzzo, L.; Tavares, T.; Franco, M.; Bondan, L.; Schaeffer-Filho, A.; Santos, C.; Granville, L.; Duarte, E., <b>"Simplificando o Gerenciamento do Ciclo de Vida de Funções Virtualizadas de Rede, Workshop de Gerência e Operação de Redes e Serviços"</b>, 2018 Workshop de Gerência e Operações de Redes e Serviços (WGRS) - <a href="http://ojs.sbc.org.br/index.php/wgrs/article/view/2365">Paper</a>/<a href="http://coral.ufsm.br/gt-fende/files/2018-wgrs-slides.pdf">Slides</a><b> - Best Paper</b></li>	   
+                <li> Bondan, L.; Franco, M.; Venâncio, G.; Marcuzzo, L.; Schneider, C.; Santos, C.; Duarte, E,; Schaeffer-Filho, A.; Granville, L., <b>"FENDE: Marketplace and Federated Ecosystem for the Distribution and Execution of VNF"</b>, 2018 ACM SIGCOMM - Demos - To appear</li>	   
+                <li>Garcia, V. F.; Gaiardo, G.F.; Marcuzzo. L.C.; Nunes, R. C.; Santos, C.R.P., <b>"DeMONS: A DDoS Mitigation NFV Solution"</b>, 2018 IEEE International Conference on Advanced Information Networking and Applications (AINA) - To appear</li>	   
+                <li>Tavares, T.; Marcuzzo, L.; Garcia, V.; Venâncio, G.; Franco, M.; Bondan, L.; De Turck, F.; Granville, L. Z.; Santos, C. R. P. D.; Elias P. Duarte, J. & Schaeffer-Filho, A. E., <b>"NIEP: NFV Infrastructure Emulation Platform"</b>, 2018 IEEE International Conference on Advanced Information Networking and Applications (AINA) - To appear</li>
+                <li>Marcuzzo et al., <b>"Click-on-OSv: A platform for running Click-based middleboxes"</b> 2017 IFIP/IEEE Symposium on Integrated Network and Service Management (IM), Lisbon, 2017, pp. 885-886 - <a href="https://ieeexplore.ieee.org/document/7987396/">Paper</a></li>
+            </ol>	
+            <br>
+            <h1>{% trans "Presentations" %}</h1>
+            <ul>
+                <li>Platform Demonstration Videos (Brazilian Portuguese version) <a href="https://www.youtube.com/watch?v=6TvXrMC38RM">(Marketplace)</a> - <a href="https://www.youtube.com/watch?v=cWH46tQp1CY">(VNF Server)</a> - <a href="https://www.youtube.com/watch?v=XevHzdLVRb8">(SIGCOMM Submitted Demo)</a></li>
+                <li>Technology Transfer Workshop - Porto Alegre, RS, Brasil, March 2018 (Brazilian Portuguese version) <a href="http://coral.ufsm.br/gt-fende/files/WorkshopTrans.zip">(Slides)</a></li>
+                <li>Workshop de GTs - Webconf, Sept. 2017 (Brazilian Portuguese version) <a href="http://coral.ufsm.br/gt-fende/files/ApresentacaoGT-Setembro2017.pptx">(Slides)</a></li>
+                <li>18º Workshop RNP (WRNP) - Belém, PA, Brazil, 2017 (Brazilian Portuguese version) <a href="http://wrnp.rnp.br/sites/wrnp2017/files/08_wrnp2017_gt_fende_design.pdf">(Poster)</a> <a href="https://eventos.rnp.br/sites/default/files/activity/activity-presentation/gt_fende-wrnp2017_lightningtalks.pdf">(Slides)</a></li>
+            </ul>	
+            <br>
+            <h1>{% trans "Reports" %}</h1>
+            <ul>   
+                <li>Guidelines to Prototype Configure and Install, Feb. 2018 (Brazilian Portuguese version) <a href="http://coral.ufsm.br/gt-fende/files/GT-FENDE_Manual_Instalacao.pdf">(PDF)</a></li>
+                <li>Prototype Results and Evaluation, Jan. 2018 (Brazilian Portuguese version) <a href="http://coral.ufsm.br/gt-fende/files/GT-FENDE_Avaliacao.pdf">(PDF)</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

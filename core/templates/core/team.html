@@ -1,0 +1,50 @@
+{% extends "core/template.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="container">
+            <div class="web-title mt-10">
+                <h1>{% trans "Team" %}</h1>
+            </div>
+            <p align="justify">{% trans "This project have a team with vast experience in Network Management and Network Functions Virtualization (NFV). Our team is composed by four PhD. researchers ," %} <a href="http://</a>www.inf.ufsm.br/~csantos">Carlos Raniery Paula dos Santos</a>,  <a href="http://www.inf.ufrgs.br/~alberto/">Alberto Egon Schaeffer-Filho</a>, <a href="http://www.inf.ufrgs.br/~granville/">Lisandro Zambenedetti Granville</a>, and <a href="http://www.inf.ufpr.br/elias/">Elias Procópio Duarte Junior</a>. {% trans "Besides, there are postgraduate and ungraduate students involved in the project." %}  </p>
+            <h2>{% trans "Coordinator" %}</h2>
+             <ul class="fa-ul">
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.inf.ufsm.br/~csantos/">&nbsp;Carlos Raniery Paula dos Santos (UFSM)</a></li>
+            </ul>
+
+            <h2>{% trans "Assistant Coordinator" %}</h2>
+            <ul class="fa-ul">
+            <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.inf.ufrgs.br/~alberto/">&nbsp;Alberto Egon Schaeffer-Filho (UFRGS)</a></li>      
+            </ul>
+
+            <h2>{% trans "Collaborators" %}</h2>
+             <ul class="fa-ul">
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.inf.ufpr.br/elias/">&nbsp;Elias Procópio Duarte Junior (UFPR)</a></li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.inf.ufrgs.br/~granville/">&nbsp;Lisandro Zambenedetti Granville (UFRGS)</a></li>
+            </ul>
+
+            <h2>{% trans "Team" %}</h2>
+            <ul class="fa-ul">
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/5417317635081894">&nbsp;Muriel Figueredo Franco ({% trans "Manager" %})</a> - {% trans "PhD. Student in Computer Science" %} (UZH)</li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/0529766486476240">&nbsp;Lucas Bondan ({% trans "Collaborator" %})</a> - {% trans "PhD. Student in Computer Science" %} (UFRGS)</li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/0935870057685560">&nbsp;Leonardo da Cruz Marcuzzo</a> - {% trans "MSc. Student in Computer Science" %} (UFSM) </li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/7019530835739204">&nbsp;Giovanni Venâncio de Souza</a> - {% trans "PhD. Student in Computer Science" %} (UFPR)</li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/5223852555650032">&nbsp;Cassiano Andrei Schneider</a> - {% trans "Computer Science Student" %} (UFSM)</li> 
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/2104313332313632">&nbsp;Marcelo Menezes Silva</a> - {% trans "Information Systems Student" %} (UFSM)</li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://lattes.cnpq.br/6497703572812050">&nbsp;José Wilson Vieira Flauzino</a> - {% trans "MSc. Student in Computer Science" %} (UFPR)</li>
+            </ul>
+
+            <h2>{% trans "Partners" %}</h2>
+            <ul class="fa-ul">
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.csg.uzh.ch/csg/en/staff/stiller.html">&nbsp;Burkhard Stiller (UZH/Switzerland)</a></li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.ic.unicamp.br/~edmundo/">&nbsp;Edmundo Madeira (UNICAMP/Brazil)</a></li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="https://www.ugent.be/ea/idlab/en/members/filip-de-turck.htm">&nbsp;Filip de Turck (Ghent/Belgium)</a></li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="http://www.great.ufc.br/index.php/o-great/quem-somos/professores-pesquisadores/15-rossana-maria-de-castro-andrade">&nbsp;Rossana Maria de Castro (UFC/Brazil)</a></li>
+                <li><i class="fa fa-chevron-right pr-3"></i><a href="https://www.it.pt/Members/Index/357">&nbsp;Rui Aguiar (Aveiro/Portugal)</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

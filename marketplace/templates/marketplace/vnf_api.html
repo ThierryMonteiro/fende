@@ -1,0 +1,127 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block top_sfc %}active{% endblock %}
+{% block top_management %}active{% endblock %}
+{% load vnf_api %}
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="breadcrumb-item"><a>{% trans "VNF_API" %}</a></li>
+{% endblock %}
+{% block top_catalogvnf %}active{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+    {% fende_widget location='start' id='publish' title=_("VNF API") icon="fa-bars" %}
+        <div class="accordion" id="parent-vnf-api">
+            {%if management %}
+                {% for item in management %}
+                    <div class="card">
+                        <div class="card-header" id="collapse-{{ forloop.counter }}">
+                            <a href="javascript:void(0);" class="card-title collapsed p-0" data-toggle="collapse" data-target="#collapse-api-{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse-api-{{ forloop.counter }}">
+                                <div class="d-flex justify-content-between w-100 method-{{ item.methodType|lower }}"> <!-- METHOD -->
+                                    <span class="d-flex">
+                                        <span class="py-2 method-api">{{ item.methodType }}</span> <!-- METHOD -->
+                                        <span class="my-auto pl-4">{{ item.method }}</span> <!-- NOME -->
+                                    </span>
+                                    <span class="my-auto pr-3">
+                                        <span>{{ item.description }}</span> <!-- DESCRIÇÂO -->
+                                        <span class="ml-auto">
+                                            <span class="collapsed-reveal"> 
+                                                <i class="fal fa-minus-circle text-danger"></i>
+                                            </span>
+                                            <span class="collapsed-hidden">
+                                                <i class="fal fa-plus-circle text-success"></i>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="collapse-api-{{ forloop.counter }}" class="collapse" aria-labelledby="collapse-{{ forloop.counter }}" data-parent="#parent-vnf-api">
+                            <div class="card-body">
+                                <div class="row">
+                                    {% if item.parameters %}
+                                        <h5 class="col-12">{% trans "Configuration" %}:</h5>
+                                        {% for parameter in item.parameters %}
+                                            <div class="form-group col-6">
+                                                <label for="{{ item.method }}{{ parameter }}">{{ parameter }}</label>
+                                                <input required name="{{ parameter }}" class="form-control"
+                                                        id="{{ item.method }}{{ parameter }}" placeholder="{{ parameter }}">
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <div class="col-12">
+                                        <button class="save btn btn-success w-100" onclick="api('{{ item.call }}', '{{ item.method }}')">{% if item.parameters %}Send{% else %}{{ item.call }}{% endif %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% fende_widget location='end' %}
+{% endblock %}
+
+{% block extra_footer %}
+    <script>
+        $(function () {
+            $('#id_method').change(function () {
+                $('.all_method').addClass('hide');
+                $('.' + $(this).val()).removeClass('hide');
+            });
+        });
+
+        function api(call, method, msg = 'Loading') {
+            wClock(msg);
+            var list = '{{ management|escapejs }}';
+            list = list.replace(/u'/g, "'");
+            list = list.replace(/'/g, '"');
+            console.log(list);
+            list = JSON.parse(list);
+            var link = 'http://' + '{{ infra_ip }}' + ':' + '{{ gateway_port }}' + '/custom/' + '{{ link }}' + call;
+            for (i = 0; i < list.length; i++) {
+                if (list[i]['method'] === method) {
+                    for (j = 0; j < list[i]['parameters'].length; j++) {
+                        id = '#' + method + list[i]['parameters'][j];
+                        link = link + $(id).val() + '/'
+                    }
+
+                }
+            }
+            $.ajax({
+                url: link,
+                method: "GET",
+                success: function (response) {
+                    setTimeout(function() {
+                        if(response.content.rules){
+                            var content = response.content.rules.replace('\n', '<br>');
+                        } else {
+                            var content = JSON.stringify(response.content);
+                        }
+                        console.log(response);
+                        $('.wait-clock-modal.show .modal-content').children('.wait-text').removeClass('text-center').empty().append('<p><pre>' + content + '</pre></p>');
+                        $('.wait-clock-modal.show .modal-content').children('.progress').hide();
+                        $('.wait-clock-modal.show .modal-content').children('.modal-footer').remove();
+                        $('.wait-clock-modal.show .modal-content').append('<div class="modal-footer pb-0"><button type="button" class="btn btn-success" data-dismiss="modal">{% trans "Close" %}</button></div>');
+                    }, 500);
+                },
+                error: function (err) {
+                    setTimeout(function() {
+                        if(err.content.rules){
+                            var content = err.content.rules.replace('\n', '<br>');
+                        } else {
+                            var content = JSON.stringify(err.content);
+                        }
+                        console.log(err);
+                        $('.wait-clock-modal.show .modal-content').children('.wait-text').removeClass('text-center').empty().append('<h1>' + content + '</h1>');
+                        $('.wait-clock-modal.show .modal-content').children('.progress').hide();
+                        $('.wait-clock-modal.show .modal-content').children('.modal-footer').remove();
+                        $('.wait-clock-modal.show .modal-content').append('<div class="modal-footer pb-0"><button type="button" class="btn btn-success" data-dismiss="modal">{% trans "Close" %}</button></div>');
+                    }, 500);
+                }
+            });
+        }
+    </script>
+{% endblock %}

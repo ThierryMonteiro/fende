@@ -1,0 +1,187 @@
+{% extends "marketplace_base.html" %}
+{% load advanced_inputs %}
+{% load static %}
+{% load i18n %}
+{% block top_service %}active{% endblock %}
+{% block breadcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'Marketplace:catalog_vnfs' %}">{% trans "Catalog VNFs" %}</a></li>
+{% endblock %}
+{% block top_catalogvnf %}active{% endblock %}
+<!-- CONTEUDO INTERNO -->
+{% block page_content %}
+{% fende_widget widget_type="no-padding" location='start' id='publish' title=_("Catalog VNFs") icon="fa-bars"%}
+{% if vnf_list %}
+<table id="tab1" class="table table-striped table-bordered table-hover" width="100%">
+    <thead>
+        <tr>
+            <th><i class="fa fa-fw fa-user txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "Developer" %}
+            </th>
+            <th data-hide="phone"><i
+                class="fa fa-fw  fa-tags txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "VNF Name" %}
+            </th>
+            <th><i class="fas fa-code-branch fa-fw txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "Version" %}
+            </th>
+            <th><i class="fa fa-fw fa-sitemap txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "Category" %}
+            </th>
+            <th><i class="fa fa-fw fa-desktop txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "Instances" %}
+            </th>
+            <th><i class="fa fa-fw fa-tasks txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                {% trans "Actions" %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Populando a tabela com informações da tabela Requests -->
+        {% for vnf in vnf_list %}
+        <tr>
+            <td>{{ vnf.developer }}</td>
+            <td>{{ vnf.VNF_name }}</td>
+            <td>{{ vnf.version }}</td>
+            <td>{{ vnf.category }}</td>
+            <td>{{ vnf.instances }}</td>
+            <td class="p-2 text-center">
+                <a href="javascript:void(0);" onClick="addvnf('{{ vnf.repository_id }}','{{ vnf.VNF_name }}');">
+                    <button type="button" class="btn w-100 btn-xs btn-success">{% trans "Add" %}</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1>
+    <center>{% trans "None VNF available." %}</center>
+</h1>
+{% endif %}
+{% fende_widget location='end' %}
+
+{% fende_widget widget_type="default" location='start' id='publish' title=_("VNFs Order")%}
+<div class="d-inline-flex w-100 py-2">
+    <ol id='list' class="d-inline-flex drag-and-drop"></ol>
+    <button class="ml-auto my-auto btn btn-sm btn-info create_path">{% trans "Submit" %}</button>
+</div>
+{% for vnf in vnf_list %}
+<div class="reorder-vnf" id="vnf-{{ vnf.repository_id }}" style="display: none;">
+    <hr>
+    <h5>{% trans "VNF Information:" %}</h5>
+    <ul class="pl-5 m-0">
+        <li><strong>{% trans "VNF Name:" %}</strong> {{ vnf.VNF_name }}</li>
+        <li><strong>{% trans "Developer:" %}</strong> {{ vnf.developer }}</li>
+        <li><strong>{% trans "Institution:" %}</strong> {{ vnf.institution }}</li>
+        <li><strong>{% trans "Version:" %}</strong> {{ vnf.version }}</li>
+        <li><strong>{% trans "Category:" %}</strong> {{ vnf.category }}</li>
+        <li><strong>{% trans "Abstract:" %}</strong> {{ vnf.abstract }}</li>
+        <li><strong>{% trans "Description:" %}</strong> {{ vnf.full_description }}</li>
+        <li><strong>{% trans "Repository:" %}</strong> <a href="{{ vnf.link }}">{{ vnf.link }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+{% fende_widget location='end' %}
+
+{% endblock %}
+<!-- CONTEUDO INTERNO -->
+
+<!--SCRIPT TABELAS -->
+{% block table %}
+{% fende_widget location='table' %}
+{% endblock %}
+<!--SCRIPT TABELAS -->
+
+<!-- SCRIPTS ADICIONAIS -->
+{% block extra_footer %}
+<script>
+    function addvnf(id, name) {
+        var ol = document.getElementById("list");
+        var li = document.createElement("li");
+        var i = document.createElement("i");
+        var p = document.createElement("p");
+        i.setAttribute("class", "removeVnf ni ni-close p-2");
+        i.setAttribute("data-infovnf", "vnf-" + id);
+        p.setAttribute("class", "p-2 m-0 d-inline");
+        p.setAttribute("onclick", "infoVnf('vnf-" + id + "')");
+        li.setAttribute("class", "vnf-" + id);
+        li.setAttribute("id", id);
+        p.appendChild(document.createTextNode(name));
+        li.appendChild(p);
+        li.appendChild(i);
+        ol.appendChild(li);
+    }
+    
+    $('.tooltip-demo').tooltip({
+        selector: "a[rel=tooltip]"
+    });
+    
+    $('.create_path').click(function () {
+        var _vnfs = [];
+        $(".drag-and-drop li").each(function () {
+            _vnfs.push(
+            [$(this).attr('id'), $(this).text()]
+            );
+        });
+        postAndRedirect('{% url 'Marketplace:sfc_construct' %}', {'vnfs': _vnfs});
+    });
+    
+    function postAndRedirect(url, postData) {
+        var postFormStr = "<form method='GET' action='" + url + "'>\n";
+            for (var key in postData) {
+                if (postData.hasOwnProperty(key)) {
+                    postFormStr += "<input type='hidden' name='" + key + "' value='" + postData[key] + "'></input>";
+                }
+            }
+            
+            postFormStr += "</form>";
+            var formElement = $(postFormStr);
+            $('body').append(formElement);
+            if(postData.vnfs.length === 0) {
+                alert('Select any VNF to Path');
+            } else{
+                $(formElement).submit();
+            }
+        }
+        
+        $(document).on("click", ".removeVnf", function () {
+            var id_vnf = $(this).data('infovnf');
+            $('#' + id_vnf).hide();
+            $(this).closest("li").remove();
+        });
+        
+        function infoVnf($id_vnf) {
+            $(".drag-and-drop>li>p").removeClass('active');
+            $("." + $id_vnf + " p").addClass('active');
+            $(".reorder-vnf").hide();
+            var x = document.getElementById($id_vnf);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        
+        var group = $("ol.drag-and-drop").sortable({
+            group: 'drag-and-drop',
+            isValidTarget: function ($item, container) {
+                if ($item.is(".highlight"))
+                return true;
+                else
+                return $item.parent("ol")[0] == container.el[0];
+            },
+            onDrop: function ($item, container, _super) {
+                $('#serialize_output').text(
+                group.sortable("serialize").get().join("\n"));
+                _super($item, container);
+            },
+            serialize: function (parent, children, isContainer) {
+                return isContainer ? children.join() : parent.text();
+            },
+            tolerance: 6,
+            distance: 10
+        });
+    </script>
+    {% endblock %}
+    <!-- SCRIPTS ADICIONAIS -->

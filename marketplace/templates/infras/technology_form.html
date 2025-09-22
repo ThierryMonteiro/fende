@@ -1,0 +1,105 @@
+{% load i18n %}
+<!-- openstack -->
+<div class="col-md-12 my-2 openstack all_infra hide">
+        <div class="row range">
+            <label><h4 class="fw-700">{% trans "Authentication" %}:</h4></label>
+            <div class="form-group col-sm-12">
+                <label>{{ form.tenant.label }}</label>
+                {{ form.tenant }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.tenant.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>{{ form.username.label }}</label>
+                {{ form.username }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.username.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>{{ form.password.label }}</label>
+                {{ form.password }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.password.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- openstack -->
+    <div class="col-md-12 my-2 cloudstack all_infra hide">
+        <div class="row range">
+            <label><h4 class="fw-700">{% trans "Authentication" %}:</h4></label>
+            <div class="form-group col-sm-6">
+                <label>{{ form.zone_id.label }}</label>
+                {{ form.zone_id }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.zone_id.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>{{ form.host_id.label }}</label>
+                {{ form.host_id }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.host_id.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>{{ form.api_key.label }}</label>
+                {{ form.api_key }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.api_key.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>{{ form.secret_key.label }}</label>
+                {{ form.secret_key }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.secret_key.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- cloudstack -->
+    
+    <!-- Kubernetes -->
+    <div class="col-md-12 my-2 kubernetes all_infra hide">
+        <div class="row range">
+            <label><h4 class="fw-700">{% trans "Configuration" %} / {% trans "Authentication" %}:</h4></label>
+            <!-- TODO FORM -->
+            <div class="form-group col-sm-6">
+                <label>FENDE Gateway Port</label>
+                {{ form.gateway_port }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.gateway_port.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group col-sm-6">
+                <label>Token</label>
+                {{ form.token }}
+                <ul class="parsley-errors-list filled">
+                    {% for error in form.token.errors %}
+                    <li class="parsley-required">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- TODO FORM -->
+        </div>
+    </div>
+    <!-- Kubernetes -->

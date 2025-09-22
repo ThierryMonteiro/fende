@@ -1,0 +1,224 @@
+{% load static %}
+{% load user_tags %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}GT-FENDE{% endblock %}</title>
+    <meta name="description" content="Blank">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- base css -->
+    <link rel="stylesheet" href="{% static 'smart-admin/css/vendors.bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'smart-admin/css/app.bundle.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/app.css' %}">
+</head>
+<body class="mod-bg-1">
+    <!-- BEGIN Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <!-- BEGIN Left Aside -->
+            <aside class="page-sidebar">
+                <div class="page-logo">
+                    <a href="#" class="page-logo-link press-scale-down d-flex align-items-center" data-toggle="modal" data-target="#modal-shortcut">
+                        <img src="{% static 'img/logo.png' %}" alt="GT-FENDE">
+                        <span class="page-logo-text mr-1">GT-FENDE</span>
+                        <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                    </a>
+                </div>
+                <nav id="js-primary-nav" class="primary-nav" role="navigation">
+                    <ul id="js-nav-menu" class="nav-menu">
+                        <li>
+                            <a href="#" title="Application Intel" data-filter-tags="application intel">
+                                <i class="fal fa-info-circle"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Application Intel</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="intel_introduction.html" title="Introduction" data-filter-tags="application intel introduction">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel_introduction">Introduction</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="intel_privacy.html" title="Privacy" data-filter-tags="application intel privacy">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel_privacy">Privacy</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="settings_how_it_works.html" title="How it works" data-filter-tags="theme settings how it works">
+                                <i class="fal fa-info-circle"></i>
+                                <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">How it works</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <!-- END Left Aside -->
+            <div class="page-content-wrapper">
+                <!-- Page Header -->
+                <header class="page-header" role="banner">
+                    <!-- Buttom hide menu -->
+                    <div class="hidden-md-down position-relative">
+                        <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Hide Navigation">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="hidden-lg-up">
+                        <a href="#" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <!-- END Buttom hide menu -->
+                    <div class="ml-auto d-flex">
+                        <div>
+                            <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <i class="fal fa-cog"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+                                <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+                                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                                        <div class="info-card-text">
+                                            <div class="fs-lg text-truncate text-truncate-lg">GT-FENDE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
+                                    <span data-i18n="drpdwn.settings">Account Settings</span>
+                                </a>
+                                <div class="dropdown-multilevel dropdown-multilevel-left">
+                                    <div class="dropdown-item">
+                                        Language
+                                    </div>
+                                    <div class="dropdown-menu">
+                                        <a href="#?lang=fr" class="dropdown-item active" data-action="lang" data-lang="pt">Português</a>
+                                        <a href="#?lang=en" class="dropdown-item" data-action="lang" data-lang="en">English (US)</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider m-0"></div>
+                                <a class="dropdown-item fw-500 pt-3 pb-3" href="page_login-alt.html">
+                                    <span data-i18n="drpdwn.page-logout">Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- END Page Header -->
+                <!-- BEGIN Page Content -->
+                <main id="js-page-content" role="main" class="page-content">
+                    <!-- BREADCRUMB -->
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
+                        <li class="breadcrumb-item">parent_1</li>
+                        <li class="breadcrumb-item">parent_2</li>
+                        <li class="breadcrumb-item active">Blank</li>
+                    </ol>
+                    <!-- BREADCRUMB -->
+                    <!-- PAGE TITLE -->
+                    <!-- <div class="subheader">
+                        <h1 class="subheader-title">Page</h1>
+                    </div> -->
+                    <!-- PAGE TITLE -->
+                    <!-- PAGE CONTENT -->
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div id="panel-1" class="panel">
+                                <div class="panel-hdr bg-fusion-400">
+                                    <h2>Panel</h2>
+                                    <div class="panel-toolbar">
+                                        <button class="btn btn-panel bg-transparent w-auto h-auto rounded-0 " data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse">
+                                            <i class="fal fa-window-minimize"></i>
+                                        </button>
+                                    </div>
+                                    <div class="panel-toolbar ml-2"><h5 class="m-0"><span class="badge badge-secondary">Help ?</span></h5>
+                                    </div>
+                                </div>
+                                <div class="panel-container show">
+                                    <div class="panel-content">
+
+                                        Text
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PAGE CONTENT -->
+                </main>
+                <!-- this overlay is activated only when mobile menu is triggered -->
+                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+                <!-- BEGIN Page Footer -->
+                <footer class="page-footer" role="contentinfo">
+                    <div class="d-flex align-items-center flex-1 text-muted">
+                        <span class="hidden-md-down">GT-FENDE - Web MarketPlace Application </span>
+                    </div>
+                    <div>
+                        <ul class="list-table m-0">
+                            <li>© 2017-2019</li>
+                        </ul>
+                    </div>
+                </footer>
+                <!-- END Page Footer -->
+                <!-- BEGIN Shortcuts -->
+                <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog" aria-labelledby="modal-shortcut" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <ul class="app-list w-auto h-auto p-0 text-left">
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-primary-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-home icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Home
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page_inbox.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
+                                                <i class="ni ni-envelope icon-stack-1x text-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Inbox
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-plus icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Add More
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- END Shortcuts -->
+            </div>
+        </div>
+    </div>
+    <!-- END Page Wrapper -->
+        <script src="{% static 'smart-admin/js/vendors.bundle.js' %}"></script>
+        <script src="{% static 'smart-admin/js/app.bundle.js' %}"></script>
+        <script>
+            var classHolder = document.getElementsByTagName("BODY")[0],
+            themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+            {},
+            themeURL = themeSettings.themeURL || '',
+            themeOptions = themeSettings.themeOptions || '';
+        </script>
+    </body>
+    </html>
+    
